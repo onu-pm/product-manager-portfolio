@@ -6,19 +6,19 @@ export default function FAQ() {
       <div className="mb-10 flex flex-col items-start gap-3">
         <span className="chapter-tab">FAQ</span>
       </div>
-      <div className="flex flex-col divide-y divide-burgundy-100 rounded-2xl border border-burgundy-100 bg-white">
+      <div className="flex flex-col divide-y divide-plum-100 rounded-2xl border border-plum-100 bg-paper-raised">
         {faqs.map((f) => (
           <details key={f.q} className="group p-5 md:p-6">
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-neutral-900">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-ink">
               {f.q}
-              <span className="shrink-0 text-xl leading-none text-burgundy-600 group-open:hidden">
+              <span className="shrink-0 text-xl leading-none text-plum-600 group-open:hidden">
                 +
               </span>
-              <span className="hidden shrink-0 text-xl leading-none text-burgundy-600 group-open:inline">
+              <span className="hidden shrink-0 text-xl leading-none text-plum-600 group-open:inline">
                 −
               </span>
             </summary>
-            <p className="mt-3 text-[15px] leading-relaxed text-neutral-600">{f.a}</p>
+            <p className="mt-3 text-[15px] leading-relaxed text-ink/70">{f.a}</p>
           </details>
         ))}
       </div>

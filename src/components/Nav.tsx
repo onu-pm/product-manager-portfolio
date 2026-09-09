@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { profile } from "@/lib/content";
 
 const links = [
@@ -10,14 +11,14 @@ const links = [
 
 export default function Nav() {
   return (
-    <header className="sticky top-0 z-50 border-b border-burgundy-100 bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-50 border-b border-plum-100 bg-paper-raised/85 backdrop-blur">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <a href="#top" className="font-display text-lg font-bold tracking-tight text-burgundy-900">
-          {profile.name}
+        <a href="#top" className="shrink-0">
+          <Image src="/logo.png" alt={profile.name} width={155} height={34} priority className="h-8 w-auto md:h-9" />
         </a>
-        <nav className="hidden items-center gap-8 text-sm font-medium text-neutral-600 md:flex">
+        <nav className="hidden items-center gap-8 text-sm font-medium text-ink/70 md:flex">
           {links.map((l) => (
-            <a key={l.href} href={l.href} className="transition-colors hover:text-burgundy-700">
+            <a key={l.href} href={l.href} className="transition-colors hover:text-plum-700">
               {l.label}
             </a>
           ))}

@@ -10,13 +10,16 @@ export const profile = {
   title: "Senior Product Manager · HRIS & Payroll, Integrations, Agentic AI",
   // Two-tone headline: `headlineEmphasis` renders bold with a highlighter marker
   // behind it, `headlineRest` renders in the italic accent font.
-  headlineEmphasis: "I turn manual HR workflows",
-  headlineRest: "into ecosystems that scale.",
+  headlineEmphasis: "I turn thoughts and ideas",
+  headlineRest: "into products that people love",
   subhead:
-    "5 years leading product for B2B SaaS platforms, from 0-to-1 marketplace builds to agentic AI. I work across engineering, partners, and compliance to ship things 35,000+ employers actually use.",
+    "Currently a Product Manager, formerly a Marketer, and now at Repute. Over the last 5 years, I've built products and features that have helped 35,000+ companies unify fragmented HR systems and workflows within their existing HRIS and Payroll.",
+  // The "Hi, I'm Anupam" line that opens the intro block under the hero.
+  intro:
+    "I am a product manager crafting products and building features for HRIS and Payroll platforms that help them enhance their capability and experience.",
   email: "onu@poums.in",
   linkedin: "https://www.linkedin.com/in/anupamkalita/",
-  github: "[Your GitHub URL]",
+  github: "https://github.com/onu-pm",
   resumeUrl: "/resume.pdf",
   location: "Bangalore, India",
 };
@@ -24,25 +27,52 @@ export const profile = {
 export const pillars = [
   {
     label: "Strategy",
-    body: "I take a 0-to-1 mandate, an embedded marketplace, an AI assistant, a compliance workflow, and turn it into a roadmap a CTO, partners, and sales can all get behind.",
+    body: "I take messy 0-to-1 mandates and turn them into clear roadmaps that design, engineering, and business teams can all rally behind.",
   },
   {
     label: "Execution",
-    body: "I own discovery through release sign-off: specs, API and schema design, QA, and the unglamorous replatforming work, like turning 75 bespoke integrations into a reusable API layer that makes the next 100 cheap to ship.",
+    body: "I love when my ideas take shape, right from discovery to release. From writing PRDs to scoping with cross-functional teams, I own products built with users' interests at the forefront.",
   },
   {
-    label: "Alignment",
-    body: "I sit between founders, engineers, and partners, defining the orchestration layer with a CTO, or the consent and audit requirements with compliance, so everyone's building the same thing.",
+    label: "Bridge",
+    body: "I sit between founders, engineers, data, and the people closest to your customers so everyone works from the same picture.",
   },
 ];
 
 export const specialties = [
   "0→1 Product Strategy",
   "Integrations & API Platforms",
-  "Workflow Automation",
-  "Agentic AI Products",
-  "Compliance & Data Trust",
-  "Founding / IC Leadership",
+  "HRIS and Payroll Automations",
+  "Agentic HR Assistant",
+  "Compliance & Statutory Benefits",
+  "iPaaS & Integrated Platforms",
+];
+
+export const highlights = [
+  {
+    value: "175+",
+    unit: "",
+    label: "Integrations in the catalog",
+    detail: "Grown from 75 through a reusable API layer, not one-off builds.",
+  },
+  {
+    value: "4",
+    unit: "X",
+    label: "ARR growth in 18 months",
+    detail: "Driven by workflow automation inside the HRIS, not a new product line.",
+  },
+  {
+    value: "35",
+    unit: "K+",
+    label: "Employers reached",
+    detail: "Across India and the Middle East, through the partner ecosystem.",
+  },
+  {
+    value: "5",
+    unit: "+",
+    label: "Years in B2B SaaS product",
+    detail: "0-to-1 marketplaces, workflow automation, and agentic AI.",
+  },
 ];
 
 export const capabilities = [

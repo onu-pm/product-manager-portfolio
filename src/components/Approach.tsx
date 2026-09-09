@@ -6,23 +6,23 @@ export default function Approach() {
       <div className="mx-auto max-w-5xl">
         <div className="mb-10 flex flex-col items-start gap-3">
           <span className="chapter-tab">Working together</span>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-neutral-900 md:text-4xl">
-            <span className="text-burgundy-800">How I usually</span>{" "}
-            <span className="text-neutral-500">plug in.</span>
+          <h2 className="font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            <span className="text-plum-800">How I usually</span>{" "}
+            <span className="text-ink/55">plug in.</span>
           </h2>
-          <p className="max-w-xl text-neutral-600">
+          <p className="max-w-xl text-ink/70">
             Every team and product is different, but most engagements follow this shape.
           </p>
         </div>
 
         <div className="grid gap-6 md:grid-cols-3">
           {approachSteps.map((s) => (
-            <div key={s.step} className="rounded-2xl border border-burgundy-100 bg-white p-6">
-              <span className="font-display text-3xl font-bold text-burgundy-200">{s.step}</span>
-              <h3 className="font-display mt-3 mb-2 text-lg font-bold text-neutral-900">
+            <div key={s.step} className="rounded-2xl border border-plum-100 bg-paper-raised p-6">
+              <span className="font-display text-3xl font-bold text-plum-200">{s.step}</span>
+              <h3 className="font-display mt-3 mb-2 text-lg font-bold text-ink">
                 {s.title}
               </h3>
-              <p className="text-[15px] leading-relaxed text-neutral-600">{s.body}</p>
+              <p className="text-[15px] leading-relaxed text-ink/70">{s.body}</p>
             </div>
           ))}
         </div>

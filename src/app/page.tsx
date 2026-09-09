@@ -2,6 +2,7 @@ import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
 import TestimonialBreak from "@/components/TestimonialBreak";
 import LogoStrip from "@/components/LogoStrip";
+import Highlights from "@/components/Highlights";
 import Capabilities from "@/components/Capabilities";
 import CaseStudies from "@/components/CaseStudies";
 import Projects from "@/components/Projects";
@@ -22,6 +23,9 @@ export default function Home() {
           <TestimonialBreak index={0} />
         </Reveal>
         <LogoStrip />
+        <Reveal>
+          <Highlights />
+        </Reveal>
         <Reveal>
           <Capabilities />
         </Reveal>

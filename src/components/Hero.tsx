@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { pillars, profile, specialties } from "@/lib/content";
 
 export default function Hero() {
@@ -7,12 +8,12 @@ export default function Hero() {
 
       <div className="relative mx-auto grid max-w-5xl items-center gap-10 md:grid-cols-[1.15fr_0.85fr] md:gap-14">
         <div className="order-2 text-center md:order-1 md:text-left">
-          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-burgundy-700">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-plum-700">
             {profile.title}
           </p>
           <h1 className="font-display text-4xl leading-[1.05] font-bold tracking-[-0.02em] md:text-5xl lg:text-[56px]">
-            <span className="marker-highlight text-burgundy-900">{profile.headlineEmphasis}</span>{" "}
-            <span className="font-accent italic text-burgundy-500">{profile.headlineRest}</span>
+            <span className="marker-highlight text-plum-900">{profile.headlineEmphasis}</span>{" "}
+            <span className="font-display font-light text-plum-500">{profile.headlineRest}</span>
           </h1>
           <p className="mx-auto mt-6 max-w-lg text-lg leading-[1.4] text-foreground/75 md:mx-0 md:text-xl">
             {profile.subhead}
@@ -49,32 +50,31 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Placeholder headshot. Swap the initials block below for a real
-            photo, e.g. <Image src="/photo.jpg" alt={profile.name} fill className="object-cover rounded-[1.4rem]" /> */}
         <div className="order-1 flex justify-center md:order-2 md:justify-end">
-          <div className="photo-frame h-56 w-56 md:h-72 md:w-72">
-            <div>
-              <span className="font-display text-6xl font-bold md:text-7xl">
-                {profile.name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </span>
-            </div>
+          <div className="relative h-72 w-72 md:h-96 md:w-96">
+            <Image
+              src="/photo.png"
+              alt={profile.name}
+              fill
+              sizes="(min-width: 768px) 24rem, 18rem"
+              className="object-contain object-bottom"
+              priority
+            />
           </div>
         </div>
       </div>
 
-      <div className="relative mx-auto mt-16 max-w-2xl text-left text-[15px] leading-relaxed text-neutral-600 md:text-base">
+      <div className="relative mx-auto mt-16 max-w-2xl text-left text-[15px] leading-relaxed text-ink/70 md:text-base">
         <p>
-          <span className="font-display font-bold text-neutral-900">Hello 👋 I&apos;m {profile.name.split(" ")[0]}</span>,
-          a founding product manager with an eye for reusable architecture, consent, and the
-          unglamorous work that lets a system scale past its first ten customers.
+          <span className="font-display font-bold text-ink">
+            Hi, I&apos;m {profile.name.split(" ")[0]} 👋
+          </span>{" "}
+          {profile.intro}
         </p>
         <ul className="mt-4 flex flex-col gap-2">
           {pillars.map((p) => (
             <li key={p.label}>
-              <span className="font-display font-bold text-burgundy-800">{p.label}</span>
+              <span className="font-display font-bold text-plum-800">{p.label}</span>
               {": "}
               {p.body}
             </li>
@@ -86,7 +86,7 @@ export default function Hero() {
         {specialties.map((s) => (
           <li
             key={s}
-            className="rounded-full border border-burgundy-200 bg-white px-4 py-1.5 text-xs font-semibold text-burgundy-800 md:text-sm"
+            className="rounded-full border border-plum-200 bg-paper-raised px-4 py-1.5 text-xs font-semibold text-plum-800 md:text-sm"
           >
             {s}
           </li>

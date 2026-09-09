@@ -23,11 +23,11 @@ export default function CaseStudies() {
       <div className="mx-auto max-w-5xl">
         <div className="mb-10 flex flex-col items-start gap-3">
           <span className="chapter-tab">Case studies</span>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-neutral-900 md:text-4xl">
-            <span className="text-burgundy-800">How I think,</span>{" "}
-            <span className="font-accent italic text-burgundy-500">unprompted.</span>
+          <h2 className="font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
+            <span className="text-plum-800">How I think,</span>{" "}
+            <span className="font-display font-light text-plum-500">unprompted.</span>
           </h2>
-          <p className="max-w-xl text-neutral-600">
+          <p className="max-w-xl text-ink/70">
             Four products I picked myself, not work I was paid to do, and wrote my own thesis on.
             Each one is an outside read, not internal data, and says so. Tap a card for the full
             reasoning.
@@ -39,20 +39,20 @@ export default function CaseStudies() {
             <button
               key={c.title}
               onClick={() => open(i)}
-              className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-burgundy-100 bg-white p-6 text-left transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(85,16,36,0.35)] ${spans[i % spans.length]}`}
+              className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-plum-100 bg-paper-raised p-6 text-left transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(28,14,38,0.28)] ${spans[i % spans.length]}`}
             >
               <div>
-                <span className="mb-3 inline-block text-xs font-bold uppercase tracking-wider text-burgundy-600">
+                <span className="mb-3 inline-block text-xs font-bold uppercase tracking-wider text-plum-600">
                   {c.tag}
                 </span>
-                <h3 className="font-display text-xl font-bold text-neutral-900 md:text-2xl">
+                <h3 className="font-display text-xl font-bold text-ink md:text-2xl">
                   {c.title}
                 </h3>
-                <p className="mt-2 text-sm text-neutral-500">{c.subject}</p>
+                <p className="mt-2 text-sm text-ink/55">{c.subject}</p>
               </div>
 
               <div className="mt-6 flex items-end justify-between gap-4">
-                <p className="font-accent line-clamp-2 text-base italic text-burgundy-700">
+                <p className="line-clamp-2 text-base text-ink/70">
                   {c.hook}
                 </p>
                 <span className="accordion-icon shrink-0 transition-transform duration-300 group-hover:rotate-45">
@@ -66,16 +66,16 @@ export default function CaseStudies() {
 
       <dialog
         ref={dialogRef}
-        className="m-auto max-h-[85vh] w-[min(640px,90vw)] rounded-3xl border border-burgundy-100 bg-white p-0 backdrop:bg-burgundy-950/40 backdrop:backdrop-blur-sm"
+        className="m-auto max-h-[85vh] w-[min(640px,90vw)] rounded-3xl border border-plum-100 bg-paper-raised p-0 backdrop:bg-plum-950/40 backdrop:backdrop-blur-sm"
       >
         <div className="max-h-[85vh] overflow-y-auto p-7 md:p-9">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <span className="mb-2 inline-block text-xs font-bold uppercase tracking-wider text-burgundy-600">
+              <span className="mb-2 inline-block text-xs font-bold uppercase tracking-wider text-plum-600">
                 {cs.tag}
               </span>
-              <h3 className="font-display text-2xl font-bold text-neutral-900">{cs.title}</h3>
-              <p className="mt-1 text-sm text-neutral-500">{cs.subject} · Self-directed case study</p>
+              <h3 className="font-display text-2xl font-bold text-ink">{cs.title}</h3>
+              <p className="mt-1 text-sm text-ink/55">{cs.subject} · Self-directed case study</p>
             </div>
             <button
               onClick={() => dialogRef.current?.close()}
@@ -86,18 +86,18 @@ export default function CaseStudies() {
             </button>
           </div>
 
-          <div className="mt-6 grid gap-6 border-t border-burgundy-100 pt-6 md:grid-cols-2">
+          <div className="mt-6 grid gap-6 border-t border-plum-100 pt-6 md:grid-cols-2">
             <div>
-              <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-neutral-400">
+              <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/45">
                 The problem
               </h4>
-              <p className="text-[15px] leading-relaxed text-neutral-600">{cs.problem}</p>
+              <p className="text-[15px] leading-relaxed text-ink/70">{cs.problem}</p>
             </div>
             <div>
-              <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-neutral-400">
+              <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/45">
                 How I reasoned through it
               </h4>
-              <ul className="list-disc space-y-1.5 pl-4 text-[15px] leading-relaxed text-neutral-600">
+              <ul className="list-disc space-y-1.5 pl-4 text-[15px] leading-relaxed text-ink/70">
                 {cs.approach.map((a) => (
                   <li key={a}>{a}</li>
                 ))}
@@ -106,17 +106,17 @@ export default function CaseStudies() {
           </div>
 
           <div className="tint-card mt-6 rounded-xl p-5">
-            <h4 className="mb-1 text-xs font-bold uppercase tracking-wider text-burgundy-700">
+            <h4 className="mb-1 text-xs font-bold uppercase tracking-wider text-plum-700">
               The idea
             </h4>
-            <p className="text-[15px] leading-relaxed text-neutral-700">{cs.outcome}</p>
-            <p className="font-display mt-2 text-base font-bold text-burgundy-800">{cs.watch}</p>
+            <p className="text-[15px] leading-relaxed text-ink/80">{cs.outcome}</p>
+            <p className="font-display mt-2 text-base font-bold text-plum-800">{cs.watch}</p>
           </div>
 
           <a
             href="#contact"
             onClick={() => dialogRef.current?.close()}
-            className="mt-5 inline-block text-sm font-semibold text-burgundy-700 underline decoration-burgundy-300 underline-offset-4 hover:text-burgundy-900"
+            className="mt-5 inline-block text-sm font-semibold text-plum-700 underline decoration-plum-300 underline-offset-4 hover:text-plum-900"
           >
             Talk about how I&apos;d apply this →
           </a>

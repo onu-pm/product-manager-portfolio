@@ -1,102 +1,156 @@
+/* Secondary/body face: Satoshi, served from Fontshare (its only official
+   distribution channel). This remote import must stay the first rule in the
+   file, before any local @import, or the CSS spec's "@import must come
+   first" rule breaks once the local imports are inlined at build time. */
+@import url("https://api.fontshare.com/v2/css?f%5B%5D=satoshi@300,400,500,700,900&display=swap");
+
 @import "tailwindcss";
 
-@import "@fontsource/schibsted-grotesk/500.css";
-@import "@fontsource/schibsted-grotesk/600.css";
-@import "@fontsource/schibsted-grotesk/700.css";
-@import "@fontsource/schibsted-grotesk/800.css";
-@import "@fontsource/lora/400-italic.css";
-@import "@fontsource/lora/500-italic.css";
-@import "@fontsource/lora/600-italic.css";
-@import "@fontsource/inter/400.css";
-@import "@fontsource/inter/500.css";
-@import "@fontsource/inter/600.css";
-@import "@fontsource/inter/700.css";
+/* Primary display face: Funnel Display. */
+@import "@fontsource/funnel-display/300.css";
+@import "@fontsource/funnel-display/400.css";
+@import "@fontsource/funnel-display/500.css";
+@import "@fontsource/funnel-display/600.css";
+@import "@fontsource/funnel-display/700.css";
+@import "@fontsource/funnel-display/800.css";
 
 :root {
-  --background: #fffdfb;
-  --foreground: #2a1219;
+  /* Palette (MP068): light ground, charcoal ink, plum as the primary brand
+     colour, with rose / solar / lavender as accents. */
+  --paper: #faeadd; /* Rosarian */
+  --paper-raised: #fff8f2;
+  --ink: #222023; /* Wet Charcoal */
 
-  /* Burgundy scale, warmed up a touch so it reads happy instead of corporate. */
-  --burgundy-950: #3b0b18;
-  --burgundy-900: #551024;
-  --burgundy-800: #71172f;
-  --burgundy-700: #8f1e3a;
-  --burgundy-600: #b02a49;
-  --burgundy-500: #cf3a58;
-  --burgundy-400: #e26688;
-  --burgundy-300: #ee94ab;
-  --burgundy-200: #f6bccb;
-  --burgundy-100: #fbdde5;
-  --burgundy-50: #fef1f4;
+  --plum-950: #1c0e26;
+  --plum-900: #2b1539;
+  --plum-800: #3a1d4e;
+  --plum-700: #46245f;
+  --plum-600: #522a6f; /* Purple Seduction */
+  --plum-500: #6b3a8f;
+  --plum-400: #8b5bb0;
+  --plum-300: #b58fd6;
+  --plum-200: #ddaaff; /* Testosterose */
+  --plum-100: #efdcff;
+  --plum-50: #f8f1ff;
 
-  /* Reusable gradients. Always tonal burgundy, never flat. */
-  --gradient-primary: linear-gradient(135deg, var(--burgundy-600), var(--burgundy-900));
-  --gradient-primary-hover: linear-gradient(135deg, var(--burgundy-700), var(--burgundy-950));
-  --gradient-soft: linear-gradient(120deg, var(--burgundy-100), var(--burgundy-200));
+  --rose-500: #f29cb7; /* Harmonious Rose */
+  --rose-300: #f8c2d3;
+  --rose-100: #fdeaf0;
+
+  --solar-500: #fbcf4f; /* Solarized */
+  --solar-200: #fdeab0;
+
+  --gradient-primary: linear-gradient(135deg, var(--plum-500), var(--plum-800));
+  --gradient-primary-hover: linear-gradient(135deg, var(--plum-600), var(--plum-950));
+  --gradient-playful: linear-gradient(120deg, var(--plum-200), var(--rose-500) 55%, var(--solar-500));
   --gradient-glow: radial-gradient(
     circle at 30% 30%,
-    var(--burgundy-300) 0%,
-    var(--burgundy-100) 45%,
+    var(--plum-200) 0%,
+    var(--rose-300) 45%,
     transparent 70%
   );
-  /* Flat, low-opacity tint for the highlighter-marker effect, matching the
-     reference site's sharp-edged, translucent highlight rather than a solid
-     pastel pill. */
-  --highlight-tint: rgba(176, 42, 73, 0.16);
+  /* Highlighter marker: solar yellow, the way a real highlighter reads on paper. */
+  --highlight-tint: rgba(251, 207, 79, 0.55);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-burgundy-950: var(--burgundy-950);
-  --color-burgundy-900: var(--burgundy-900);
-  --color-burgundy-800: var(--burgundy-800);
-  --color-burgundy-700: var(--burgundy-700);
-  --color-burgundy-600: var(--burgundy-600);
-  --color-burgundy-500: var(--burgundy-500);
-  --color-burgundy-400: var(--burgundy-400);
-  --color-burgundy-300: var(--burgundy-300);
-  --color-burgundy-200: var(--burgundy-200);
-  --color-burgundy-100: var(--burgundy-100);
-  --color-burgundy-50: var(--burgundy-50);
+  --color-background: var(--paper);
+  --color-paper-raised: var(--paper-raised);
+  --color-foreground: var(--ink);
+  --color-ink: var(--ink);
 
-  /* font-sans -> body copy. font-display -> headlines, buttons, nav (bold + friendly).
-     font-accent -> italic serif, used sparingly for eyebrows and a warmer word here
-     and there so the page doesn't read like one uniform SaaS typeface. */
-  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif;
-  --font-display: "Schibsted Grotesk", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+  --color-plum-950: var(--plum-950);
+  --color-plum-900: var(--plum-900);
+  --color-plum-800: var(--plum-800);
+  --color-plum-700: var(--plum-700);
+  --color-plum-600: var(--plum-600);
+  --color-plum-500: var(--plum-500);
+  --color-plum-400: var(--plum-400);
+  --color-plum-300: var(--plum-300);
+  --color-plum-200: var(--plum-200);
+  --color-plum-100: var(--plum-100);
+  --color-plum-50: var(--plum-50);
+
+  --color-rose-500: var(--rose-500);
+  --color-rose-300: var(--rose-300);
+  --color-rose-100: var(--rose-100);
+  --color-solar-500: var(--solar-500);
+  --color-solar-200: var(--solar-200);
+
+  /* font-display -> Funnel Display: every heading, button, nav item, metric.
+     font-sans -> Satoshi: all body copy, captions, list text. */
+  --font-display: "Funnel Display", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Helvetica, Arial, sans-serif;
-  --font-accent: "Lora", Georgia, "Times New Roman", serif;
+  --font-sans: "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+    sans-serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--paper);
+  color: var(--ink);
   font-family: var(--font-sans);
-  background-image: radial-gradient(var(--burgundy-100) 1.5px, transparent 1.5px);
-  background-size: 24px 24px;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(rgba(82, 42, 111, 0.09) 1.5px, transparent 1.5px);
+  background-size: 26px 26px;
 }
 
 /* ---------------------------------------------------------------------- */
-/* Shared UI primitives, warm gradient burgundy instead of flat matte tone */
+/* Type hierarchy                                                          */
 /* ---------------------------------------------------------------------- */
 
-/* Eyebrow label above each section: italic serif, no badge/pill, feels like
-   a handwritten chapter title rather than a SaaS category tag. */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: clamp(1.875rem, 3.4vw, 2.5rem);
+  line-height: 1.12;
+  letter-spacing: -0.018em;
+}
+
+h3 {
+  font-weight: 600;
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+h4 {
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Shared UI primitives                                                    */
+/* ---------------------------------------------------------------------- */
+
+/* Eyebrow label above each section. */
 .chapter-tab {
   display: inline-block;
-  font-family: var(--font-accent);
-  font-style: italic;
-  font-weight: 500;
-  font-size: 1.5rem;
-  letter-spacing: -0.02em;
-  line-height: 1.2;
-  color: var(--burgundy-500);
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--plum-500);
 }
 
-/* Primary CTA: warm gradient fill, a soft spring scale, and a light sweep
-   that glides across on hover instead of the old "lift up" button trick. */
+/* Primary CTA: plum gradient, spring scale, light sweep on hover. */
 .btn-primary {
   position: relative;
   display: inline-flex;
@@ -107,10 +161,10 @@ body {
   color: #fff;
   border-radius: 999px;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 6px 16px -6px rgba(85, 16, 36, 0.55);
+    0 6px 16px -6px rgba(28, 14, 38, 0.5);
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -128,7 +182,7 @@ body {
   transform: scale(1.04);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 10px 22px -6px rgba(85, 16, 36, 0.6);
+    0 10px 22px -6px rgba(28, 14, 38, 0.55);
 }
 .btn-primary:hover::after {
   background-position: -100% 0;
@@ -137,49 +191,47 @@ body {
   transform: scale(0.97);
 }
 
-/* Secondary CTA: outline, sits on white or tinted sections alike. */
+/* Secondary CTA: outline on the paper ground. */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
-  color: var(--burgundy-800);
-  border: 1.5px solid var(--burgundy-200);
+  background: var(--paper-raised);
+  color: var(--plum-700);
+  border: 1.5px solid var(--plum-200);
   border-radius: 999px;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 600;
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .btn-secondary:hover {
-  background: var(--burgundy-50);
-  border-color: var(--burgundy-400);
+  background: var(--plum-50);
+  border-color: var(--plum-400);
   transform: scale(1.04);
 }
 .btn-secondary:active {
   transform: scale(0.97);
 }
 
-/* Solid light-tint card/section surface (the "segment" alternate to white). */
+/* Section / card surfaces. */
 .tint-surface {
-  background: linear-gradient(180deg, var(--burgundy-50), #fff 65%);
+  background: linear-gradient(180deg, var(--plum-50), var(--paper) 70%);
 }
 
 .tint-card {
-  background: linear-gradient(160deg, var(--burgundy-50), #fff 120%);
-  border: 1px solid var(--burgundy-100);
+  background: linear-gradient(160deg, var(--plum-50), var(--paper-raised) 120%);
+  border: 1px solid var(--plum-100);
 }
 
 .section-divider {
   height: 1px;
-  background: var(--burgundy-100);
+  background: var(--plum-100);
 }
 
-/* Highlighter-marker effect behind emphasized text, clones the background
-   across wrapped lines like a real highlighter pen, with a soft gradient
-   instead of a flat tint so it doesn't feel like a plain SaaS badge. */
+/* Highlighter-marker effect behind emphasized text. */
 .marker-highlight {
   background-color: var(--highlight-tint);
   -webkit-box-decoration-break: clone;
@@ -188,7 +240,7 @@ body {
   border-radius: 0.08em;
 }
 
-/* +/x accordion toggle icon, shared by Selected Works and FAQ. */
+/* +/x accordion toggle icon. */
 .accordion-icon {
   display: inline-flex;
   height: 1.75rem;
@@ -197,10 +249,11 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: var(--burgundy-100);
-  color: var(--burgundy-700);
+  background: var(--plum-100);
+  color: var(--plum-700);
   font-family: var(--font-display);
   font-size: 1.1rem;
+  font-weight: 600;
   line-height: 1;
   transition:
     background 0.15s ease,
@@ -223,45 +276,94 @@ body {
   border-radius: 999px;
   background: var(--gradient-primary);
   color: #fff;
-  box-shadow: 0 6px 16px -6px rgba(85, 16, 36, 0.5);
+  box-shadow: 0 6px 16px -6px rgba(28, 14, 38, 0.45);
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .icon-btn:hover {
   transform: scale(1.12) rotate(-4deg);
-  box-shadow: 0 10px 20px -6px rgba(85, 16, 36, 0.55);
+  box-shadow: 0 10px 20px -6px rgba(28, 14, 38, 0.5);
 }
 .icon-btn:active {
   transform: scale(0.95);
 }
 
-/* Soft, blurred gradient blob used behind the hero for a modern, hand-made
-   feel instead of a flat tint block. Purely decorative, sits behind text. */
+/* Soft, blurred gradient blob behind the hero. */
 .hero-glow {
   position: absolute;
   border-radius: 999px;
   background-image: var(--gradient-glow);
-  filter: blur(40px);
-  opacity: 0.7;
+  filter: blur(48px);
+  opacity: 0.55;
   pointer-events: none;
 }
 
-/* Placeholder photo frame: a gradient ring standing in for a real headshot.
-   Swap the inner content for a next/image once a photo is ready. */
-.photo-frame {
+/* ---------------------------------------------------------------------- */
+/* Highlights: full-bleed dark band with glass-morphism metric cards.      */
+/* An original composition, not a copy of any reference site's exact      */
+/* values, sharing only the general "glass card on a dark stage" idea.    */
+/* ---------------------------------------------------------------------- */
+
+.glass-section {
   position: relative;
-  border-radius: 1.75rem;
-  padding: 0.4rem;
-  background: var(--gradient-primary);
+  overflow: hidden;
+  background: linear-gradient(165deg, var(--plum-950) 0%, var(--plum-800) 55%, var(--plum-700) 100%);
 }
-.photo-frame > div {
+
+.glass-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(242, 156, 183, 0.16), transparent 70%),
+    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(251, 207, 79, 0.12), transparent 70%);
+  pointer-events: none;
+}
+
+.glass-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  padding: 1.75rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(14px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
+    0 20px 40px -24px rgba(10, 4, 16, 0.6);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+}
+.glass-card::before {
+  content: "";
+  position: absolute;
+  inset: -40% -40% auto auto;
+  width: 70%;
+  height: 70%;
+  background: radial-gradient(circle, var(--glow, var(--plum-300)) 0%, transparent 72%);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+/* Continuous marquee for the worked-with strip. */
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-  border-radius: 1.4rem;
-  background: var(--burgundy-50);
-  color: var(--burgundy-400);
+  width: max-content;
+  animation: marquee-left 26s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }

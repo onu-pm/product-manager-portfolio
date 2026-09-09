@@ -46,28 +46,28 @@ export default function Contact() {
     <section id="contact" className="mx-auto max-w-2xl px-6 py-24">
       <div className="text-center">
         <span className="chapter-tab">Let&apos;s connect 👋</span>
-        <h2 className="font-display mt-4 text-3xl font-bold tracking-tight text-neutral-900 md:text-5xl">
-          <span className="text-burgundy-800">If this sounds right,</span>{" "}
-          <span className="font-accent italic text-burgundy-500">let&apos;s talk.</span>
+        <h2 className="font-display mt-4 text-3xl font-bold tracking-tight text-ink md:text-5xl">
+          <span className="text-plum-800">If this sounds right,</span>{" "}
+          <span className="font-display font-light text-plum-500">let&apos;s talk.</span>
         </h2>
-        <p className="mx-auto mt-4 max-w-md text-neutral-600">
+        <p className="mx-auto mt-4 max-w-md text-ink/70">
           A short conversation is usually enough to see if there&apos;s a fit.
         </p>
       </div>
 
       {status === "sent" ? (
         <div className="tint-card mt-10 rounded-2xl p-8 text-center">
-          <p className="font-display text-lg font-bold text-neutral-900">Thanks, that&apos;s in.</p>
-          <p className="mt-2 text-sm text-neutral-600">
+          <p className="font-display text-lg font-bold text-ink">Thanks, that&apos;s in.</p>
+          <p className="mt-2 text-sm text-ink/70">
             I read every message myself and will get back to you soon.
           </p>
         </div>
       ) : (
         <form
           onSubmit={handleSubmit}
-          className="mt-10 flex flex-col gap-5 rounded-2xl border border-burgundy-100 bg-white p-6 md:p-8"
+          className="mt-10 flex flex-col gap-5 rounded-2xl border border-plum-100 bg-paper-raised p-6 md:p-8"
         >
-          <label className="flex flex-col gap-1.5 text-sm font-semibold text-neutral-700">
+          <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink/80">
             Name
             <input
               type="text"
@@ -75,10 +75,10 @@ export default function Contact() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Jane Smith"
-              className="rounded-lg border border-burgundy-200 px-3.5 py-2.5 text-[15px] font-normal text-neutral-900 outline-none placeholder:text-neutral-400 focus:border-burgundy-500"
+              className="rounded-lg border border-plum-200 px-3.5 py-2.5 text-[15px] font-normal text-ink outline-none placeholder:text-ink/40 focus:border-plum-500"
             />
           </label>
-          <label className="flex flex-col gap-1.5 text-sm font-semibold text-neutral-700">
+          <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink/80">
             Email
             <input
               type="email"
@@ -86,10 +86,10 @@ export default function Contact() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@company.com"
-              className="rounded-lg border border-burgundy-200 px-3.5 py-2.5 text-[15px] font-normal text-neutral-900 outline-none placeholder:text-neutral-400 focus:border-burgundy-500"
+              className="rounded-lg border border-plum-200 px-3.5 py-2.5 text-[15px] font-normal text-ink outline-none placeholder:text-ink/40 focus:border-plum-500"
             />
           </label>
-          <label className="flex flex-col gap-1.5 text-sm font-semibold text-neutral-700">
+          <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink/80">
             What&apos;s going on?
             <textarea
               required
@@ -97,18 +97,18 @@ export default function Contact() {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               placeholder="A few sentences about the role or the problem you're solving."
-              className="rounded-lg border border-burgundy-200 px-3.5 py-2.5 text-[15px] font-normal leading-relaxed text-neutral-900 outline-none placeholder:text-neutral-400 focus:border-burgundy-500"
+              className="rounded-lg border border-plum-200 px-3.5 py-2.5 text-[15px] font-normal leading-relaxed text-ink outline-none placeholder:text-ink/40 focus:border-plum-500"
             />
           </label>
           <button type="submit" disabled={status === "sending"} className="btn-primary mt-1 px-7 py-3 text-sm disabled:opacity-60">
             {status === "sending" ? "Sending..." : "Send it over"}
           </button>
           {status === "error" && (
-            <p className="text-center text-xs font-semibold text-burgundy-700">
+            <p className="text-center text-xs font-semibold text-plum-700">
               That didn&apos;t go through. Try again, or email me directly below.
             </p>
           )}
-          <p className="text-center text-xs text-neutral-400">I read every message myself.</p>
+          <p className="text-center text-xs text-ink/45">I read every message myself.</p>
         </form>
       )}
 
