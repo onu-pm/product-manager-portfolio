@@ -2,12 +2,12 @@ import { faqs } from "@/lib/content";
 
 export default function FAQ() {
   return (
-    <section id="faq" className="mx-auto max-w-3xl px-6 py-20">
+    <section id="faq" className="page-shell py-20">
       <div className="mb-10 flex flex-col items-start gap-3">
         <span className="chapter-tab">FAQ</span>
         <h2>
           <span>Common</span>{" "}
-          <span className="font-display italic text-plum-500">questions.</span>
+          <span className="marker-highlight">questions.</span>
         </h2>
       </div>
       <div className="flex flex-col divide-y divide-plum-100 rounded-2xl border border-plum-100 bg-paper-raised">

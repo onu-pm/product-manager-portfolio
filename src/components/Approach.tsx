@@ -2,13 +2,13 @@ import { approachSteps } from "@/lib/content";
 
 export default function Approach() {
   return (
-    <section id="approach" className="tint-surface px-6 py-20">
-      <div className="mx-auto max-w-5xl">
+    <section id="approach" className="tint-surface py-20">
+      <div className="page-shell">
         <div className="mb-10 flex flex-col items-start gap-3">
           <span className="chapter-tab">Working together</span>
           <h2>
             <span>How I usually</span>{" "}
-            <span className="font-display italic text-plum-500">plug in.</span>
+            <span className="marker-highlight">plug in.</span>
           </h2>
           <p className="max-w-xl text-ink/70">
             Every team and product is different, but most engagements follow this shape.

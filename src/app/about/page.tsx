@@ -7,7 +7,7 @@ import Contact from "@/components/Contact";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "About, Anupam Kalita",
+  title: "About",
   description: "How I work, what I'm good at, and how to reach me.",
 };
 

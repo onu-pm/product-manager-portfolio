@@ -1,67 +1,107 @@
-/* Display face: Instrument Serif, editorial and personal rather than a
-   typical SaaS sans-only pairing. Body/UI face: Inter. Both self-hosted via
-   Fontsource so there's no remote CDN dependency. */
+/* Display face: General Sans (Fontshare, free for commercial use) — the
+   licensed Super Sans VF on the reference site isn't licensed here, so this
+   is the finalised substitute, not a placeholder. Body/UI face: Inter.
+   Both self-hosted: General Sans from /public/fonts, Inter via Fontsource,
+   so there's no remote CDN dependency at runtime. */
 @import "tailwindcss";
-@import "@fontsource/instrument-serif/400.css";
-@import "@fontsource/instrument-serif/400-italic.css";
 @import "@fontsource/inter/400.css";
 @import "@fontsource/inter/500.css";
 @import "@fontsource/inter/600.css";
 @import "@fontsource/inter/700.css";
 @import "@fontsource/inter/800.css";
 
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/general-sans-400.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/general-sans-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/general-sans-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "General Sans";
+  src: url("/fonts/general-sans-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  /* Palette: Clay & Spice, drawn from the Baya Weaver's plumage (bright
-     yellow crown, dark brown mask, warm buff belly). Token names kept from
-     the previous palette (paper/ink/plum/rose/solar) so components don't
-     need to change, only what each token points to. */
-  /* Neutrals are warm-tinted on purpose: a cool grey body text next to the
-     umber/terracotta headings read as two unrelated palettes in light mode.
-     Everything now sits on the same warm axis. */
-  --paper: #faf7f2;
-  --paper-raised: #fffdf9;
-  --ink: #241a13;
-  --ink-secondary: #6e5a4c;
-  --ink-tertiary: #9a8676;
-  --border: #e9e0d4;
+  /* Palette: Ivory & Citron, after the leoparpeix.com reference — an ivory
+     ground, near-black type, forest green for secondary accents and a
+     single rationed citron yellow. A flat, solid-block system rather than a
+     gradient one. Token names (paper/ink/plum/rose/solar) are kept so no
+     component has to change; only what each token points to. */
+  --paper: #f7f7f5;
+  --paper-raised: #ffffff;
+  --surface-tinted: #ececec;
+  /* Measured off the reference: its body copy is a near-black forest green
+     used ~670 times, while mid-green and citron are used as text exactly
+     zero times. Colour there comes from SURFACES (tan, grey, citron,
+     forest blocks), not from tinted type — which is why an earlier pass
+     that coloured every label mid-green read as "just white and green". */
+  --ink: #022016;
+  --ink-secondary: #4a5852;
+  --ink-tertiary: #8b9791;
+  --border: #e0ded7;
 
-  /* "plum" now carries the clay/umber-brown ramp. */
-  --plum-950: #2a190f;
-  --plum-900: #3a2213;
-  --plum-800: #4a2e1f;
-  --plum-700: #6b3b23;
-  --plum-600: #8a4a28;
-  --plum-500: #b5502e;
-  --plum-400: #c96a3e;
-  --plum-300: #d9a441;
-  --plum-200: #e8c179;
-  --plum-100: #f3e2c0;
-  --plum-50: #faf1e0;
+  --citron: #f6e016;
+  --forest: #083d2a;
+  --tan: #eed6c8;
 
-  /* "rose" carries the ochre/gold accent. */
-  --rose-500: #d9a441;
-  --rose-300: #ecc978;
-  --rose-100: #faf1e0;
+  /* Text tokens all resolve to the one near-black green. Interactive text
+     separates itself with underlines, arrows and hover — not with hue. */
+  --plum-950: #022016;
+  --plum-900: #022016;
+  --plum-800: #022016;
+  --plum-700: #022016;
+  --plum-600: #022016;
+  --plum-500: #022016;
+  --plum-400: #6f7d76;
+  --plum-300: #d6d3cb;
+  --plum-200: #e0ded7;
+  /* Chip/tag fills are tan — this is where the warmth comes from. */
+  --plum-100: #eed6c8;
+  --plum-50: #f1efe9;
 
-  /* "solar" carries a rare sage/moss counterpoint, used sparingly. */
-  --solar-500: #8a9a6b;
-  --solar-200: #d9e0cc;
+  --rose-500: #eed6c8;
+  --rose-300: #f3e9df;
+  --rose-100: #faf6f1;
 
-  --gradient-primary: linear-gradient(135deg, #4a2e1f, #b5502e, #d9a441);
-  --gradient-primary-hover: linear-gradient(135deg, #3a2213, #8a4a28, #c96a3e);
-  --gradient-playful: linear-gradient(120deg, var(--plum-800), var(--plum-500) 55%, var(--plum-300));
+  /* "solar" carries the citron. */
+  --solar-500: #f6e016;
+  --solar-200: #fcf3a8;
+
+  /* Flat colour system: the one approved gradient is dark -> forest ->
+     citron, reserved for the hero statement. Buttons are solid fills. */
+  --gradient-primary: linear-gradient(135deg, #022016, #083d2a 60%, #0f5138);
+  --gradient-primary-hover: linear-gradient(135deg, #022016, #083d2a 60%, #0f5138);
+  --gradient-playful: linear-gradient(120deg, var(--plum-800), var(--forest) 55%, var(--citron));
   --gradient-glow: radial-gradient(
     circle at 30% 30%,
-    var(--plum-200) 0%,
-    var(--rose-300) 45%,
+    var(--tan) 0%,
+    var(--surface-tinted) 45%,
     transparent 70%
   );
-  --highlight-tint: rgba(217, 164, 65, 0.35);
+  --highlight-tint: rgba(246, 224, 22, 0.45);
 
   /* Light mode: the bulb is off. */
   --bulb-wire: var(--ink-tertiary);
-  --bulb-glass: rgba(26, 26, 24, 0.18);
-  --bulb-fill: rgba(26, 26, 24, 0.04);
+  --bulb-glass: rgba(10, 10, 8, 0.2);
+  --bulb-fill: rgba(10, 10, 8, 0.04);
   --bulb-cap-line: var(--ink-tertiary);
   --bulb-filament: var(--ink-tertiary);
   --bulb-ray-opacity: 0;
@@ -69,95 +109,109 @@
 }
 
 :root[data-theme="dark"] {
-  --paper: #14100c;
-  --paper-raised: #1f1810;
-  --ink: #f6efe4;
-  --ink-secondary: #bfb2a2;
-  --ink-tertiary: #8b7d6d;
-  --border: #322a21;
+  --paper: #0a0f0c;
+  --paper-raised: #12140f;
+  --surface-tinted: #1b1a14;
+  --ink: #f5f4ef;
+  --ink-secondary: #b7b5ac;
+  --ink-tertiary: #787770;
+  --border: #26261f;
 
-  --plum-950: #f6efe4;
-  --plum-900: #f4c15c;
-  --plum-800: #f4c15c;
-  --plum-700: #e8a34a;
-  --plum-600: #d9743a;
-  --plum-500: #d9743a;
-  --plum-400: #c96a3e;
-  --plum-300: #7a4b2e;
-  --plum-200: #4a2e1f;
-  --plum-100: #2e2317;
-  --plum-50: #221a12;
+  --citron: #f6e016;
+  --forest: #3a7a57;
+  --tan: #d9bba4;
 
-  --rose-500: #f4c15c;
-  --rose-300: #8a5f2a;
-  --rose-100: #2e2317;
+  --plum-950: #f5f4ef;
+  --plum-900: #f6e016;
+  --plum-800: #f5f4ef;
+  --plum-700: #f6e016;
+  --plum-600: #f6e016;
+  --plum-500: #f6e016;
+  --plum-400: #3a7a57;
+  --plum-300: #3a7a57;
+  --plum-200: #2f3a33;
+  --plum-100: #1b1a14;
+  --plum-50: #12140f;
 
-  --solar-500: #a3b389;
-  --solar-200: #2a3020;
+  --rose-500: #d9bba4;
+  --rose-300: #8a6b55;
+  --rose-100: #1b1a14;
 
-  --gradient-primary: linear-gradient(135deg, #7a4b2e, #d9743a, #f4c15c);
-  --gradient-primary-hover: linear-gradient(135deg, #8a5a37, #e8854a, #f7cd76);
+  --solar-500: #f6e016;
+  --solar-200: #2a2a16;
+
+  /* Starts at the lightened forest, not near-black: a near-black first
+     stop on a near-black page made the hero's opening words vanish. */
+  --gradient-primary: linear-gradient(135deg, #3a7a57, #8fbf5f 45%, #f6e016);
+  --gradient-primary-hover: linear-gradient(135deg, #46906a, #9fcf6f 45%, #f6e016);
   --gradient-glow: radial-gradient(
     circle at 30% 30%,
-    rgba(217, 116, 58, 0.35) 0%,
-    rgba(244, 193, 92, 0.2) 45%,
+    rgba(58, 122, 87, 0.35) 0%,
+    rgba(246, 224, 22, 0.16) 45%,
     transparent 70%
   );
-  --highlight-tint: rgba(244, 193, 92, 0.22);
+  --highlight-tint: rgba(246, 224, 22, 0.22);
 
   /* Dark mode: the bulb is switched on. */
-  --bulb-wire: #5c5348;
-  --bulb-glass: rgba(0, 0, 0, 0.25);
-  --bulb-fill: #f4c15c;
-  --bulb-cap-line: #3a2213;
-  --bulb-filament: #8a5a2a;
+  --bulb-wire: #4a4a44;
+  --bulb-glass: rgba(0, 0, 0, 0.3);
+  --bulb-fill: #f6e016;
+  --bulb-cap-line: #1b1a14;
+  --bulb-filament: #8a7a10;
   --bulb-ray-opacity: 0.85;
   --bulb-glow-opacity: 0.55;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #14100c;
-    --paper-raised: #1f1810;
-    --ink: #f6efe4;
-    --ink-secondary: #bfb2a2;
-    --ink-tertiary: #8b7d6d;
-    --border: #322a21;
+    --paper: #0a0f0c;
+    --paper-raised: #12140f;
+    --surface-tinted: #1b1a14;
+    --ink: #f5f4ef;
+    --ink-secondary: #b7b5ac;
+    --ink-tertiary: #787770;
+    --border: #26261f;
 
-    --plum-950: #f6efe4;
-    --plum-900: #f4c15c;
-    --plum-800: #f4c15c;
-    --plum-700: #e8a34a;
-    --plum-600: #d9743a;
-    --plum-500: #d9743a;
-    --plum-400: #c96a3e;
-    --plum-300: #7a4b2e;
-    --plum-200: #4a2e1f;
-    --plum-100: #2e2317;
-    --plum-50: #221a12;
+    --citron: #f6e016;
+    --forest: #3a7a57;
+    --tan: #d9bba4;
 
-    --rose-500: #f4c15c;
-    --rose-300: #8a5f2a;
-    --rose-100: #2e2317;
+    --plum-950: #f5f4ef;
+    --plum-900: #f6e016;
+    --plum-800: #f5f4ef;
+    --plum-700: #f6e016;
+    --plum-600: #f6e016;
+    --plum-500: #f6e016;
+    --plum-400: #3a7a57;
+    --plum-300: #3a7a57;
+    --plum-200: #2f3a33;
+    --plum-100: #1b1a14;
+    --plum-50: #12140f;
 
-    --solar-500: #a3b389;
-    --solar-200: #2a3020;
+    --rose-500: #d9bba4;
+    --rose-300: #8a6b55;
+    --rose-100: #1b1a14;
 
-    --gradient-primary: linear-gradient(135deg, #7a4b2e, #d9743a, #f4c15c);
-    --gradient-primary-hover: linear-gradient(135deg, #8a5a37, #e8854a, #f7cd76);
+    --solar-500: #f6e016;
+    --solar-200: #2a2a16;
+
+    /* Starts at the lightened forest, not near-black: a near-black first
+       stop on a near-black page made the hero's opening words vanish. */
+    --gradient-primary: linear-gradient(135deg, #3a7a57, #8fbf5f 45%, #f6e016);
+    --gradient-primary-hover: linear-gradient(135deg, #46906a, #9fcf6f 45%, #f6e016);
     --gradient-glow: radial-gradient(
       circle at 30% 30%,
-      rgba(217, 116, 58, 0.35) 0%,
-      rgba(244, 193, 92, 0.2) 45%,
+      rgba(58, 122, 87, 0.35) 0%,
+      rgba(246, 224, 22, 0.16) 45%,
       transparent 70%
     );
-    --highlight-tint: rgba(244, 193, 92, 0.22);
+    --highlight-tint: rgba(246, 224, 22, 0.22);
 
-    --bulb-wire: #5c5348;
-    --bulb-glass: rgba(0, 0, 0, 0.25);
-    --bulb-fill: #f4c15c;
-    --bulb-cap-line: #3a2213;
-    --bulb-filament: #8a5a2a;
+    --bulb-wire: #4a4a44;
+    --bulb-glass: rgba(0, 0, 0, 0.3);
+    --bulb-fill: #f6e016;
+    --bulb-cap-line: #1b1a14;
+    --bulb-filament: #8a7a10;
     --bulb-ray-opacity: 0.85;
     --bulb-glow-opacity: 0.55;
   }
@@ -189,10 +243,14 @@
   --color-rose-100: var(--rose-100);
   --color-solar-500: var(--solar-500);
   --color-solar-200: var(--solar-200);
+  --color-citron: var(--citron);
+  --color-forest: var(--forest);
+  --color-tan: var(--tan);
+  --color-surface-tinted: var(--surface-tinted);
 
-  /* font-display -> Instrument Serif: headlines, big display numbers.
+  /* font-display -> General Sans: headlines and display numbers.
      font-sans -> Inter: everything else. */
-  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-display: "General Sans", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
   --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif;
 }
@@ -272,18 +330,26 @@ body {
 }
 
 
+/* General Sans ships no italic, so a slanted synthetic face is what the
+   browser would fake here. The accent words in section headings lean on
+   colour and weight instead — which is how the reference site does it. */
+.font-display.italic {
+  font-style: normal;
+  font-weight: 600;
+}
+
 /* ---------------------------------------------------------------------- */
 /* Shared UI primitives                                                    */
 /* ---------------------------------------------------------------------- */
 
 .chapter-tab {
   display: inline-block;
-  font-family: var(--font-sans);
-  font-weight: 700;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--plum-500);
+  color: var(--ink-secondary);
 }
 
 .btn-primary {
@@ -292,14 +358,12 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--gradient-primary);
-  color: #fff;
+  background: var(--citron);
+  color: #0a0a08;
   border-radius: 999px;
   font-family: var(--font-sans);
-  font-weight: 600;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 6px 16px -6px rgba(40, 20, 10, 0.5);
+  font-weight: 700;
+  box-shadow: 0 6px 16px -8px rgba(10, 10, 8, 0.45);
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -365,11 +429,26 @@ body {
 }
 
 .marker-highlight {
-  background-color: var(--highlight-tint);
+  /* An inline element's background paints the font's full ascent+descent
+     box, not the visible glyph ink — measured on this exact heading, that
+     box is 82px tall while the glyphs it's drawing behind are only ~46px
+     tall. A solid fill (or fill + border-radius) at full height was why
+     the chip swallowed the lines above and below it. The gradient confines
+     the citron to a band around the real ink, measured the same way, with
+     a few pixels of highlighter overshoot above and below the letters —
+     not the font's full metrics box. Flat ends, not a rounded pill: that's
+     what makes it read as marker ink over type rather than a button. */
+  background-image: linear-gradient(
+    to bottom,
+    transparent 16%,
+    var(--citron) 16%,
+    var(--citron) 84%,
+    transparent 84%
+  );
+  color: #0a0a08;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
-  padding: 0.02em 0.28em;
-  border-radius: 0.08em;
+  padding-inline: 0.1em;
 }
 
 .accordion-icon {
@@ -392,8 +471,8 @@ body {
     transform 0.15s ease;
 }
 .group[open] .accordion-icon {
-  background: var(--gradient-primary);
-  color: #fff;
+  background: var(--forest);
+  color: var(--citron);
   transform: rotate(45deg);
 }
 
@@ -404,9 +483,9 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: var(--gradient-primary);
-  color: #fff;
-  box-shadow: 0 6px 16px -6px rgba(40, 20, 10, 0.45);
+  background: var(--forest);
+  color: var(--citron);
+  box-shadow: 0 6px 16px -8px rgba(10, 10, 8, 0.4);
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -704,11 +783,11 @@ body {
    the type has to come down with it. */
 .card-name {
   display: block;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-size: min(clamp(1.5rem, 0.9vw + 1.25rem, 2.05rem), 3.9vh);
   line-height: 1.08;
   letter-spacing: -0.02em;
-  font-weight: 800;
+  font-weight: 700;
   color: var(--plum-800);
 }
 
@@ -718,17 +797,9 @@ body {
 .card-name.card-name-hero {
   margin-top: min(0.7rem, 1.4vh);
   font-size: min(clamp(2.1rem, 2.8vw + 1.4rem, 3.9rem), 7.4vh);
-  line-height: 1;
+  line-height: 1.12;
   letter-spacing: -0.035em;
-  background-image: var(--gradient-primary);
   color: var(--plum-800);
-}
-@supports (-webkit-background-clip: text) or (background-clip: text) {
-  .card-name.card-name-hero {
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
 }
 
 .card-desc {
@@ -783,9 +854,9 @@ body {
     color 0.25s ease;
 }
 .cta-chip-sm:hover {
-  background: var(--gradient-primary);
+  background: var(--forest);
   border-color: transparent;
-  color: #fff;
+  color: var(--citron);
   transform: scale(1.05);
 }
 
@@ -834,16 +905,16 @@ body {
   font-style: italic;
   font-size: 5rem;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.22);
+  color: color-mix(in srgb, var(--citron) 26%, transparent);
 }
 .card-cover-label {
   position: relative;
-  font-family: var(--font-sans);
+  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 0.95rem;
-  line-height: 1.3;
-  color: #fff;
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+  font-size: 1.05rem;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--citron);
 }
 .card-cover-dots {
   position: absolute;
@@ -886,9 +957,9 @@ body {
     color 0.25s ease;
 }
 .cta-chip:hover {
-  background: var(--gradient-primary);
+  background: var(--forest);
   border-color: transparent;
-  color: #fff;
+  color: var(--citron);
   transform: scale(1.05);
 }
 
@@ -992,4 +1063,448 @@ body {
    z-index overlay. */
 body.menu-open canvas {
   visibility: hidden;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Shared page shell — one gutter and one max width for every route, so    */
+/* the left/right margins line up with the homepage on every page.         */
+/* ---------------------------------------------------------------------- */
+
+.page-shell {
+  margin-inline: auto;
+  width: 100%;
+  /* 72rem of content + the 1.5rem gutter on each side. The homepage puts
+     its gutter outside its 72rem grid, so matching that here (rather than
+     a flat 72rem) is what makes the left/right edges line up across every
+     route instead of sitting 24px apart. */
+  max-width: 75rem;
+  padding-inline: 1.5rem;
+}
+/* Prose still needs a comfortable measure inside that full-width shell. */
+.prose-measure {
+  max-width: 44rem;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Work section: scroll-driven poster carousel.                            */
+/* ---------------------------------------------------------------------- */
+
+/* The tall outer wrapper is what the page actually scrolls through; the
+   inner sticky stage stays put while that scroll is mapped onto the rail's
+   horizontal offset, so an ordinary downward scroll moves the cards. */
+.work-title {
+  font-size: clamp(2.25rem, 3.4vw + 1.2rem, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+}
+
+.work-rail {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  padding-block: 0.5rem 1rem;
+  scrollbar-width: none;
+}
+.work-rail::-webkit-scrollbar {
+  display: none;
+}
+.work-rail.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+/* Scroll-snap only on touch, where it's the sole input method and nothing
+   else is moving scrollLeft. On desktop it actively fights the wheel
+   handler: after each small JS-driven nudge the browser sees the scroll as
+   "settled" and pulls it straight back to the nearest snap point, which is
+   why the carousel looked frozen under the mouse wheel. */
+@media (max-width: 767px) {
+  .work-rail {
+    scroll-snap-type: x mandatory;
+  }
+  .work-card {
+    scroll-snap-align: center;
+  }
+}
+
+/* One rectangle: the artwork is the card, the text sits on top of it.
+   Sized well past the old "bigger, please" ask — a card now runs close to
+   half the page width on desktop instead of a third. */
+.work-card {
+  position: relative;
+  flex: 0 0 clamp(24rem, 55vw, 56rem);
+  aspect-ratio: 16 / 9;
+  display: block;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in srgb, white 14%, transparent);
+  background-color: var(--forest);
+  text-align: left;
+  box-shadow: 0 18px 40px -24px rgba(40, 20, 10, 0.5);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.work-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 55px -22px rgba(40, 20, 10, 0.6);
+}
+/* Geometric motif, one per project — the same art the detail page opens
+   with, so the card and the cover are the same object. */
+.work-card-art {
+  position: absolute;
+  inset: 0;
+  /* Solid field + motif on one element: .work-art--N sets both the
+     --work-field colour and the motif image, so they resolve together. */
+  background-color: var(--work-field, var(--forest));
+}
+/* A scrim so the overlaid type stays legible over the artwork. */
+.work-card-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(28, 16, 10, 0.82) 0%,
+    rgba(28, 16, 10, 0.45) 38%,
+    rgba(28, 16, 10, 0.05) 72%
+  );
+}
+.work-card-content {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.6rem 1.75rem 1.75rem;
+  color: #fff;
+}
+.work-card-feature {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.35rem, 1.1vw + 1rem, 1.9rem);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  color: var(--citron);
+}
+.work-card-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin-top: 0.6rem;
+}
+.work-card-stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2rem, 1.9vw + 1.2rem, 3rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--citron);
+}
+.work-card-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: rgba(255, 255, 255, 0.88);
+}
+.work-card-company {
+  display: block;
+  margin-top: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: rgba(255, 255, 255, 0.76);
+}
+
+/* Solid colour fields, one per project — a flat block system, so each card
+   is a single colour with a white motif over it rather than a blend. */
+.work-art--0 {
+  --work-field: #0f3d2a;
+}
+.work-art--1 {
+  --work-field: #0a0a08;
+}
+.work-art--2 {
+  --work-field: #06251a;
+}
+.work-art--3 {
+  --work-field: #23302a;
+}
+.work-art--4 {
+  --work-field: #15503a;
+}
+:root[data-theme="dark"] .work-art--0 {
+  --work-field: #14432f;
+}
+:root[data-theme="dark"] .work-art--1 {
+  --work-field: #1b1a14;
+}
+:root[data-theme="dark"] .work-art--2 {
+  --work-field: #0e3928;
+}
+:root[data-theme="dark"] .work-art--3 {
+  --work-field: #27352e;
+}
+:root[data-theme="dark"] .work-art--4 {
+  --work-field: #2f6b4d;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .work-art--0 {
+    --work-field: #14432f;
+  }
+  :root:not([data-theme="light"]) .work-art--1 {
+    --work-field: #1b1a14;
+  }
+  :root:not([data-theme="light"]) .work-art--2 {
+    --work-field: #0e3928;
+  }
+  :root:not([data-theme="light"]) .work-art--3 {
+    --work-field: #27352e;
+  }
+  :root:not([data-theme="light"]) .work-art--4 {
+    --work-field: #2f6b4d;
+  }
+}
+
+/* Motifs, shared by the card and the detail cover. */
+.work-art--0 {
+  background-image: repeating-radial-gradient(
+    circle at 18% 118%,
+    rgba(255, 255, 255, 0.34) 0 2px,
+    transparent 2px 26px
+  );
+}
+.work-art--1 {
+  background-image: repeating-linear-gradient(
+    58deg,
+    rgba(255, 255, 255, 0.26) 0 3px,
+    transparent 3px 22px
+  );
+}
+.work-art--2 {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.42) 1.6px, transparent 1.7px);
+  background-size: 22px 22px;
+}
+.work-art--3 {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.22) 0 1px, transparent 1px 22px),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 1px, transparent 1px 22px);
+}
+.work-art--4 {
+  background-image:
+    radial-gradient(ellipse 120% 70% at 8% 112%, rgba(255, 255, 255, 0.32), transparent 60%),
+    radial-gradient(ellipse 110% 65% at 82% 122%, rgba(255, 255, 255, 0.24), transparent 60%);
+}
+
+/* Arrows + counter sit with the section header, well away from the
+   bottom-centre dock so the two never read as one control cluster. */
+.work-nav-btn {
+  display: inline-flex;
+  height: 2.25rem;
+  width: 2.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid var(--plum-200);
+  background: color-mix(in srgb, var(--paper-raised) 70%, transparent);
+  color: var(--plum-700);
+  transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+.work-nav-btn:hover:not(:disabled) {
+  background: var(--forest);
+  border-color: transparent;
+  color: var(--citron);
+}
+.work-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+.work-counter {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-secondary);
+}
+.work-progress {
+  height: 2px;
+  width: 100%;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--border) 85%, transparent);
+  overflow: hidden;
+}
+.work-progress span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--citron);
+  transition: width 0.15s linear;
+}
+
+/* ---- Case-study detail page ------------------------------------------ */
+
+.work-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1.5rem;
+  aspect-ratio: 16 / 6;
+  background-color: var(--forest);
+}
+@media (max-width: 640px) {
+  .work-hero {
+    aspect-ratio: 4 / 3;
+  }
+}
+.work-hero-content {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  color: #fff;
+}
+.work-hero-feature {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.75rem, 3vw + 1rem, 3rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--citron);
+}
+.work-hero-meta {
+  margin-top: 0.6rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* The payoff, in large type before the narrative. */
+.work-stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 5vw + 1rem, 4.5rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--plum-600);
+}
+.work-stat-label {
+  margin-top: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+}
+.work-section-label {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--plum-500);
+}
+.work-body-text {
+  margin-top: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--ink-secondary);
+}
+
+/* Surface rhythm in light mode. The reference gets its colour from blocks
+   of tan / grey / citron rather than from tinted type, so a couple of the
+   bento cards take a tinted field instead of every card being white. */
+.card-pov {
+  /* Tan over white reads pink at this opacity, so both tinted cards use the
+     neutral grey and the warmth comes from the chips and the citron. */
+  background-color: color-mix(in srgb, var(--surface-tinted) 85%, var(--paper-raised));
+}
+.card-alter {
+  background-color: color-mix(in srgb, var(--surface-tinted) 45%, var(--paper-raised));
+}
+:root[data-theme="dark"] .card-pov,
+:root[data-theme="dark"] .card-alter {
+  background-color: color-mix(in srgb, var(--paper-raised) 58%, transparent);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .card-pov,
+  :root:not([data-theme="light"]) .card-alter {
+    background-color: color-mix(in srgb, var(--paper-raised) 58%, transparent);
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Breadcrumbs                                                             */
+/* ---------------------------------------------------------------------- */
+
+.breadcrumbs {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  margin-inline: -1.5rem;
+  padding: 0.9rem 1.5rem;
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.breadcrumbs li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.breadcrumbs a {
+  color: var(--ink-secondary);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--ink-secondary) 35%, transparent);
+  text-underline-offset: 3px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+.breadcrumbs a:hover {
+  color: var(--ink);
+  text-decoration-color: var(--ink);
+}
+.breadcrumbs [aria-current="page"] {
+  color: var(--ink);
+  font-weight: 600;
+}
+.breadcrumbs-sep {
+  color: var(--ink-tertiary);
+}
+
+
+/* Logo: sits directly on the page, no chip. The light/dark cuts swap on
+   data-theme so the mark always has contrast without a coloured backing. */
+.logo-mark {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.logo-mark:hover {
+  transform: scale(1.04);
+}
+.logo-on-dark {
+  display: none;
+}
+:root[data-theme="dark"] .logo-on-light {
+  display: none;
+}
+:root[data-theme="dark"] .logo-on-dark {
+  display: block;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .logo-on-light {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .logo-on-dark {
+    display: block;
+  }
 }

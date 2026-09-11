@@ -3,7 +3,7 @@ import Building from "@/components/Building";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Brewery, Anupam Kalita",
+  title: "Brewery",
   description: "What I'm building right now, in stealth.",
 };
 

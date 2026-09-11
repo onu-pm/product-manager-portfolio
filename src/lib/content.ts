@@ -10,7 +10,10 @@ export const profile = {
   title: "Senior Product Manager · HRIS & Payroll, Integrations, Agentic AI",
   // Homepage intro card copy.
   greeting: "Hi, I'm Anupam",
-  heroHeadline: "Being a human in the AI era.",
+  /** The headline is split so exactly one word carries the citron marker. */
+  heroLead: "Being a",
+  heroAccent: "human",
+  heroTrail: "in the AI era.",
   heroDescription: "Crafting products of the people, by the people, for the people.",
   subhead:
     "Currently a Product Manager, formerly a Marketer, and now at Repute. Over the last 5 years, I've built products and features that have helped 35,000+ companies unify fragmented HR systems and workflows within their existing HRIS and Payroll.",
@@ -129,6 +132,10 @@ export const logos = ["Repute", "Nestaway", "Moolya"];
 
 export type Project = {
   tag: string;
+  /** URL segment for /work/<slug>. */
+  slug: string;
+  /** Short feature name — what the card leads with. */
+  feature: string;
   title: string;
   company: string;
   role: string;
@@ -137,12 +144,17 @@ export type Project = {
   approach: string[];
   outcome: string;
   metric: string;
+  /** The headline number pulled out of `metric`, for the card face. Null
+   *  where no real figure exists yet — never a placeholder. */
+  stat: { value: string; label: string } | null;
 };
 
 // Real work: shipped as part of the job at Repute and Nestaway.
 export const projects: Project[] = [
   {
     tag: "01 · Integrations Marketplace",
+    slug: "integrations-marketplace",
+    feature: "Integrations Marketplace",
     title: "Building a 0-to-1 embedded integrations marketplace",
     company: "Repute (HRIS Ecosystem: GreytHR, AdrenalinMAX, GelyxHR, PocketHRMS)",
     role: "Founding Product Manager",
@@ -157,9 +169,12 @@ export const projects: Project[] = [
     outcome:
       "Marketplace-sourced deals became a meaningful share of partner revenue within two quarters, and the catalog scaled well past its original size without a proportional rise in engineering cost per integration.",
     metric: "45% of solution providers' monthly closures sourced from the marketplace within 6 months · catalog grown from 75 to 175+ integrations",
+    stat: { value: "45%", label: "of partner monthly closures" },
   },
   {
     tag: "02 · Workflow Automation",
+    slug: "workflow-automation",
+    feature: "Workflow Automation",
     title: "Automating recruitment & payroll workflows end-to-end",
     company: "Repute",
     role: "Founding Product Manager",
@@ -174,9 +189,12 @@ export const projects: Project[] = [
     outcome:
       "Automation turned a low-usage feature area into one of the platform's clearer growth drivers, compounding into sustained MAU and revenue growth over the following year and a half.",
     metric: "Recruitment & payroll activation up 5X in 3 months · MAU grew 10,000 → 25,000 and ARR 4X in 18 months",
+    stat: { value: "4X", label: "ARR in 18 months" },
   },
   {
     tag: "03 · Agentic AI",
+    slug: "agentic-ai-assistant",
+    feature: "Agentic AI Assistant",
     title: "Shipping a 4-agent AI assistant for HR operations",
     company: "Repute",
     role: "Founding Product Manager",
@@ -191,9 +209,12 @@ export const projects: Project[] = [
     outcome:
       "The assistant shipped live and became a differentiator for HRIS ARR growth, while the human-review benchmarking approach kept accuracy auditable rather than opaque.",
     metric: "HRIS ARR grew 2X following launch",
+    stat: { value: "2X", label: "HRIS ARR after launch" },
   },
   {
     tag: "04 · Compliance & Trust",
+    slug: "dpdp-compliance",
+    feature: "Compliance & Trust",
     title: "Shipping payroll & compliance integrations under India's DPDP regime",
     company: "Repute",
     role: "Founding Product Manager",
@@ -208,9 +229,12 @@ export const projects: Project[] = [
     outcome:
       "Payroll and compliance integrations shipped on schedule while meeting a new regulatory bar, turning a potential blocker into a repeatable pattern for future integrations.",
     metric: "",
+    stat: null,
   },
   {
     tag: "05 · Customer Experience",
+    slug: "tenant-journey",
+    feature: "Customer Experience",
     title: "Redesigning the tenant journey to cut support escalations",
     company: "Nestaway (Co-living & House Rentals)",
     role: "Program Manager, CX",
@@ -226,11 +250,14 @@ export const projects: Project[] = [
     outcome:
       "Escalations dropped sharply within a quarter, NPS improved substantially, and the CRM migration produced a durable per-user cost saving alongside the experience improvements.",
     metric: "Support tickets down 10%, social escalations down 50% in 3 months · NPS up 70% with 10% of detractors converted to promoters · ₹1,800 saved per user per month via CRM migration",
+    stat: { value: "50%", label: "fewer social escalations" },
   },
 ];
 
 export type CaseStudy = {
   tag: string;
+  /** URL segment for /pov/<slug>. */
+  slug: string;
   title: string;
   subject: string;
   hook: string;
@@ -247,6 +274,7 @@ export const caseStudies: CaseStudy[] = [
   {
     tag: "01 · Cross-sell Strategy",
     title: "Getting SpringVerify accounts to make their first hire in Goodfit",
+    slug: "springverify-goodfit",
     subject: "SpringVerify × Goodfit",
     hook: "Goodfit already sits inside SpringVerify. Discovery isn't the problem, the ask is.",
     problem:
@@ -263,6 +291,7 @@ export const caseStudies: CaseStudy[] = [
   {
     tag: "02 · Product Thesis",
     title: "Making it easier to know you're talking to the same person on Beeper",
+    slug: "beeper-people-layer",
     subject: "Beeper",
     hook: "Beeper's own search already knows two chats are the same person. Merge just doesn't act on it.",
     problem:
@@ -279,6 +308,7 @@ export const caseStudies: CaseStudy[] = [
   {
     tag: "03 · Platform Strategy",
     title: "Closing the integration coverage gap for Remote.com",
+    slug: "remote-integration-coverage",
     subject: "Remote.com",
     hook: "Every new system starts from zero. That's a template problem, not a data problem.",
     problem:
@@ -295,6 +325,7 @@ export const caseStudies: CaseStudy[] = [
   {
     tag: "04 · Systems Design",
     title: "Why complex payroll customers take months to activate when simple ones take weeks",
+    slug: "payroll-activation",
     subject: "Global payroll platforms",
     hook: "Simple customers self-serve in weeks. Complex ones wait on a person working a playbook by hand.",
     problem:

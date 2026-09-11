@@ -3,7 +3,7 @@ import AlterEgo from "@/components/AlterEgo";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Alter Ego, Anupam Kalita",
+  title: "Alter Ego",
   description: "Writing, blogs, and side hustles outside the product-manager job title.",
 };
 
