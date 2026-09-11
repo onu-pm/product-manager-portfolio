@@ -1,14 +1,16 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { alterEgo, profile } from "@/lib/content";
 
 export default function AlterEgo() {
   return (
-    <section className="px-6 py-20">
-      <div className="mx-auto max-w-3xl">
-        <div className="mb-10 flex flex-col items-start gap-3">
+    <section className="py-20">
+      <div className="page-shell">
+        <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Alter Ego" }]} />
+        <div className="mb-10 mt-6 flex flex-col items-start gap-3">
           <span className="chapter-tab">Alter Ego</span>
           <h2>
             <span>The part that isn&apos;t</span>{" "}
-            <span className="font-display italic text-plum-500">a job title.</span>
+            <span className="marker-highlight">a job title.</span>
           </h2>
           <p className="max-w-xl text-ink-secondary">{alterEgo.body}</p>
         </div>

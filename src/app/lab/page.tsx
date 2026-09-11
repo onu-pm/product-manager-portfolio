@@ -3,7 +3,7 @@ import Playground from "@/components/Playground";
 import Reveal from "@/components/Reveal";
 
 export const metadata: Metadata = {
-  title: "Lab, Anupam Kalita",
+  title: "Lab",
   description: "AI and vibe-coded projects, built for fun outside of any job.",
 };
 

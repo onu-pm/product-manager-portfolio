@@ -1,138 +1,193 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { projects } from "@/lib/content";
 
-// Span pattern for the bento grid, one entry per project, cycling if there
-// are more than five. Keeps the grid from feeling like a uniform card wall.
-const spans = [
-  "md:col-span-2 md:row-span-2",
-  "md:col-span-2",
-  "md:col-span-1",
-  "md:col-span-1",
-  "md:col-span-4",
-];
+function Arrow({ dir }: { dir: "left" | "right" }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+      <path
+        d={dir === "left" ? "M19 12H5M11 18l-6-6 6-6" : "M5 12h14M13 6l6 6-6 6"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export default function Projects() {
-  const [active, setActive] = useState(0);
-  const dialogRef = useRef<HTMLDialogElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
+  const barRef = useRef<HTMLSpanElement>(null);
+  const [index, setIndex] = useState(0);
 
-  function open(index: number) {
-    setActive(index);
-    dialogRef.current?.showModal();
+  const step = useCallback(() => {
+    const rail = railRef.current;
+    const card = rail?.querySelector<HTMLElement>(".work-card");
+    if (!rail || !card) return 0;
+    const gap = parseFloat(getComputedStyle(rail).columnGap || "0") || 0;
+    return card.offsetWidth + gap;
+  }, []);
+
+  const scrollToIndex = useCallback(
+    (i: number, behavior: ScrollBehavior = "smooth") => {
+      const rail = railRef.current;
+      if (!rail) return;
+      const clamped = Math.max(0, Math.min(projects.length - 1, i));
+      rail.scrollTo({ left: clamped * step(), behavior });
+    },
+    [step],
+  );
+
+  // The rail's own scroll position drives the counter and progress bar — the
+  // page itself never moves, so this only ever reflects horizontal motion.
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    let frame = 0;
+    function apply() {
+      frame = 0;
+      const max = rail!.scrollWidth - rail!.clientWidth;
+      const p = max > 0 ? rail!.scrollLeft / max : 0;
+      if (barRef.current) barRef.current.style.width = `${p * 100}%`;
+      const s = step();
+      if (s > 0) setIndex(Math.round(rail!.scrollLeft / s));
+    }
+    function onScroll() {
+      if (!frame) frame = requestAnimationFrame(apply);
+    }
+    apply();
+    rail.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", apply);
+    return () => {
+      rail.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", apply);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, [step]);
+
+  // Any wheel/trackpad input over the rail moves it, and only it — the page
+  // never scrolls while the pointer is over the carousel. Earlier this only
+  // captured vertical-dominant deltas and let horizontal-dominant ones fall
+  // through natively; trackpads report noisy, mixed deltas even during a
+  // gesture the user experiences as purely vertical, so that let plenty of
+  // events leak through as real page scroll. Whichever axis carries more
+  // signal on a given tick now drives the rail, full stop. Only right at
+  // either end, continuing further in that same direction, is the event
+  // released so normal page scroll can resume past the carousel.
+  useEffect(() => {
+    const rail = railRef.current;
+    if (!rail) return;
+    function onWheel(e: WheelEvent) {
+      const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+      if (delta === 0) return;
+      const max = rail!.scrollWidth - rail!.clientWidth;
+      const atStart = rail!.scrollLeft <= 0;
+      const atEnd = rail!.scrollLeft >= max - 1;
+      if ((delta < 0 && atStart) || (delta > 0 && atEnd)) return;
+      e.preventDefault();
+      rail!.scrollLeft += delta;
+    }
+    rail.addEventListener("wheel", onWheel, { passive: false });
+    return () => rail.removeEventListener("wheel", onWheel);
+  }, []);
+
+  // Pointer drag for mouse users (touch already scrolls natively).
+  const drag = useRef({ active: false, startX: 0, startLeft: 0, moved: 0 });
+  function onPointerDown(e: React.PointerEvent) {
+    if (e.pointerType === "touch") return;
+    const rail = railRef.current;
+    if (!rail) return;
+    drag.current = { active: true, startX: e.clientX, startLeft: rail.scrollLeft, moved: 0 };
+    rail.classList.add("is-dragging");
+  }
+  function onPointerMove(e: React.PointerEvent) {
+    const rail = railRef.current;
+    if (!rail || !drag.current.active) return;
+    const dx = e.clientX - drag.current.startX;
+    drag.current.moved = Math.max(drag.current.moved, Math.abs(dx));
+    rail.scrollLeft = drag.current.startLeft - dx;
+  }
+  function endDrag() {
+    const rail = railRef.current;
+    if (!rail || !drag.current.active) return;
+    drag.current.active = false;
+    rail.classList.remove("is-dragging");
+  }
+  function onCardClick(e: React.MouseEvent) {
+    if (drag.current.moved > 6) e.preventDefault(); // that was a drag, not a click
   }
 
-  const p = projects[active];
-
   return (
-    <section id="projects" className="px-6 py-20">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-10 flex flex-col items-start gap-3">
-          <span className="chapter-tab">Projects</span>
-          <h2>
-            <span>Work I&apos;ve actually</span>{" "}
-            <span className="font-display italic text-plum-500">shipped.</span>
+    <section id="projects" className="page-shell py-14">
+      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Work" }]} />
+      <div className="flex flex-wrap items-end justify-between gap-6 pb-8 pt-5">
+        <div className="flex flex-col items-start gap-3">
+          <span className="chapter-tab">Work</span>
+          <h2 className="work-title">
+            <span>Work I&apos;ve actually</span> <span className="marker-highlight">shipped.</span>
           </h2>
-          <p className="max-w-xl text-ink/70">
-            The systems I&apos;ve built end to end as part of the job. Tap a card for the full
-            story.
+          <p className="prose-measure text-ink-secondary">
+            Real, shipped product work. Drag, scroll or use the arrows, then open a card for the
+            full story.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
-          {projects.map((c, i) => (
-            <button
-              key={c.title}
-              onClick={() => open(i)}
-              className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-plum-100 bg-paper-raised p-6 text-left transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(28,14,38,0.28)] ${spans[i % spans.length]}`}
-            >
-              <div>
-                <span className="mb-3 inline-block text-xs font-bold uppercase tracking-wider text-plum-600">
-                  {c.tag}
-                </span>
-                <h3 className="text-xl md:text-2xl">
-                  {c.title}
-                </h3>
-                <p className="mt-2 text-sm text-ink/55">
-                  {c.company} · {c.role}
-                </p>
-              </div>
-
-              <div className="mt-6 flex items-end justify-between gap-4">
-                <p className="line-clamp-2 text-sm font-semibold text-plum-700">
-                  {c.metric || `${c.outcome.split(".")[0]}.`}
-                </p>
-                <span className="accordion-icon shrink-0 transition-transform duration-300 group-hover:rotate-45">
-                  +
-                </span>
-              </div>
-            </button>
-          ))}
+        <div className="flex items-center gap-2">
+          <span className="work-counter">
+            {index + 1} / {projects.length}
+          </span>
+          <button
+            type="button"
+            onClick={() => scrollToIndex(index - 1)}
+            disabled={index === 0}
+            aria-label="Previous project"
+            className="work-nav-btn"
+          >
+            <Arrow dir="left" />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollToIndex(index + 1)}
+            disabled={index >= projects.length - 1}
+            aria-label="Next project"
+            className="work-nav-btn"
+          >
+            <Arrow dir="right" />
+          </button>
         </div>
       </div>
 
-      <dialog
-        ref={dialogRef}
-        className="m-auto max-h-[85vh] w-[min(640px,90vw)] rounded-3xl border border-plum-100 bg-paper-raised p-0 backdrop:bg-plum-950/40 backdrop:backdrop-blur-sm"
+      <div
+        ref={railRef}
+        className="work-rail"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={endDrag}
+        onPointerLeave={endDrag}
       >
-        <div className="max-h-[85vh] overflow-y-auto p-7 md:p-9">
-          <div className="flex items-start justify-between gap-4">
-            <div>
-              <span className="mb-2 inline-block text-xs font-bold uppercase tracking-wider text-plum-600">
-                {p.tag}
-              </span>
-              <h3 className="text-2xl">{p.title}</h3>
-              <p className="mt-1 text-sm text-ink/55">
-                {p.company} · {p.role} · {p.timeframe}
-              </p>
-            </div>
-            <button
-              onClick={() => dialogRef.current?.close()}
-              aria-label="Close"
-              className="accordion-icon shrink-0 rotate-45"
-            >
-              +
-            </button>
-          </div>
+        {projects.map((p, i) => (
+          <Link key={p.slug} href={`/work/${p.slug}`} className="work-card" onClick={onCardClick}>
+            <span className={`work-card-art work-art--${i}`} />
+            <span className="work-card-scrim" />
+            <span className="work-card-content">
+              <span className="work-card-feature">{p.feature}</span>
+              {p.stat && (
+                <span className="work-card-stat">
+                  <span className="work-card-stat-value">{p.stat.value}</span>
+                  <span className="work-card-stat-label">{p.stat.label}</span>
+                </span>
+              )}
+              <span className="work-card-company">{p.company.split(" (")[0]}</span>
+            </span>
+          </Link>
+        ))}
+      </div>
 
-          <div className="mt-6 grid gap-6 border-t border-plum-100 pt-6 md:grid-cols-2">
-            <div>
-              <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/45">
-                Pain point
-              </h4>
-              <p className="text-[15px] leading-relaxed text-ink/70">{p.problem}</p>
-            </div>
-            <div>
-              <h4 className="mb-2 text-xs font-bold uppercase tracking-wider text-ink/45">
-                Approach
-              </h4>
-              <ul className="list-disc space-y-1.5 pl-4 text-[15px] leading-relaxed text-ink/70">
-                {p.approach.map((a) => (
-                  <li key={a}>{a}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="tint-card mt-6 rounded-xl p-5">
-            <h4 className="mb-1 text-xs font-bold uppercase tracking-wider text-plum-700">
-              Impact
-            </h4>
-            <p className="text-[15px] leading-relaxed text-ink/80">{p.outcome}</p>
-            {p.metric && (
-              <p className="mt-2 text-base font-semibold text-plum-800">{p.metric}</p>
-            )}
-          </div>
-
-          <a
-            href="/about#contact"
-            onClick={() => dialogRef.current?.close()}
-            className="mt-5 inline-block text-sm font-semibold text-plum-700 underline decoration-plum-300 underline-offset-4 hover:text-plum-900"
-          >
-            Talk about next steps →
-          </a>
-        </div>
-      </dialog>
+      <div className="work-progress mt-4">
+        <span ref={barRef} style={{ width: "0%" }} />
+      </div>
     </section>
   );
 }

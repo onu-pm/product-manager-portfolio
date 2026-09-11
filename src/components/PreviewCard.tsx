@@ -5,12 +5,15 @@ import Link from "next/link";
 
 export type Slide = { number: string; label: string };
 
+// Dark fields only. These previously pulled from the plum ramp, which in
+// dark mode resolves to citron — so a white-on-yellow slide had almost no
+// contrast. Citron is a highlight colour, never a text-bearing surface.
 const SLIDE_COLORS = [
-  "var(--plum-500)",
-  "var(--rose-500)",
-  "var(--plum-700)",
-  "var(--plum-300)",
-  "var(--plum-600)",
+  "#0f3d2a",
+  "#0a0a08",
+  "#06251a",
+  "#23302a",
+  "#15503a",
 ];
 
 export default function PreviewCard({

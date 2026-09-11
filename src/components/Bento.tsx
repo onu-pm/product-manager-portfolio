@@ -34,7 +34,11 @@ export default function Bento() {
           <div className="card-face">
             <div>
               <h2 className="card-name">{profile.greeting}</h2>
-              <h1 className="card-name card-name-hero">{profile.heroHeadline}</h1>
+              <h1 className="card-name card-name-hero">
+                {profile.heroLead}{" "}
+                <span className="marker-highlight">{profile.heroAccent}</span>{" "}
+                {profile.heroTrail}
+              </h1>
               <p className="card-desc">{profile.heroDescription}</p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
@@ -55,7 +59,7 @@ export default function Bento() {
           href="/work"
           areaClass="card-work"
           name="Work"
-          description="Real systems I've shipped end to end, as part of the job."
+          description="The 0-to-1 marketplace behind 45% of partner closures, and the automation that 4X'd ARR."
           ctaText="5 shipped projects"
           slides={projects.map((p, i) => ({ number: `0${i + 1}`, label: tagLabel(p.tag) }))}
         />

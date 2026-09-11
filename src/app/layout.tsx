@@ -8,23 +8,29 @@ const siteUrl = "https://poums.in";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Anupam Kalita, Senior Product Manager, B2B SaaS",
+  // A page below this in the tree that sets a plain string title (e.g.
+  // "Work") gets wrapped as "Anupam Kalita Universe | Work" automatically.
+  // The home page sets no title of its own, so it falls back to `default`.
+  title: {
+    default: "Anupam Kalita Universe",
+    template: "Anupam Kalita Universe | %s",
+  },
   description:
-    "Product, case studies, and what I'm building: HRIS & payroll, integrations, and agentic AI at B2B SaaS scale.",
+    "Product Manager who transformed the way HRIS and Payroll operates in India.",
   openGraph: {
-    title: "Anupam Kalita, Senior Product Manager, B2B SaaS",
+    title: "Anupam Kalita Universe (AKU)",
     description:
-      "Product, case studies, and what I'm building: HRIS & payroll, integrations, and agentic AI at B2B SaaS scale.",
+    "Product Manager who transformed the way HRIS and Payroll operates in India.",
     url: siteUrl,
-    siteName: "Anupam Kalita",
+    siteName: "Anupam Kalita Universe (AKU)",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Anupam Kalita, Senior Product Manager, B2B SaaS",
+    title: "Anupam Kalita Universe (AKU)",
     description:
-      "Product, case studies, and what I'm building: HRIS & payroll, integrations, and agentic AI at B2B SaaS scale.",
+    "Product Manager who transformed the way HRIS and Payroll operates in India.",
     images: ["/og-image.png"],
   },
 };

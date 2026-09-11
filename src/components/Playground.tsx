@@ -1,14 +1,16 @@
+import Breadcrumbs from "@/components/Breadcrumbs";
 import { playgroundProjects } from "@/lib/content";
 
 export default function Playground() {
   return (
-    <section className="px-6 py-20">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-10 flex flex-col items-start gap-3">
+    <section className="py-20">
+      <div className="page-shell">
+        <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Lab" }]} />
+        <div className="mb-10 mt-6 flex flex-col items-start gap-3">
           <span className="chapter-tab">Lab</span>
           <h2>
             <span>Lighter, faster,</span>{" "}
-            <span className="font-display italic text-plum-500">more exploratory.</span>
+            <span className="marker-highlight">more exploratory.</span>
           </h2>
           <p className="max-w-xl text-ink-secondary">
             AI and vibe-coded projects I build for fun, outside of any job. Some ship, some
