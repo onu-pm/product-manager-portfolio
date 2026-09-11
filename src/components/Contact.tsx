@@ -46,9 +46,9 @@ export default function Contact() {
     <section id="contact" className="mx-auto max-w-2xl px-6 py-24">
       <div className="text-center">
         <span className="chapter-tab">Let&apos;s connect 👋</span>
-        <h2 className="font-display mt-4 text-3xl font-bold tracking-tight text-ink md:text-5xl">
-          <span className="text-plum-800">If this sounds right,</span>{" "}
-          <span className="font-display font-light text-plum-500">let&apos;s talk.</span>
+        <h2 className="mt-4 text-4xl md:text-5xl">
+          <span>If this sounds right,</span>{" "}
+          <span className="font-display italic text-plum-500">let&apos;s talk.</span>
         </h2>
         <p className="mx-auto mt-4 max-w-md text-ink/70">
           A short conversation is usually enough to see if there&apos;s a fit.
@@ -57,7 +57,7 @@ export default function Contact() {
 
       {status === "sent" ? (
         <div className="tint-card mt-10 rounded-2xl p-8 text-center">
-          <p className="font-display text-lg font-bold text-ink">Thanks, that&apos;s in.</p>
+          <p className="text-lg font-semibold text-ink">Thanks, that&apos;s in.</p>
           <p className="mt-2 text-sm text-ink/70">
             I read every message myself and will get back to you soon.
           </p>

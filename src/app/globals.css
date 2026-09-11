@@ -1,56 +1,166 @@
-/* Secondary/body face: Satoshi, served from Fontshare (its only official
-   distribution channel). This remote import must stay the first rule in the
-   file, before any local @import, or the CSS spec's "@import must come
-   first" rule breaks once the local imports are inlined at build time. */
-@import url("https://api.fontshare.com/v2/css?f%5B%5D=satoshi@300,400,500,700,900&display=swap");
-
+/* Display face: Instrument Serif, editorial and personal rather than a
+   typical SaaS sans-only pairing. Body/UI face: Inter. Both self-hosted via
+   Fontsource so there's no remote CDN dependency. */
 @import "tailwindcss";
-
-/* Primary display face: Funnel Display. */
-@import "@fontsource/funnel-display/300.css";
-@import "@fontsource/funnel-display/400.css";
-@import "@fontsource/funnel-display/500.css";
-@import "@fontsource/funnel-display/600.css";
-@import "@fontsource/funnel-display/700.css";
-@import "@fontsource/funnel-display/800.css";
+@import "@fontsource/instrument-serif/400.css";
+@import "@fontsource/instrument-serif/400-italic.css";
+@import "@fontsource/inter/400.css";
+@import "@fontsource/inter/500.css";
+@import "@fontsource/inter/600.css";
+@import "@fontsource/inter/700.css";
+@import "@fontsource/inter/800.css";
 
 :root {
-  /* Palette (MP068): light ground, charcoal ink, plum as the primary brand
-     colour, with rose / solar / lavender as accents. */
-  --paper: #faeadd; /* Rosarian */
-  --paper-raised: #fff8f2;
-  --ink: #222023; /* Wet Charcoal */
+  /* Palette: Clay & Spice, drawn from the Baya Weaver's plumage (bright
+     yellow crown, dark brown mask, warm buff belly). Token names kept from
+     the previous palette (paper/ink/plum/rose/solar) so components don't
+     need to change, only what each token points to. */
+  /* Neutrals are warm-tinted on purpose: a cool grey body text next to the
+     umber/terracotta headings read as two unrelated palettes in light mode.
+     Everything now sits on the same warm axis. */
+  --paper: #faf7f2;
+  --paper-raised: #fffdf9;
+  --ink: #241a13;
+  --ink-secondary: #6e5a4c;
+  --ink-tertiary: #9a8676;
+  --border: #e9e0d4;
 
-  --plum-950: #1c0e26;
-  --plum-900: #2b1539;
-  --plum-800: #3a1d4e;
-  --plum-700: #46245f;
-  --plum-600: #522a6f; /* Purple Seduction */
-  --plum-500: #6b3a8f;
-  --plum-400: #8b5bb0;
-  --plum-300: #b58fd6;
-  --plum-200: #ddaaff; /* Testosterose */
-  --plum-100: #efdcff;
-  --plum-50: #f8f1ff;
+  /* "plum" now carries the clay/umber-brown ramp. */
+  --plum-950: #2a190f;
+  --plum-900: #3a2213;
+  --plum-800: #4a2e1f;
+  --plum-700: #6b3b23;
+  --plum-600: #8a4a28;
+  --plum-500: #b5502e;
+  --plum-400: #c96a3e;
+  --plum-300: #d9a441;
+  --plum-200: #e8c179;
+  --plum-100: #f3e2c0;
+  --plum-50: #faf1e0;
 
-  --rose-500: #f29cb7; /* Harmonious Rose */
-  --rose-300: #f8c2d3;
-  --rose-100: #fdeaf0;
+  /* "rose" carries the ochre/gold accent. */
+  --rose-500: #d9a441;
+  --rose-300: #ecc978;
+  --rose-100: #faf1e0;
 
-  --solar-500: #fbcf4f; /* Solarized */
-  --solar-200: #fdeab0;
+  /* "solar" carries a rare sage/moss counterpoint, used sparingly. */
+  --solar-500: #8a9a6b;
+  --solar-200: #d9e0cc;
 
-  --gradient-primary: linear-gradient(135deg, var(--plum-500), var(--plum-800));
-  --gradient-primary-hover: linear-gradient(135deg, var(--plum-600), var(--plum-950));
-  --gradient-playful: linear-gradient(120deg, var(--plum-200), var(--rose-500) 55%, var(--solar-500));
+  --gradient-primary: linear-gradient(135deg, #4a2e1f, #b5502e, #d9a441);
+  --gradient-primary-hover: linear-gradient(135deg, #3a2213, #8a4a28, #c96a3e);
+  --gradient-playful: linear-gradient(120deg, var(--plum-800), var(--plum-500) 55%, var(--plum-300));
   --gradient-glow: radial-gradient(
     circle at 30% 30%,
     var(--plum-200) 0%,
     var(--rose-300) 45%,
     transparent 70%
   );
-  /* Highlighter marker: solar yellow, the way a real highlighter reads on paper. */
-  --highlight-tint: rgba(251, 207, 79, 0.55);
+  --highlight-tint: rgba(217, 164, 65, 0.35);
+
+  /* Light mode: the bulb is off. */
+  --bulb-wire: var(--ink-tertiary);
+  --bulb-glass: rgba(26, 26, 24, 0.18);
+  --bulb-fill: rgba(26, 26, 24, 0.04);
+  --bulb-cap-line: var(--ink-tertiary);
+  --bulb-filament: var(--ink-tertiary);
+  --bulb-ray-opacity: 0;
+  --bulb-glow-opacity: 0;
+}
+
+:root[data-theme="dark"] {
+  --paper: #14100c;
+  --paper-raised: #1f1810;
+  --ink: #f6efe4;
+  --ink-secondary: #bfb2a2;
+  --ink-tertiary: #8b7d6d;
+  --border: #322a21;
+
+  --plum-950: #f6efe4;
+  --plum-900: #f4c15c;
+  --plum-800: #f4c15c;
+  --plum-700: #e8a34a;
+  --plum-600: #d9743a;
+  --plum-500: #d9743a;
+  --plum-400: #c96a3e;
+  --plum-300: #7a4b2e;
+  --plum-200: #4a2e1f;
+  --plum-100: #2e2317;
+  --plum-50: #221a12;
+
+  --rose-500: #f4c15c;
+  --rose-300: #8a5f2a;
+  --rose-100: #2e2317;
+
+  --solar-500: #a3b389;
+  --solar-200: #2a3020;
+
+  --gradient-primary: linear-gradient(135deg, #7a4b2e, #d9743a, #f4c15c);
+  --gradient-primary-hover: linear-gradient(135deg, #8a5a37, #e8854a, #f7cd76);
+  --gradient-glow: radial-gradient(
+    circle at 30% 30%,
+    rgba(217, 116, 58, 0.35) 0%,
+    rgba(244, 193, 92, 0.2) 45%,
+    transparent 70%
+  );
+  --highlight-tint: rgba(244, 193, 92, 0.22);
+
+  /* Dark mode: the bulb is switched on. */
+  --bulb-wire: #5c5348;
+  --bulb-glass: rgba(0, 0, 0, 0.25);
+  --bulb-fill: #f4c15c;
+  --bulb-cap-line: #3a2213;
+  --bulb-filament: #8a5a2a;
+  --bulb-ray-opacity: 0.85;
+  --bulb-glow-opacity: 0.55;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #14100c;
+    --paper-raised: #1f1810;
+    --ink: #f6efe4;
+    --ink-secondary: #bfb2a2;
+    --ink-tertiary: #8b7d6d;
+    --border: #322a21;
+
+    --plum-950: #f6efe4;
+    --plum-900: #f4c15c;
+    --plum-800: #f4c15c;
+    --plum-700: #e8a34a;
+    --plum-600: #d9743a;
+    --plum-500: #d9743a;
+    --plum-400: #c96a3e;
+    --plum-300: #7a4b2e;
+    --plum-200: #4a2e1f;
+    --plum-100: #2e2317;
+    --plum-50: #221a12;
+
+    --rose-500: #f4c15c;
+    --rose-300: #8a5f2a;
+    --rose-100: #2e2317;
+
+    --solar-500: #a3b389;
+    --solar-200: #2a3020;
+
+    --gradient-primary: linear-gradient(135deg, #7a4b2e, #d9743a, #f4c15c);
+    --gradient-primary-hover: linear-gradient(135deg, #8a5a37, #e8854a, #f7cd76);
+    --gradient-glow: radial-gradient(
+      circle at 30% 30%,
+      rgba(217, 116, 58, 0.35) 0%,
+      rgba(244, 193, 92, 0.2) 45%,
+      transparent 70%
+    );
+    --highlight-tint: rgba(244, 193, 92, 0.22);
+
+    --bulb-wire: #5c5348;
+    --bulb-glass: rgba(0, 0, 0, 0.25);
+    --bulb-fill: #f4c15c;
+    --bulb-cap-line: #3a2213;
+    --bulb-filament: #8a5a2a;
+    --bulb-ray-opacity: 0.85;
+    --bulb-glow-opacity: 0.55;
+  }
 }
 
 @theme inline {
@@ -58,6 +168,9 @@
   --color-paper-raised: var(--paper-raised);
   --color-foreground: var(--ink);
   --color-ink: var(--ink);
+  --color-ink-secondary: var(--ink-secondary);
+  --color-ink-tertiary: var(--ink-tertiary);
+  --color-border: var(--border);
 
   --color-plum-950: var(--plum-950);
   --color-plum-900: var(--plum-900);
@@ -77,12 +190,27 @@
   --color-solar-500: var(--solar-500);
   --color-solar-200: var(--solar-200);
 
-  /* font-display -> Funnel Display: every heading, button, nav item, metric.
-     font-sans -> Satoshi: all body copy, captions, list text. */
-  --font-display: "Funnel Display", "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
-  --font-sans: "Satoshi", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+  /* font-display -> Instrument Serif: headlines, big display numbers.
+     font-sans -> Inter: everything else. */
+  --font-display: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
     sans-serif;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  html:not([data-theme="light"]) {
+    color-scheme: dark;
+  }
 }
 
 body {
@@ -91,55 +219,63 @@ body {
   font-family: var(--font-sans);
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  background-image: radial-gradient(rgba(82, 42, 111, 0.09) 1.5px, transparent 1.5px);
-  background-size: 26px 26px;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 /* ---------------------------------------------------------------------- */
 /* Type hierarchy                                                          */
 /* ---------------------------------------------------------------------- */
 
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
-  color: var(--ink);
-  text-wrap: balance;
+/* Tailwind utilities (className overrides) should always be able to beat
+   these defaults, so they live in the "base" layer, which Tailwind v4
+   orders before "utilities" in its cascade regardless of specificity.
+   Unlayered custom classes below (.card-title-*, etc.) still win over both,
+   since unlayered CSS always outranks any @layer. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    /* A warm palette tone, not a flat near-black/near-white "ink" — headings
+       should read as part of the Clay & Spice palette in both themes. */
+    color: var(--plum-800);
+    text-wrap: balance;
+  }
+
+  h1 {
+    font-weight: 400;
+    font-size: clamp(2.5rem, 6vw, 4.25rem);
+    line-height: 1.02;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font-weight: 400;
+    font-size: clamp(1.875rem, 3.6vw, 2.75rem);
+    line-height: 1.08;
+    letter-spacing: -0.008em;
+  }
+
+  h3 {
+    font-weight: 400;
+    font-size: clamp(1.25rem, 2vw, 1.625rem);
+    line-height: 1.2;
+  }
+
+  h4 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
 }
 
-h1 {
-  font-weight: 700;
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-}
-
-h2 {
-  font-weight: 600;
-  font-size: clamp(1.875rem, 3.4vw, 2.5rem);
-  line-height: 1.12;
-  letter-spacing: -0.018em;
-}
-
-h3 {
-  font-weight: 600;
-  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
-  line-height: 1.25;
-  letter-spacing: -0.01em;
-}
-
-h4 {
-  font-weight: 600;
-  font-size: 1rem;
-  line-height: 1.35;
-}
 
 /* ---------------------------------------------------------------------- */
 /* Shared UI primitives                                                    */
 /* ---------------------------------------------------------------------- */
 
-/* Eyebrow label above each section. */
 .chapter-tab {
   display: inline-block;
   font-family: var(--font-sans);
@@ -150,7 +286,6 @@ h4 {
   color: var(--plum-500);
 }
 
-/* Primary CTA: plum gradient, spring scale, light sweep on hover. */
 .btn-primary {
   position: relative;
   display: inline-flex;
@@ -160,11 +295,11 @@ h4 {
   background: var(--gradient-primary);
   color: #fff;
   border-radius: 999px;
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-weight: 600;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 6px 16px -6px rgba(28, 14, 38, 0.5);
+    0 6px 16px -6px rgba(40, 20, 10, 0.5);
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -182,7 +317,7 @@ h4 {
   transform: scale(1.04);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 10px 22px -6px rgba(28, 14, 38, 0.55);
+    0 10px 22px -6px rgba(40, 20, 10, 0.55);
 }
 .btn-primary:hover::after {
   background-position: -100% 0;
@@ -191,7 +326,6 @@ h4 {
   transform: scale(0.97);
 }
 
-/* Secondary CTA: outline on the paper ground. */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
@@ -200,7 +334,7 @@ h4 {
   color: var(--plum-700);
   border: 1.5px solid var(--plum-200);
   border-radius: 999px;
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-weight: 600;
   transition:
     background-color 0.2s ease,
@@ -216,7 +350,6 @@ h4 {
   transform: scale(0.97);
 }
 
-/* Section / card surfaces. */
 .tint-surface {
   background: linear-gradient(180deg, var(--plum-50), var(--paper) 70%);
 }
@@ -228,10 +361,9 @@ h4 {
 
 .section-divider {
   height: 1px;
-  background: var(--plum-100);
+  background: var(--border);
 }
 
-/* Highlighter-marker effect behind emphasized text. */
 .marker-highlight {
   background-color: var(--highlight-tint);
   -webkit-box-decoration-break: clone;
@@ -240,7 +372,6 @@ h4 {
   border-radius: 0.08em;
 }
 
-/* +/x accordion toggle icon. */
 .accordion-icon {
   display: inline-flex;
   height: 1.75rem;
@@ -251,7 +382,7 @@ h4 {
   border-radius: 999px;
   background: var(--plum-100);
   color: var(--plum-700);
-  font-family: var(--font-display);
+  font-family: var(--font-sans);
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1;
@@ -266,7 +397,6 @@ h4 {
   transform: rotate(45deg);
 }
 
-/* Round icon-only contact buttons in the hero. */
 .icon-btn {
   display: inline-flex;
   height: 2.75rem;
@@ -276,20 +406,19 @@ h4 {
   border-radius: 999px;
   background: var(--gradient-primary);
   color: #fff;
-  box-shadow: 0 6px 16px -6px rgba(28, 14, 38, 0.45);
+  box-shadow: 0 6px 16px -6px rgba(40, 20, 10, 0.45);
   transition:
     transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .icon-btn:hover {
   transform: scale(1.12) rotate(-4deg);
-  box-shadow: 0 10px 20px -6px rgba(28, 14, 38, 0.5);
+  box-shadow: 0 10px 20px -6px rgba(40, 20, 10, 0.5);
 }
 .icon-btn:active {
   transform: scale(0.95);
 }
 
-/* Soft, blurred gradient blob behind the hero. */
 .hero-glow {
   position: absolute;
   border-radius: 999px;
@@ -301,8 +430,6 @@ h4 {
 
 /* ---------------------------------------------------------------------- */
 /* Highlights: full-bleed dark band with glass-morphism metric cards.      */
-/* An original composition, not a copy of any reference site's exact      */
-/* values, sharing only the general "glass card on a dark stage" idea.    */
 /* ---------------------------------------------------------------------- */
 
 .glass-section {
@@ -316,8 +443,8 @@ h4 {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(242, 156, 183, 0.16), transparent 70%),
-    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(251, 207, 79, 0.12), transparent 70%);
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(217, 164, 65, 0.16), transparent 70%),
+    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(217, 116, 58, 0.14), transparent 70%);
   pointer-events: none;
 }
 
@@ -331,7 +458,7 @@ h4 {
   backdrop-filter: blur(14px);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 20px 40px -24px rgba(10, 4, 16, 0.6);
+    0 20px 40px -24px rgba(10, 4, 4, 0.6);
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .glass-card:hover {
@@ -348,7 +475,6 @@ h4 {
   pointer-events: none;
 }
 
-/* Continuous marquee for the worked-with strip. */
 @keyframes marquee-left {
   from {
     transform: translateX(0);
@@ -366,4 +492,504 @@ h4 {
   .marquee-track {
     animation: none;
   }
+}
+
+/* Consistent cross-page entrance: every route fades and rises in the same
+   way (main remounts on navigation via a pathname key), instead of some
+   pages animating in (via Reveal) and others just popping into place. */
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-transition {
+  animation: page-in 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-transition {
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Bento grid (homepage)                                                   */
+/* ---------------------------------------------------------------------- */
+
+.bento-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.bento-backdrop span {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(70px);
+  opacity: 0.55;
+}
+:root[data-theme="dark"] .bento-backdrop span {
+  opacity: 0.32;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .bento-backdrop span {
+    opacity: 0.32;
+  }
+}
+
+/* Interactive light bulb: off (plain outline) in light mode, glowing in
+   dark mode. Right-aligned above the grid (not centered — a centered bulb
+   sat awkwardly on top of the Intro/Work seam). A positive z-index keeps it
+   reliably clickable — a negative one previously let the grid's own box
+   swallow every click even where nothing was visibly drawn over it. */
+.bulb-button {
+  position: absolute;
+  top: 0;
+  right: 4%;
+  z-index: 10;
+  width: 3rem;
+  cursor: pointer;
+}
+.bulb-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.bulb-svg path,
+.bulb-svg circle,
+.bulb-svg line {
+  transition: stroke 0.5s ease, fill 0.5s ease, opacity 0.5s ease;
+}
+.bulb-glow {
+  opacity: var(--bulb-glow-opacity);
+  filter: blur(18px);
+}
+.bulb-glow-halo {
+  opacity: var(--bulb-glow-opacity);
+  filter: blur(34px);
+  transition: opacity 0.5s ease;
+}
+.bulb-rays {
+  opacity: var(--bulb-ray-opacity);
+}
+
+/* The home dashboard locks to exactly one screen — but only when the
+   viewport is genuinely tall enough to show all of it. Below that the
+   section flows naturally and the page scrolls, because clipping a whole
+   card out of existence is worse than a short scroll. */
+@media (min-width: 640px) and (min-height: 660px) {
+  .home-section {
+    height: 100dvh;
+    overflow: hidden;
+  }
+}
+
+/* Six cards, full width, five distinct footprints: Intro is a 2x2 hero on
+   the left, Work a wide banner, POV and Lab a matched pair of squares, and
+   Alter Ego / Brewery a split banner row along the bottom. Named areas
+   (rather than span utilities) so each card has a genuinely different
+   shape instead of a uniform tile wall. */
+.bento-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .bento-grid {
+    grid-template-columns: 1.25fr 1fr 1fr;
+    /* minmax(0, …) is load-bearing: a plain `1fr` row refuses to shrink
+       below its content, so the grid grew past the fixed-height section and
+       the bottom card got clipped out of view entirely. */
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 0.88fr);
+    grid-template-areas:
+      "intro work work"
+      "intro pov lab"
+      "alter alter brewery";
+    height: 100%;
+  }
+  .card-intro {
+    grid-area: intro;
+  }
+  .card-work {
+    grid-area: work;
+  }
+  .card-pov {
+    grid-area: pov;
+  }
+  .card-lab {
+    grid-area: lab;
+  }
+  .card-alter {
+    grid-area: alter;
+  }
+  .card-brewery {
+    grid-area: brewery;
+  }
+  /* No per-card layout exceptions: every card stacks title -> description
+     -> CTA, so a wide card and a tall card still read the same way. */
+}
+
+.bento-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  text-align: left;
+  overflow: hidden;
+  border-radius: 1.75rem;
+  border: 1px solid color-mix(in srgb, white 30%, var(--border) 70%);
+  background: color-mix(in srgb, var(--paper-raised) 58%, transparent);
+  backdrop-filter: blur(22px) saturate(160%);
+  -webkit-backdrop-filter: blur(22px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 30%, transparent),
+    0 8px 30px -18px rgba(40, 20, 10, 0.25);
+  padding: 1.45rem;
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease;
+}
+.bento-card:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 22%, transparent),
+    0 20px 40px -20px rgba(40, 20, 10, 0.32);
+  border-color: var(--plum-300);
+}
+
+/* Content cards (Work/POV/Lab/Brewery): a static, readable face by
+   default (name, description, tags, CTA) that glows on hover; the cover-
+   flow photo-album slide (below) takes over as the hover state itself,
+   instead of changing the face's own content. */
+.link-card {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.4s ease;
+}
+.link-card:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--plum-400) 70%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 30%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--plum-400) 35%, transparent),
+    0 0 46px -10px var(--plum-400);
+}
+
+/* Every card shares one layout contract: a content block pinned to the top
+   (title, description, tags) and the CTA pinned to the bottom edge. Without
+   this the card's own space-between spread every child apart, which is what
+   made the Intro card's lines drift so far from each other. */
+.card-face {
+  display: flex;
+  flex: 1;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+}
+
+/* One ladder, repeated on all six cards: title -> description -> CTA.
+   Every card title — "Hi, I'm Anupam" included — is the same size, weight
+   and colour, so the grid reads as one system. The Intro card's only
+   privilege is the hero line underneath. Sized against viewport height as
+   well as width: the dashboard has a fixed height, so on a short screen
+   the type has to come down with it. */
+.card-name {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: min(clamp(1.5rem, 0.9vw + 1.25rem, 2.05rem), 3.9vh);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-weight: 800;
+  color: var(--plum-800);
+}
+
+/* The hero statement is the one true display element on the page, so it
+   gets the palette's 3-stop gradient — exactly what the brief reserved
+   that gradient for (large display text), rather than a flat fill. */
+.card-name.card-name-hero {
+  margin-top: min(0.7rem, 1.4vh);
+  font-size: min(clamp(2.1rem, 2.8vw + 1.4rem, 3.9rem), 7.4vh);
+  line-height: 1;
+  letter-spacing: -0.035em;
+  background-image: var(--gradient-primary);
+  color: var(--plum-800);
+}
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .card-name.card-name-hero {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.card-desc {
+  margin-top: min(0.6rem, 1.2vh);
+  max-width: 44ch;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: min(0.95rem, 1.95vh);
+  line-height: 1.5;
+  color: var(--ink-secondary);
+}
+
+.card-cta {
+  margin-top: min(1.25rem, 2.4vh);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--plum-600);
+  transition: gap 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease;
+}
+.card-cta svg {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-card:hover .card-cta {
+  gap: 0.6rem;
+  color: var(--plum-700);
+}
+.link-card:hover .card-cta svg {
+  transform: translateX(2px);
+}
+
+/* Small, highlighted CTA chips for the Intro card (Who am I / Connect /
+   Email) — same pill language as .cta-chip, one size down. */
+.cta-chip-sm {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border: 1px solid var(--plum-300);
+  background: color-mix(in srgb, var(--plum-100) 55%, transparent);
+  padding: 0.3rem 0.7rem;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--plum-700);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.25s ease;
+}
+.cta-chip-sm:hover {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* Hover swaps the static face for a cover-flow slide per item (like an
+   iPhone Photos slideshow), auto-advancing while hovered/focused. */
+.link-card:hover .card-face,
+.link-card:focus-within .card-face {
+  transform: translateY(-6px);
+  opacity: 0;
+}
+
+.card-cover {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+.link-card:hover .card-cover,
+.link-card:focus-within .card-cover {
+  opacity: 1;
+}
+.card-cover-track {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+.card-cover-slide {
+  display: flex;
+  flex: 0 0 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.15rem;
+  padding: 1.45rem;
+  position: relative;
+  overflow: hidden;
+}
+.card-cover-number {
+  position: absolute;
+  top: -0.6rem;
+  right: 0.4rem;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 5rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.22);
+}
+.card-cover-label {
+  position: relative;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: #fff;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
+}
+.card-cover-dots {
+  position: absolute;
+  bottom: 0.7rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.3rem;
+}
+.card-cover-dots span {
+  height: 5px;
+  width: 5px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+.card-cover-dots span.active {
+  background: #fff;
+  transform: scale(1.3);
+}
+
+/* Intro card's contact links are CTAs, styled as small pill buttons rather
+   than the content cards' hover-reveal treatment. */
+.cta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--plum-200);
+  background: color-mix(in srgb, var(--paper-raised) 70%, transparent);
+  padding: 0.45rem 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--plum-700);
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.25s ease;
+}
+.cta-chip:hover {
+  background: var(--gradient-primary);
+  border-color: transparent;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Bottom dock navigation                                                  */
+/* ---------------------------------------------------------------------- */
+
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: 1.1rem;
+  z-index: 50;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+  border-radius: 1.75rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  background: color-mix(in srgb, var(--paper-raised) 55%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 25%, transparent),
+    0 16px 36px -16px rgba(40, 20, 10, 0.35);
+  padding: 0.45rem 0.55rem;
+  padding-bottom: max(0.45rem, env(safe-area-inset-bottom));
+}
+
+.dock-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  height: 3.4rem;
+  width: 3.4rem;
+  border-radius: 1.1rem;
+  color: var(--ink-secondary);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.dock-item:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--plum-200) 35%, transparent);
+}
+.dock-item[data-active="true"] {
+  color: var(--plum-600);
+  background: color-mix(in srgb, var(--plum-200) 45%, transparent);
+}
+.dock-label {
+  font-family: var(--font-sans);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  line-height: 1;
+}
+
+/* Seven items at full size run wider than a phone screen; shrink to fit. */
+@media (max-width: 430px) {
+  .dock {
+    gap: 0;
+    padding: 0.35rem 0.4rem;
+  }
+  .dock-item {
+    height: 2.9rem;
+    width: 2.65rem;
+    border-radius: 0.9rem;
+    gap: 0.15rem;
+  }
+  .dock-label {
+    font-size: 0.5rem;
+  }
+}
+
+/* Theme toggle: show the sun in dark mode (offering light), the moon in
+   light mode (offering dark). Default (no explicit choice) follows the
+   system preference, same as the inline script in layout.tsx. */
+.theme-icon-dark {
+  display: none;
+}
+.theme-icon-light {
+  display: block;
+}
+:root[data-theme="dark"] .theme-icon-dark {
+  display: block;
+}
+:root[data-theme="dark"] .theme-icon-light {
+  display: none;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .theme-icon-dark {
+    display: block;
+  }
+  :root:not([data-theme="light"]) .theme-icon-light {
+    display: none;
+  }
+}
+
+/* WebGL canvases can paint in their own compositor layer that ignores
+   normal DOM stacking, bleeding through an otherwise-opaque, higher
+   z-index overlay. */
+body.menu-open canvas {
+  visibility: hidden;
 }

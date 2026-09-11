@@ -8,10 +8,10 @@
 export const profile = {
   name: "Anupam Kalita",
   title: "Senior Product Manager · HRIS & Payroll, Integrations, Agentic AI",
-  // Two-tone headline: `headlineEmphasis` renders bold with a highlighter marker
-  // behind it, `headlineRest` renders in the italic accent font.
-  headlineEmphasis: "I turn thoughts and ideas",
-  headlineRest: "into products that people love",
+  // Homepage intro card copy.
+  greeting: "Hi, I'm Anupam",
+  heroHeadline: "Being a human in the AI era.",
+  heroDescription: "Crafting products of the people, by the people, for the people.",
   subhead:
     "Currently a Product Manager, formerly a Marketer, and now at Repute. Over the last 5 years, I've built products and features that have helped 35,000+ companies unify fragmented HR systems and workflows within their existing HRIS and Payroll.",
   // The "Hi, I'm Anupam" line that opens the intro block under the hero.
@@ -207,7 +207,7 @@ export const projects: Project[] = [
     ],
     outcome:
       "Payroll and compliance integrations shipped on schedule while meeting a new regulatory bar, turning a potential blocker into a repeatable pattern for future integrations.",
-    metric: "[Add a concrete number here if you have one, e.g. integrations passing compliance review on first pass, or audit findings closed]",
+    metric: "",
   },
   {
     tag: "05 · Customer Experience",
@@ -310,20 +310,6 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "[A real quote from a manager, peer, or partner works well here. A LinkedIn recommendation is a great source.]",
-    name: "[Name]",
-    title: "[Their title, Company]",
-  },
-  {
-    quote: "[Second testimonial]",
-    name: "[Name]",
-    title: "[Their title, Company]",
-  },
-];
-
 export const approachSteps = [
   {
     step: "01",
@@ -355,8 +341,42 @@ export const faqs = [
     q: "What's your process for a 0-to-1 feature vs. an established product?",
     a: "For 0-to-1 work, like the integrations marketplace or the AI assistant, I front-load architecture decisions (a canonical data model, an orchestration layer) so the tenth build is cheap, not just the first. For established products, I lead with usage data to find the highest-friction manual step before proposing anything new.",
   },
+];
+
+export type PlaygroundProject = {
+  title: string;
+  body: string;
+  href?: string;
+};
+
+// Placeholder layout content until real vibe-coded projects are swapped in.
+export const playgroundProjects: PlaygroundProject[] = [
   {
-    q: "Are you open to new opportunities right now?",
-    a: "[State your current availability here, e.g. open to conversations, or specify what kind of role or timing you're looking for.]",
+    title: "Inbox Triage Agent",
+    body: "A small AI agent that reads incoming support email, tags intent, and drafts a first-pass reply for review.",
+  },
+  {
+    title: "Meeting Notes → Tickets",
+    body: "Vibe-coded over a weekend: turns a raw meeting transcript into a scoped list of tickets with acceptance criteria.",
+  },
+  {
+    title: "Resume Diff Tool",
+    body: "A tiny tool that diffs two resume versions and flags what quietly changed, built to sanity-check my own edits.",
   },
 ];
+
+export const building = {
+  headline: "Something new, in stealth",
+  body: "I'm spending nights and weekends on an early-stage venture I'm not naming publicly yet. It's still early: no landing page, no waitlist, just building. Reach out if you're curious.",
+};
+
+// ---------------------------------------------------------------------------
+// Alter Ego: everything outside the product-manager job title.
+// ---------------------------------------------------------------------------
+
+export const alterEgo = {
+  headline: "Alter Ego",
+  description: "Writing, blogs, and the side hustles I keep going after hours.",
+  body: "The part of me that isn't a product manager: essays and blogs I write, small side hustles, and whatever else I'm curious about that month. Still collecting these in one place.",
+  strands: ["Writing", "Blogs", "Side hustles"],
+};

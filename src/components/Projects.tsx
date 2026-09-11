@@ -29,9 +29,9 @@ export default function Projects() {
       <div className="mx-auto max-w-5xl">
         <div className="mb-10 flex flex-col items-start gap-3">
           <span className="chapter-tab">Projects</span>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-            <span className="text-plum-800">Work I&apos;ve actually</span>{" "}
-            <span className="font-display font-light text-plum-500">shipped.</span>
+          <h2>
+            <span>Work I&apos;ve actually</span>{" "}
+            <span className="font-display italic text-plum-500">shipped.</span>
           </h2>
           <p className="max-w-xl text-ink/70">
             The systems I&apos;ve built end to end as part of the job. Tap a card for the full
@@ -50,7 +50,7 @@ export default function Projects() {
                 <span className="mb-3 inline-block text-xs font-bold uppercase tracking-wider text-plum-600">
                   {c.tag}
                 </span>
-                <h3 className="font-display text-xl font-bold text-ink md:text-2xl">
+                <h3 className="text-xl md:text-2xl">
                   {c.title}
                 </h3>
                 <p className="mt-2 text-sm text-ink/55">
@@ -59,8 +59,8 @@ export default function Projects() {
               </div>
 
               <div className="mt-6 flex items-end justify-between gap-4">
-                <p className="font-display line-clamp-2 text-sm font-bold text-plum-700">
-                  {c.metric.split("[")[0] || "Full story inside"}
+                <p className="line-clamp-2 text-sm font-semibold text-plum-700">
+                  {c.metric || `${c.outcome.split(".")[0]}.`}
                 </p>
                 <span className="accordion-icon shrink-0 transition-transform duration-300 group-hover:rotate-45">
                   +
@@ -81,7 +81,7 @@ export default function Projects() {
               <span className="mb-2 inline-block text-xs font-bold uppercase tracking-wider text-plum-600">
                 {p.tag}
               </span>
-              <h3 className="font-display text-2xl font-bold text-ink">{p.title}</h3>
+              <h3 className="text-2xl">{p.title}</h3>
               <p className="mt-1 text-sm text-ink/55">
                 {p.company} · {p.role} · {p.timeframe}
               </p>
@@ -119,11 +119,13 @@ export default function Projects() {
               Impact
             </h4>
             <p className="text-[15px] leading-relaxed text-ink/80">{p.outcome}</p>
-            <p className="font-display mt-2 text-base font-bold text-plum-800">{p.metric}</p>
+            {p.metric && (
+              <p className="mt-2 text-base font-semibold text-plum-800">{p.metric}</p>
+            )}
           </div>
 
           <a
-            href="#contact"
+            href="/about#contact"
             onClick={() => dialogRef.current?.close()}
             className="mt-5 inline-block text-sm font-semibold text-plum-700 underline decoration-plum-300 underline-offset-4 hover:text-plum-900"
           >

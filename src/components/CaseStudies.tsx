@@ -22,10 +22,10 @@ export default function CaseStudies() {
     <section id="case-studies" className="tint-surface px-6 py-20">
       <div className="mx-auto max-w-5xl">
         <div className="mb-10 flex flex-col items-start gap-3">
-          <span className="chapter-tab">Case studies</span>
-          <h2 className="font-display text-3xl font-bold tracking-tight text-ink md:text-4xl">
-            <span className="text-plum-800">How I think,</span>{" "}
-            <span className="font-display font-light text-plum-500">unprompted.</span>
+          <span className="chapter-tab">POV</span>
+          <h2>
+            <span>How I think,</span>{" "}
+            <span className="font-display italic text-plum-500">unprompted.</span>
           </h2>
           <p className="max-w-xl text-ink/70">
             Four products I picked myself, not work I was paid to do, and wrote my own thesis on.
@@ -45,7 +45,7 @@ export default function CaseStudies() {
                 <span className="mb-3 inline-block text-xs font-bold uppercase tracking-wider text-plum-600">
                   {c.tag}
                 </span>
-                <h3 className="font-display text-xl font-bold text-ink md:text-2xl">
+                <h3 className="text-xl md:text-2xl">
                   {c.title}
                 </h3>
                 <p className="mt-2 text-sm text-ink/55">{c.subject}</p>
@@ -74,7 +74,7 @@ export default function CaseStudies() {
               <span className="mb-2 inline-block text-xs font-bold uppercase tracking-wider text-plum-600">
                 {cs.tag}
               </span>
-              <h3 className="font-display text-2xl font-bold text-ink">{cs.title}</h3>
+              <h3 className="text-2xl">{cs.title}</h3>
               <p className="mt-1 text-sm text-ink/55">{cs.subject} · Self-directed case study</p>
             </div>
             <button
@@ -110,11 +110,11 @@ export default function CaseStudies() {
               The idea
             </h4>
             <p className="text-[15px] leading-relaxed text-ink/80">{cs.outcome}</p>
-            <p className="font-display mt-2 text-base font-bold text-plum-800">{cs.watch}</p>
+            <p className="mt-2 text-base font-semibold text-plum-800">{cs.watch}</p>
           </div>
 
           <a
-            href="#contact"
+            href="/about#contact"
             onClick={() => dialogRef.current?.close()}
             className="mt-5 inline-block text-sm font-semibold text-plum-700 underline decoration-plum-300 underline-offset-4 hover:text-plum-900"
           >

@@ -1,3 +1,5 @@
+"use client";
+
 import { profile } from "@/lib/content";
 
 export default function Footer() {
@@ -8,9 +10,13 @@ export default function Footer() {
           © {new Date().getFullYear()} {profile.name}
         </span>
         <span>{profile.location}</span>
-        <a href="#top" className="font-semibold text-plum-700 hover:text-plum-900">
+        <button
+          type="button"
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="font-semibold text-plum-700 hover:text-plum-900"
+        >
           Back to top ↑
-        </a>
+        </button>
       </div>
     </footer>
   );

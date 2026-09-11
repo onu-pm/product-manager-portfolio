@@ -13,6 +13,17 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    // react-hooks/immutability assumes React-state semantics. Three.js
+    // objects returned by r3f hooks (camera, refs to meshes/groups) are
+    // meant to be mutated every frame inside useFrame, that's the
+    // documented, correct way to animate them, it just runs outside
+    // React's render cycle so the rule can't see that it's safe here.
+    files: ["src/components/three/**/*.tsx"],
+    rules: {
+      "react-hooks/immutability": "off",
+    },
+  },
 ]);
 
 export default eslintConfig;
