@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Logo from "@/components/Logo";
@@ -52,6 +53,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <Logo />
         <PageChrome>{children}</PageChrome>
         <Nav />
+
+        {/* Zoho SalesIQ chat widget. next/script with afterInteractive loads
+            it after hydration rather than blocking the initial render, the
+            App Router equivalent of the `defer` on the original tag. */}
+        <Script id="zsiq-init" strategy="afterInteractive">
+          {`window.$zoho = window.$zoho || {}; $zoho.salesiq = $zoho.salesiq || { ready: function () {} };`}
+        </Script>
+        <Script
+          id="zsiqscript"
+          strategy="afterInteractive"
+          src="https://salesiq.zohopublic.in/widget?wc=siq2b93e3244baeaf941adef6d19665fc8c7d5a55a688e343f86fb705327dd4a13591d0870e59e885e849830fdd13799244"
+        />
       </body>
     </html>
   );
