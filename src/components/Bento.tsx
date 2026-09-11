@@ -61,7 +61,20 @@ export default function Bento() {
           name="Work"
           description="The 0-to-1 marketplace behind 45% of partner closures, and the automation that 4X'd ARR."
           ctaText="5 shipped projects"
-          slides={projects.map((p, i) => ({ number: `0${i + 1}`, label: tagLabel(p.tag) }))}
+          slides={projects.map((p, i) => {
+            // The bento slot is a short banner — far shorter than the
+            // carousel card — so a rich slide shows the title plus one
+            // stat (whichever cover stat matches the headline figure),
+            // not the full three-stat/tag spread that fits on the carousel.
+            const primaryStat = p.coverStats?.find((s) => s.value === p.stat?.value) ?? p.stat;
+            return {
+              number: `0${i + 1}`,
+              label: tagLabel(p.tag),
+              image: p.coverImage,
+              title: p.coverImage ? p.bentoLabel ?? p.title : undefined,
+              stats: p.coverImage && primaryStat ? [primaryStat] : undefined,
+            };
+          })}
         />
 
         <PreviewCard

@@ -1,9 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
-export type Slide = { number: string; label: string };
+export type Slide = {
+  number: string;
+  label: string;
+  image?: string;
+  /** A "rich" slide — same title/stats/tags as the Work carousel card and
+   *  cover, for a project that has real content behind it. Slides without
+   *  a title fall back to the plain numeral + label. */
+  title?: string;
+  stats?: { value: string; label: string }[];
+  tags?: string[];
+};
 
 // Dark fields only. These previously pulled from the plum ramp, which in
 // dark mode resolves to citron — so a white-on-yellow slide had almost no
@@ -72,12 +83,50 @@ export default function PreviewCard({
           <div className="card-cover-track" style={{ transform: `translateX(-${index * 100}%)` }}>
             {slides.map((s, i) => (
               <div
-                className="card-cover-slide"
+                className={s.title ? "card-cover-slide card-cover-slide--rich" : "card-cover-slide"}
                 key={s.label}
-                style={{ background: SLIDE_COLORS[i % SLIDE_COLORS.length] }}
+                style={s.image ? undefined : { background: SLIDE_COLORS[i % SLIDE_COLORS.length] }}
               >
-                <span className="card-cover-number">{s.number}</span>
-                <span className="card-cover-label">{s.label}</span>
+                {s.image && (
+                  <>
+                    <Image src={s.image} alt="" fill sizes="50vw" className="card-cover-image" style={{ objectFit: "cover" }} />
+                    <span className="card-cover-scrim" />
+                  </>
+                )}
+                {s.title ? (
+                  <>
+                    {/* The number still anchors the top corner, same as the
+                        plain slides — without it, a short bottom-anchored
+                        block in a banner this tall read as floating in the
+                        middle rather than deliberately bottom-set. */}
+                    <span className="card-cover-number">{s.number}</span>
+                    <span className="card-cover-title">{s.title}</span>
+                    {s.stats && s.stats.length > 0 && (
+                      <span className="work-card-stats">
+                        {s.stats.map((stat) => (
+                          <span key={stat.label} className="work-card-stat-chip">
+                            <span className="work-card-stat-chip-value">{stat.value}</span>
+                            <span className="work-card-stat-chip-label">{stat.label}</span>
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                    {s.tags && s.tags.length > 0 && (
+                      <span className="work-tag-row work-tag-row--sm">
+                        {s.tags.map((t) => (
+                          <span key={t} className="work-tag-pill work-tag-pill--sm">
+                            {t}
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <span className="card-cover-number">{s.number}</span>
+                    <span className="card-cover-label">{s.label}</span>
+                  </>
+                )}
               </div>
             ))}
           </div>

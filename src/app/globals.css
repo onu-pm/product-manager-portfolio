@@ -897,6 +897,17 @@ body {
   position: relative;
   overflow: hidden;
 }
+.card-cover-image {
+  z-index: 0;
+}
+/* Same darkening treatment as the carousel card's photo, so the numeral and
+   label overlay stays legible over real art instead of a flat field. */
+.card-cover-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(to top, rgba(8, 10, 6, 0.88) 0%, rgba(8, 10, 6, 0.5) 48%, rgba(8, 10, 6, 0.08) 80%);
+}
 .card-cover-number {
   position: absolute;
   top: -0.6rem;
@@ -915,6 +926,41 @@ body {
   line-height: 1.25;
   letter-spacing: -0.01em;
   color: var(--citron);
+}
+/* A "rich" slide (real project content behind it) drops the decorative
+   numeral entirely and sizes its title to match .card-name exactly — the
+   same rule the user pointed at — so the preview reads as one continuous
+   piece with the card's own face, not a smaller, disconnected overlay.
+   This banner is much shorter than the carousel card, so the title clamps
+   to two lines and only one stat rides along, rather than the full
+   three-stat spread that fits there. */
+.card-cover-slide--rich {
+  padding: 1.1rem 1.5rem 1.25rem;
+  gap: 0.4rem;
+}
+.card-cover-title {
+  position: relative;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: min(clamp(1.35rem, 1vw + 1rem, 2.05rem), 3.4vh);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--citron);
+  max-width: 34rem;
+}
+.card-cover-slide--rich .work-card-stats {
+  margin-top: 0;
+}
+/* This slide sits directly on a busy photo with no dedicated stat panel
+   behind it (unlike the cover and carousel card), so the chip needs a
+   solid field, not a faint glass tint, to stay legible. */
+.card-cover-slide--rich .work-card-stat-chip {
+  background: rgba(8, 10, 6, 0.55);
+  border-color: rgba(255, 255, 255, 0.28);
 }
 .card-cover-dots {
   position: absolute;
@@ -967,18 +1013,24 @@ body {
 /* Bottom dock navigation                                                  */
 /* ---------------------------------------------------------------------- */
 
-.dock {
+.dock-wrap {
   position: fixed;
   left: 50%;
   bottom: 1.1rem;
   z-index: 50;
   transform: translateX(-50%);
+}
+
+.dock {
   display: flex;
   align-items: center;
   gap: 0.15rem;
   border-radius: 1.75rem;
   border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
-  background: color-mix(in srgb, var(--paper-raised) 55%, transparent);
+  /* Opaque enough to stay legible over whatever scrolls underneath it — a
+     55% glass tint let page content (and, on a short page, the footer
+     directly beneath) read right through the bar. */
+  background: color-mix(in srgb, var(--paper-raised) 88%, transparent);
   backdrop-filter: blur(20px) saturate(140%);
   -webkit-backdrop-filter: blur(20px) saturate(140%);
   box-shadow:
@@ -1016,12 +1068,33 @@ body {
   letter-spacing: 0.02em;
   line-height: 1;
 }
+.dock-divider {
+  display: none;
+}
 
-/* Seven items at full size run wider than a phone screen; shrink to fit. */
-@media (max-width: 430px) {
-  .dock {
-    gap: 0;
-    padding: 0.35rem 0.4rem;
+/* Desktop shows all seven destinations inline; mobile swaps in a condensed
+   row (below) so the bar never has to stretch edge-to-edge on a phone,
+   which used to leave it almost touching both screen edges and crowding
+   the chat widget's corner. */
+.dock-item--mobile-only {
+  display: none;
+}
+@media (min-width: 641px) {
+  .dock-divider {
+    display: block;
+    height: 2rem;
+    width: 1px;
+    margin-inline: 0.25rem;
+    align-self: center;
+    background: var(--border);
+  }
+}
+@media (max-width: 640px) {
+  .dock-item--desktop-only {
+    display: none;
+  }
+  .dock-item--mobile-only {
+    display: flex;
   }
   .dock-item {
     height: 2.9rem;
@@ -1031,6 +1104,51 @@ body {
   }
   .dock-label {
     font-size: 0.5rem;
+  }
+}
+
+/* The "More" panel: Lab / Alter Ego / Brewery, folded off the mobile bar. */
+.dock-more-panel {
+  position: absolute;
+  bottom: calc(100% + 0.75rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 11rem;
+  border-radius: 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+  background: color-mix(in srgb, var(--paper-raised) 96%, transparent);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  box-shadow: 0 20px 44px -18px rgba(40, 20, 10, 0.4);
+  padding: 0.5rem;
+}
+.dock-more-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  height: 2.75rem;
+  padding-inline: 0.65rem;
+  border-radius: 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-secondary);
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+.dock-more-item:hover {
+  color: var(--ink);
+  background: color-mix(in srgb, var(--plum-200) 35%, transparent);
+}
+.dock-more-item[data-active="true"] {
+  color: var(--plum-600);
+  background: color-mix(in srgb, var(--plum-200) 45%, transparent);
+}
+@media (min-width: 641px) {
+  .dock-more-panel {
+    display: none;
   }
 }
 
@@ -1169,6 +1287,18 @@ body.menu-open canvas {
     rgba(28, 16, 10, 0.05) 72%
   );
 }
+/* Real photography carries far more visual noise than the flat colour
+   motifs, so the overlaid type needs a darker, taller scrim to stay legible
+   against it. */
+.work-card-scrim--strong {
+  background: linear-gradient(
+    to top,
+    rgba(8, 10, 6, 0.94) 0%,
+    rgba(8, 10, 6, 0.78) 32%,
+    rgba(8, 10, 6, 0.4) 62%,
+    rgba(8, 10, 6, 0.05) 88%
+  );
+}
 .work-card-content {
   position: absolute;
   inset: auto 0 0 0;
@@ -1185,6 +1315,75 @@ body.menu-open canvas {
   line-height: 1.12;
   letter-spacing: -0.025em;
   color: var(--citron);
+}
+/* A full case-study title runs longer than a short feature name, so it
+   needs a smaller size and a capped width to keep three lines from
+   crowding the card. */
+.work-card-feature--title {
+  font-size: clamp(1.05rem, 0.75vw + 0.8rem, 1.35rem);
+  line-height: 1.2;
+  max-width: 30rem;
+}
+/* All three cover stats, scaled down to chip size for the card face —
+   the same numbers and labels as the cover, not a card-only summary. */
+.work-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.work-card-stat-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  border-radius: 0.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.07);
+  padding: 0.45rem 0.7rem;
+}
+.work-card-stat-chip-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--citron);
+}
+.work-card-stat-chip-label {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 600;
+  /* Fixed tan, not var(--tan) — this label sits on the fixed-green field
+     (.work-hero-split/.work-card use a hardcoded green, not the theme
+     token), so its accent stays fixed too rather than drifting with the
+     site's light/dark toggle. */
+  color: #eed6c8;
+}
+/* Category tags — one shared component, used identically on the cover and
+   the carousel card so a project's tags never read differently in two
+   places. `--sm` scales it down for the card's tighter footprint. */
+.work-tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+.work-tag-row--sm {
+  margin-top: 0.6rem;
+  gap: 0.4rem;
+}
+.work-tag-pill {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  padding: 0.35rem 0.85rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #eed6c8;
+}
+.work-tag-pill--sm {
+  padding: 0.25rem 0.65rem;
+  font-size: 0.68rem;
 }
 .work-card-stat {
   display: flex;
@@ -1376,6 +1575,193 @@ body.menu-open canvas {
   font-size: 0.85rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.88);
+}
+
+/* Photo cover variant — real photography beside the text instead of a flat
+   colour field behind it, used once a project has actual art. Uses the same
+   fixed deep-green field as this project's carousel card (--work-art--0),
+   not the generic --forest token — that token is deliberately LIGHTENED in
+   dark mode for hero-gradient legibility elsewhere, which reads as a loud,
+   disconnected green block against the dark theme's near-black ground. */
+.work-hero-split {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 0;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background-color: #0f3d2a;
+}
+:root[data-theme="dark"] .work-hero-split {
+  background-color: #14432f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .work-hero-split {
+    background-color: #14432f;
+  }
+}
+@media (max-width: 860px) {
+  .work-hero-split {
+    grid-template-columns: 1fr;
+  }
+}
+.work-hero-info {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
+  padding: clamp(1.75rem, 3vw, 3rem);
+}
+.work-hero-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.9rem, 2.4vw + 1rem, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--citron);
+}
+/* Secondary copy on the green field reads as plain white-on-green — tan
+   (the same warm off-white used for tag fills elsewhere) gives it a
+   distinct, on-palette voice instead of flattening into "white and green". */
+.work-hero-description {
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: #eed6c8;
+}
+.work-hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+.work-hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  min-width: 7.5rem;
+  border-radius: 1rem;
+  border: 1px solid color-mix(in srgb, white 14%, transparent);
+  background: rgba(255, 255, 255, 0.06);
+  padding: 0.9rem 1.1rem;
+}
+.work-hero-stat-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 1.1vw + 1rem, 1.75rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--citron);
+}
+.work-hero-stat-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #eed6c8;
+}
+.work-hero-image-wrap {
+  position: relative;
+  min-height: 16rem;
+}
+.work-hero-image {
+  object-fit: cover;
+}
+/* Fades the photo into the forest field at the seam instead of a hard
+   vertical edge, so the two halves read as one cover, not two panels. */
+.work-hero-image-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to right, #0f3d2a 0%, transparent 14%);
+  pointer-events: none;
+}
+:root[data-theme="dark"] .work-hero-image-wrap::before {
+  background: linear-gradient(to right, #14432f 0%, transparent 14%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .work-hero-image-wrap::before {
+    background: linear-gradient(to right, #14432f 0%, transparent 14%);
+  }
+}
+@media (max-width: 860px) {
+  .work-hero-image-wrap::before {
+    background: linear-gradient(to bottom, #0f3d2a 0%, transparent 14%);
+  }
+  :root[data-theme="dark"] .work-hero-image-wrap::before {
+    background: linear-gradient(to bottom, #14432f 0%, transparent 14%);
+  }
+}
+@media (max-width: 860px) and (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .work-hero-image-wrap::before {
+    background: linear-gradient(to bottom, #14432f 0%, transparent 14%);
+  }
+}
+
+/* Body copy for a photo-cover case study: short, related sections pair up
+   in a two-column grid instead of one column stretched to the full shell
+   width, which would put 120+ characters on a line. "Work I did" (the
+   longest section) spans both columns. Each section is its own bordered
+   card — plain floating text of uneven length (a 2-line answer next to a
+   4-line one) read as misaligned; a card boundary turns that same length
+   difference into an ordinary "these are different-sized cards" pattern,
+   the same visual logic the bento grid already uses. */
+.work-body-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+@media (max-width: 700px) {
+  .work-body-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.work-body-section {
+  border-radius: 1.25rem;
+  border: 1px solid var(--border);
+  background: var(--paper-raised);
+  padding: 1.5rem 1.75rem;
+}
+.work-body-section--full {
+  grid-column: 1 / -1;
+}
+.work-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+/* A short citron tick, echoing the chapter-tab motif used elsewhere,
+   instead of relying on size and colour alone to read as a heading. */
+.work-section-heading::before {
+  content: "";
+  display: block;
+  height: 0.6rem;
+  width: 0.22rem;
+  border-radius: 999px;
+  background: var(--citron);
+}
+.work-body-section .work-body-text {
+  margin-top: 0.6rem;
+}
+
+/* Inline links cited within a case study's narrative — an underline, not a
+   colour change, since citron/forest text is reserved for numbers. */
+.work-inline-link {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--ink-tertiary) 60%, transparent);
+  text-underline-offset: 0.15em;
+  transition: text-decoration-color 0.2s ease;
+}
+.work-inline-link:hover {
+  text-decoration-color: currentColor;
 }
 
 /* The payoff, in large type before the narrative. */

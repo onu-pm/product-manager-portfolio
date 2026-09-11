@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { projects } from "@/lib/content";
@@ -167,22 +168,62 @@ export default function Projects() {
         onPointerUp={endDrag}
         onPointerLeave={endDrag}
       >
-        {projects.map((p, i) => (
-          <Link key={p.slug} href={`/work/${p.slug}`} className="work-card" onClick={onCardClick}>
-            <span className={`work-card-art work-art--${i}`} />
-            <span className="work-card-scrim" />
-            <span className="work-card-content">
-              <span className="work-card-feature">{p.feature}</span>
-              {p.stat && (
-                <span className="work-card-stat">
-                  <span className="work-card-stat-value">{p.stat.value}</span>
-                  <span className="work-card-stat-label">{p.stat.label}</span>
-                </span>
+        {projects.map((p, i) => {
+          return (
+            <Link key={p.slug} href={`/work/${p.slug}`} className="work-card" onClick={onCardClick}>
+              {p.coverImage ? (
+                <Image
+                  src={p.coverImage}
+                  alt=""
+                  fill
+                  sizes="(max-width: 767px) 86vw, 55vw"
+                  className="work-card-art"
+                  style={{ objectFit: "cover" }}
+                />
+              ) : (
+                <span className={`work-card-art work-art--${i}`} />
               )}
-              <span className="work-card-company">{p.company.split(" (")[0]}</span>
-            </span>
-          </Link>
-        ))}
+              <span className={p.coverImage ? "work-card-scrim work-card-scrim--strong" : "work-card-scrim"} />
+              <span className="work-card-content">
+                {p.coverImage ? (
+                  <>
+                    <span className="work-card-feature work-card-feature--title">{p.title}</span>
+                    {p.coverStats && p.coverStats.length > 0 && (
+                      <span className="work-card-stats">
+                        {p.coverStats.map((s) => (
+                          <span key={s.label} className="work-card-stat-chip">
+                            <span className="work-card-stat-chip-value">{s.value}</span>
+                            <span className="work-card-stat-chip-label">{s.label}</span>
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                    {p.coverTags && p.coverTags.length > 0 && (
+                      <span className="work-tag-row work-tag-row--sm">
+                        {p.coverTags.map((t) => (
+                          <span key={t} className="work-tag-pill work-tag-pill--sm">
+                            {t}
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    <span className="work-card-feature">{p.feature}</span>
+                    {p.stat && (
+                      <span className="work-card-stat">
+                        <span className="work-card-stat-value">{p.stat.value}</span>
+                        <span className="work-card-stat-label">{p.stat.label}</span>
+                      </span>
+                    )}
+                    <span className="work-card-company">{p.company.split(" (")[0]}</span>
+                  </>
+                )}
+              </span>
+            </Link>
+          );
+        })}
       </div>
 
       <div className="work-progress mt-4">

@@ -1,10 +1,16 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "@/components/ThemeToggle";
 
-const links = [
+// Seven destinations plus the theme toggle is too many for a mobile bottom
+// bar — it forced the dock nearly edge-to-edge on a phone, right into the
+// chat widget's corner, with almost no breathing room either side.
+// `secondary` folds into a "More" panel on narrow screens only; desktop
+// still shows every item inline, unchanged.
+const primaryLinks = [
   {
     href: "/",
     label: "Home",
@@ -34,6 +40,19 @@ const links = [
       />
     ),
   },
+  {
+    href: "/about",
+    label: "About",
+    icon: (
+      <>
+        <circle cx="12" cy="8.2" r="3.2" />
+        <path d="M5 20c0.8-4 3.4-6.2 7-6.2s6.2 2.2 7 6.2" strokeLinecap="round" />
+      </>
+    ),
+  },
+];
+
+const secondaryLinks = [
   {
     href: "/lab",
     label: "Lab",
@@ -66,36 +85,122 @@ const links = [
       />
     ),
   },
-  {
-    href: "/about",
-    label: "About",
-    icon: (
-      <>
-        <circle cx="12" cy="8.2" r="3.2" />
-        <path d="M5 20c0.8-4 3.4-6.2 7-6.2s6.2 2.2 7 6.2" strokeLinecap="round" />
-      </>
-    ),
-  },
 ];
+
+const allLinks = [...primaryLinks.slice(0, 3), ...secondaryLinks, primaryLinks[3]];
+
+function NavIcon({ icon }: { icon: React.ReactNode }) {
+  return (
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+      {icon}
+    </svg>
+  );
+}
 
 export default function Nav() {
   const pathname = usePathname();
+  const [moreOpen, setMoreOpen] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!moreOpen) return;
+    function onPointerDown(e: PointerEvent) {
+      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) setMoreOpen(false);
+    }
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") setMoreOpen(false);
+    }
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [moreOpen]);
+
+  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
   return (
-    <nav className="dock" aria-label="Primary">
-      {links.map((l) => {
-        const active = l.href === "/" ? pathname === "/" : pathname.startsWith(l.href);
-        return (
-          <Link key={l.href} href={l.href} aria-label={l.label} className="dock-item" data-active={active}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
-              {l.icon}
-            </svg>
+    <div ref={wrapRef} className="dock-wrap">
+      {moreOpen && (
+        <div className="dock-more-panel" role="menu">
+          {secondaryLinks.map((l) => (
+            <Link
+              key={l.href}
+              href={l.href}
+              className="dock-more-item"
+              data-active={isActive(l.href)}
+              role="menuitem"
+              onClick={() => setMoreOpen(false)}
+            >
+              <NavIcon icon={l.icon} />
+              {l.label}
+            </Link>
+          ))}
+        </div>
+      )}
+      <nav className="dock" aria-label="Primary">
+        {/* Desktop: every destination inline, in its original order. Hidden
+            on mobile in favour of the condensed row below. */}
+        {allLinks.map((l) => (
+          <Link
+            key={l.href}
+            href={l.href}
+            aria-label={l.label}
+            className="dock-item dock-item--desktop-only"
+            data-active={isActive(l.href)}
+          >
+            <NavIcon icon={l.icon} />
             <span className="dock-label">{l.label}</span>
           </Link>
-        );
-      })}
-      <span className="mx-1 hidden h-8 w-px self-center bg-[var(--border)] sm:block" />
-      <ThemeToggle />
-    </nav>
+        ))}
+
+        {/* Mobile: primary destinations plus a "More" toggle for the rest,
+            so the bar never has to stretch edge-to-edge on a phone. */}
+        {primaryLinks.slice(0, 3).map((l) => (
+          <Link
+            key={l.href}
+            href={l.href}
+            aria-label={l.label}
+            className="dock-item dock-item--mobile-only"
+            data-active={isActive(l.href)}
+          >
+            <NavIcon icon={l.icon} />
+            <span className="dock-label">{l.label}</span>
+          </Link>
+        ))}
+        <button
+          type="button"
+          aria-label="More"
+          aria-expanded={moreOpen}
+          aria-haspopup="menu"
+          onClick={() => setMoreOpen((v) => !v)}
+          className="dock-item dock-item--mobile-only"
+          data-active={moreOpen || secondaryLinks.some((l) => isActive(l.href))}
+        >
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+            <circle cx="5" cy="12" r="1.4" fill="currentColor" stroke="none" />
+            <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none" />
+            <circle cx="19" cy="12" r="1.4" fill="currentColor" stroke="none" />
+          </svg>
+          <span className="dock-label">More</span>
+        </button>
+        {primaryLinks.slice(3).map((l) => (
+          <Link
+            key={l.href}
+            href={l.href}
+            aria-label={l.label}
+            className="dock-item dock-item--mobile-only"
+            data-active={isActive(l.href)}
+          >
+            <NavIcon icon={l.icon} />
+            <span className="dock-label">{l.label}</span>
+          </Link>
+        ))}
+
+        <span className="dock-divider" />
+        <ThemeToggle />
+      </nav>
+    </div>
   );
 }

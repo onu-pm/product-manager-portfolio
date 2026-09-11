@@ -147,110 +147,194 @@ export type Project = {
   /** The headline number pulled out of `metric`, for the card face. Null
    *  where no real figure exists yet — never a placeholder. */
   stat: { value: string; label: string } | null;
+  /** Real photography for the detail-page cover, in place of the flat
+   *  colour-field motif. Only set once a project has actual art — also
+   *  swapped in for the card face in the Work carousel, so the two match. */
+  coverImage?: string;
+  coverDescription?: string;
+  /** Up to three headline numbers shown on the photo cover. */
+  coverStats?: { value: string; label: string }[];
+  /** Category tags — rendered identically on the cover and the carousel
+   *  card, so keep this the single source. */
+  coverTags?: string[];
+  /** Short phrase for the homepage bento preview — the full `title` reads
+   *  as a headline everywhere else, but that banner is too short for it. */
+  bentoLabel?: string;
+  /** Extra source-doc sections, only rendered when present. */
+  whatWasNeeded?: string;
+  whatHelped?: string;
+  /** Words inside `approach` that should render as links, e.g. partner or
+   *  platform names cited in the write-up. Matched by exact label text. */
+  links?: { label: string; href: string }[];
 };
 
-// Real work: shipped as part of the job at Repute and Nestaway.
+// Real work: shipped as part of the job at Repute.
 export const projects: Project[] = [
   {
-    tag: "01 · Integrations Marketplace",
+    tag: "01 · Integrations Ecosystem",
     slug: "integrations-marketplace",
-    feature: "Integrations Marketplace",
-    title: "Building a 0-to-1 embedded integrations marketplace",
+    feature: "Integrations Ecosystem",
+    title: "Building an embedded ecosystem within HRIS",
     company: "Repute (HRIS Ecosystem: GreytHR, AdrenalinMAX, GelyxHR, PocketHRMS)",
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
-    problem:
-      "Repute's HRIS partners needed a way for third-party solution providers (HRtech, Tax, Accounting, Benefits, ITSM) to reach a combined base of about 35,000 employers, without every integration turning into a bespoke, one-off engineering build.",
-    approach: [
-      "Built an ecosystem-led sales flow so listed integrations could be discovered and sold as part of partners' monthly closures, not bolted on after the fact.",
-      "Designed a developers' platform that lets partner integrations self-list, rather than routing every listing through a manual review queue.",
-      "Replaced bespoke per-integration builds with a unified API layer on a canonical data model, giving each new integration a repeatable reference architecture.",
+    coverImage: "/work/integrations-marketplace-cover.jpg",
+    bentoLabel: "Embedded HRIS Ecosystem",
+    coverDescription:
+      "How an HRIS native marketplace went from a blank page to becoming a partner ecosystem and a real revenue channel for both sides.",
+    coverStats: [
+      { value: "35K+", label: "Employer Reach" },
+      { value: "45%", label: "Marketplace Closures" },
+      { value: "3X", label: "Revenue Growth" },
     ],
+    coverTags: ["HRIS", "Integrations Ecosystem"],
+    problem:
+      "Repute is an embedded native marketplace for HRIS. When I joined, Repute didn't have a marketplace yet. Partner HRIS platforms had no built-in way for employers to discover and add integrations like background checks, tax tools, or benefits providers.",
+    whatWasNeeded:
+      "Just listing apps wasn't going to be enough. If partners didn't see real business coming from being listed, they'd stop caring about the marketplace altogether.",
+    approach: [
+      "I built the marketplace from scratch across four HRIS platforms: GreytHR, AdrenalinMAX, GelyxHR, and PocketHRMS. Then I designed a sales flow so a browsing employer could actually turn into a closed deal for the partner, and built a developer platform so partners could list their own apps instead of waiting on my team every time.",
+    ],
+    whatHelped:
+      "I onboarded the first batch of partners by hand before building the self-serve version, so I actually knew what made a listing worth trusting.",
     outcome:
-      "Marketplace-sourced deals became a meaningful share of partner revenue within two quarters, and the catalog scaled well past its original size without a proportional rise in engineering cost per integration.",
-    metric: "45% of solution providers' monthly closures sourced from the marketplace within 6 months · catalog grown from 75 to 175+ integrations",
+      "The marketplace now covers roughly 35,000 employers across India and the Middle East. Within six months, it was driving 45% of partners' monthly closures — taking the marketplace from zero revenue to 3X monthly revenue within 18 months.",
+    metric: "",
     stat: { value: "45%", label: "of partner monthly closures" },
+    links: [
+      { label: "GreytHR", href: "https://www.greythr.com/unite-marketplace/" },
+      {
+        label: "AdrenalinMAX",
+        href: "https://marketplace.microsoft.com/en-eg/product/adrenalinesystemslimited1665053480102.adrenalinmax",
+      },
+      { label: "GelyxHR", href: "https://gelyxhr.com/" },
+      { label: "PocketHRMS", href: "https://www.pockethrms.com/integrations-overview/" },
+    ],
   },
   {
     tag: "02 · Workflow Automation",
     slug: "workflow-automation",
     feature: "Workflow Automation",
-    title: "Automating recruitment & payroll workflows end-to-end",
+    title: "Automating Recruitment and Onboarding Workflows",
     company: "Repute",
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
-    problem:
-      "Recruitment and payroll modules inside the HRIS were feature-complete but barely used. Most of the work customers needed still happened by hand, module by module.",
-    approach: [
-      "Scoped and shipped Zapier-like workflow automations inside the HRIS, connecting steps that previously required manual hand-off between modules.",
-      "Prioritized the highest-friction manual steps first, using activation and usage data rather than guessing at what to automate.",
-      "Owned the full loop from spec to release sign-off, including QA. This was a founding PM role with no separate program layer.",
+    coverImage: "/work/workflow-automation-cover.jpg",
+    bentoLabel: "Automating HR workflows",
+    coverDescription:
+      "Zapier-style automations removed manual, repetitive steps from the recruitment and onboarding modules.",
+    coverStats: [
+      { value: "5X", label: "Module Activation" },
+      { value: "25K", label: "Active Users" },
+      { value: "4X", label: "ARR Growth" },
     ],
+    coverTags: ["HRIS", "Workflow Automation"],
+    problem:
+      "HR teams already lived in the recruitment and onboarding modules, but much of what they did there was just repeating the same manual steps over and over.",
+    whatWasNeeded:
+      "Something that removed those steps without forcing HR teams to pick up a new tool, since most of them barely had time to learn the one they already had.",
+    approach: [
+      "I built Zapier-style automations directly into the HRIS, so finishing one action would kick off the next one on its own, across recruitment and employee onboarding.",
+    ],
+    whatHelped:
+      "I picked the two or three steps HR teams repeated the most and fixed those first, instead of trying to automate every workflow at once.",
     outcome:
-      "Automation turned a low-usage feature area into one of the platform's clearer growth drivers, compounding into sustained MAU and revenue growth over the following year and a half.",
-    metric: "Recruitment & payroll activation up 5X in 3 months · MAU grew 10,000 → 25,000 and ARR 4X in 18 months",
-    stat: { value: "4X", label: "ARR in 18 months" },
+      "Module activation jumped 5X in three months. Monthly active users went from 10,000 to 25,000, and ARR grew 4X over 18 months.",
+    metric: "",
+    stat: { value: "4X", label: "ARR Growth" },
   },
   {
     tag: "03 · Agentic AI",
     slug: "agentic-ai-assistant",
-    feature: "Agentic AI Assistant",
-    title: "Shipping a 4-agent AI assistant for HR operations",
+    feature: "Agentic AI",
+    title: "Four-Agent AI Assistant for HR",
     company: "Repute",
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
-    problem:
-      "Recruitment, payroll checks, onboarding, and compliance each involved repetitive judgment calls that ate up HR teams' time but didn't clearly warrant four separate point solutions.",
-    approach: [
-      "Defined the orchestration layer for a 4-agent AI assistant together with the CTO, covering recruitment, payroll checks, onboarding, and compliance.",
-      "Grounded every agent's answers in live HRIS data rather than static prompts, so responses stayed accurate as underlying records changed.",
-      "Set accuracy benchmarks with human review before rollout, treating this as a trust-building exercise rather than a launch-and-see feature.",
+    coverImage: "/work/agentic-ai-cover.jpg",
+    bentoLabel: "Agentic AI for All-things-HR",
+    coverDescription:
+      "A live assistant that answers recruitment, payroll, onboarding, and compliance questions inside the HRIS itself.",
+    coverStats: [
+      { value: "2X", label: "ARR Impact" },
+      { value: "4", label: "AI Agents Live" },
     ],
-    outcome:
-      "The assistant shipped live and became a differentiator for HRIS ARR growth, while the human-review benchmarking approach kept accuracy auditable rather than opaque.",
-    metric: "HRIS ARR grew 2X following launch",
-    stat: { value: "2X", label: "HRIS ARR after launch" },
-  },
-  {
-    tag: "04 · Compliance & Trust",
-    slug: "dpdp-compliance",
-    feature: "Compliance & Trust",
-    title: "Shipping payroll & compliance integrations under India's DPDP regime",
-    company: "Repute",
-    role: "Founding Product Manager",
-    timeframe: "Dec 2021 – Present",
+    coverTags: ["HRIS", "Agentic AI"],
     problem:
-      "Employee data moving between the HRIS and partner systems for payroll and compliance had to satisfy India's new Digital Personal Data Protection (DPDP) requirements, with no established internal playbook yet.",
+      "Recruitment, payroll, onboarding, and compliance questions each needed their own back-and-forth before someone actually got an answer.",
+    whatWasNeeded:
+      "One assistant that could handle all four areas correctly. Not a chatbot that sounded confident but got the details wrong.",
     approach: [
-      "Defined consent requirements for data moving between HRIS and partner systems before any integration touched employee records.",
-      "Set data-minimisation rules so integrations only received the fields they actually needed, not full employee records by default.",
-      "Built audit requirements into the integration spec itself, rather than treating compliance as a post-launch checklist.",
+      "I shipped a live four-agent assistant covering all four areas. I worked with our CTO on the orchestration layer that routes each question to the right agent, grounded its answers in live HRIS data, and set accuracy benchmarks with human review built in.",
     ],
+    whatHelped:
+      "I insisted on the accuracy benchmarks before we scaled it up, rather than shipping fast and hoping it held.",
     outcome:
-      "Payroll and compliance integrations shipped on schedule while meeting a new regulatory bar, turning a potential blocker into a repeatable pattern for future integrations.",
+      "The assistant is live today across all four areas and helped grow HRIS ARR by 2X.",
     metric: "",
-    stat: null,
+    stat: { value: "2X", label: "ARR Impact" },
   },
   {
-    tag: "05 · Customer Experience",
-    slug: "tenant-journey",
-    feature: "Customer Experience",
-    title: "Redesigning the tenant journey to cut support escalations",
-    company: "Nestaway (Co-living & House Rentals)",
-    role: "Program Manager, CX",
-    timeframe: "Oct 2016 – Dec 2019",
-    problem:
-      "Support tickets and social media escalations were high, and the underlying causes were scattered across a tenant journey that had never been mapped end-to-end.",
-    approach: [
-      "Pulled support ticket data and analyzed it to find recurring escalation patterns, rather than fixing complaints one at a time.",
-      "Redesigned the tenant journey end-to-end based on those patterns.",
-      "Ran user interviews and targeted experiments, including a rent-rewards program aimed at both satisfaction and on-time payment behavior.",
-      "Separately, I migrated the CX team from an external CRM to an internal tool: gathering requirements, writing the PRD, and designing training for about 150 team members.",
+    tag: "04 · Payroll Compliance",
+    slug: "dpdp-compliance",
+    feature: "Payroll Compliance",
+    title: "Cutting Statutory Filing to Minutes",
+    company: "Repute",
+    role: "Founding Product Manager",
+    timeframe: "Dec 2021 – Present",
+    coverImage: "/work/compliance-filing-cover.jpg",
+    bentoLabel: "Automating Compliance Filing",
+    coverDescription:
+      "Moved statutory payroll filing directly into the HRIS, so employers stopped juggling government portals by hand.",
+    coverStats: [
+      { value: "10 min", label: "Filing Time" },
+      { value: "0", label: "Portal Logins" },
     ],
+    coverTags: ["HRIS", "Payroll Compliance"],
+    problem:
+      "Employers had to file statutory payroll returns and remit payroll taxes by logging into separate government portals, preparing the data by hand, and uploading it themselves.",
+    whatWasNeeded:
+      "A way to remove that whole coordination effort, not just make the existing process a bit faster.",
+    approach: [
+      "I shipped compliance filing workflows directly into the HRIS payroll module, so employers could prepare and submit statutory returns and remit payroll taxes without ever leaving the HRIS or logging into a government portal.",
+    ],
+    whatHelped:
+      "I mapped out exactly where employers were losing time — manual coordination, data prep, portal uploads — before deciding what to automate.",
     outcome:
-      "Escalations dropped sharply within a quarter, NPS improved substantially, and the CRM migration produced a durable per-user cost saving alongside the experience improvements.",
-    metric: "Support tickets down 10%, social escalations down 50% in 3 months · NPS up 70% with 10% of detractors converted to promoters · ₹1,800 saved per user per month via CRM migration",
-    stat: { value: "50%", label: "fewer social escalations" },
+      "What used to take HR teams multiple days or weeks now takes about 10 minutes.",
+    metric: "",
+    stat: { value: "10 min", label: "Filing Time" },
+  },
+  {
+    tag: "05 · Integrations Architecture",
+    slug: "unified-api",
+    feature: "Unified API",
+    title: "Unified API Layer for Bespoke Integrations",
+    company: "Repute",
+    role: "Founding Product Manager",
+    timeframe: "Dec 2021 – Present",
+    coverImage: "/work/unified-api-cover.jpg",
+    bentoLabel: "Unified API for bespoke integrations",
+    coverDescription:
+      "Replaced custom, one-off integration builds with a Unified API layer that every new partner could plug into.",
+    coverStats: [
+      { value: "175+", label: "Integration Catalog" },
+      { value: "1", label: "API Layer" },
+    ],
+    coverTags: ["HRIS", "Integrations Architecture"],
+    problem:
+      "Every partner integration up to that point had been built separately, from scratch. Each one worked fine, but each one was also its own little project.",
+    whatWasNeeded:
+      "A way to stop rebuilding the same plumbing every time a new partner came along.",
+    approach: [
+      "I replaced the custom builds with a single API layer sitting on one canonical data model, so every new integration could follow the same blueprint instead of starting from zero.",
+    ],
+    whatHelped:
+      "I stopped treating each integration as a special case and just solved the underlying problem once, properly.",
+    outcome:
+      "The integration catalog grew from 75 to over 175, and new integrations started shipping noticeably faster, from months to days.",
+    metric: "",
+    stat: { value: "175+", label: "Integration Catalog" },
   },
 ];
 
