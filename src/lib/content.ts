@@ -378,12 +378,7 @@ export const caseStudies: CaseStudy[] = [
     slug: "remote-integration-coverage",
     subject: "Remote.com",
     hook: "Every new system starts from zero. That's a template problem, not a data problem.",
-    // Cover photo pending — the file hasn't been supplied yet. Every other
-    // field below is ready; add the path back once the real image is in
-    // public/pov/ and this entry switches over to the photo treatment
-    // (cover, carousel card, bento hover) automatically, same as a Work
-    // project. Until then this falls back to the plain motif hero.
-    // coverImage: "/pov/remote-integration-coverage-cover.jpg",
+    coverImage: "/pov/remote-integration-coverage-cover.png",
     coverDescription:
       "My POV of how Remote.com can make it easier for their customers — existing and new — to connect their existing systems.",
     coverTags: ["Remote.com", "Integrations", "HRIS", "EOR"],
