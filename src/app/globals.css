@@ -927,7 +927,7 @@ body {
   font-size: 1.05rem;
   line-height: 1.25;
   letter-spacing: -0.01em;
-  color: var(--citron);
+  color: #eed6c8;
 }
 /* A "rich" slide (real project content behind it) drops the decorative
    numeral entirely and sizes its title to match .card-name exactly — the
@@ -962,7 +962,7 @@ body {
   font-size: min(clamp(1.5rem, 0.9vw + 1.25rem, 2.05rem), 3.9vh);
   line-height: 1.08;
   letter-spacing: -0.02em;
-  color: var(--citron);
+  color: #eed6c8;
   max-width: 34rem;
 }
 .card-cover-slide--rich .work-card-stats {
@@ -1061,7 +1061,11 @@ body {
   justify-content: center;
   gap: 0.2rem;
   height: 3.4rem;
-  width: 3.4rem;
+  /* min-width + padding rather than a fixed width: the label sets the
+     item's size, so "Alter Ego" doesn't have to be shrunk to fit a box
+     sized for "Lab". */
+  min-width: 3.4rem;
+  padding-inline: 0.5rem;
   border-radius: 1.1rem;
   color: var(--ink-secondary);
   transition: color 0.2s ease, background-color 0.2s ease;
@@ -1076,10 +1080,13 @@ body {
 }
 .dock-label {
   font-family: var(--font-sans);
-  font-size: 0.6rem;
+  /* 0.6rem rendered at 10px, below any sensible floor for a label someone
+     is meant to read; Material's bottom-nav spec puts these at 12sp. */
+  font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1;
+  white-space: nowrap;
 }
 .dock-divider {
   display: none;
@@ -1110,13 +1117,28 @@ body {
     display: flex;
   }
   .dock-item {
-    height: 2.9rem;
-    width: 2.65rem;
+    height: 3rem;
+    min-width: 2.9rem;
+    padding-inline: 0.3rem;
     border-radius: 0.9rem;
     gap: 0.15rem;
   }
   .dock-label {
-    font-size: 0.5rem;
+    font-size: 0.75rem;
+  }
+}
+
+/* The Zoho launcher is fixed at bottom-right (measured: 44x44 at bottom
+   10px / right 10px). On a phone the dock is ~315px wide and reaches to
+   within 30px of the right edge, so the two genuinely overlap — the
+   launcher sat on top of the dock's last item. Lifting it above the dock
+   on narrow screens is the one thing we control; its greeting tooltip is
+   a child, so it comes along. Scoped to phone widths because from ~480px
+   up the two already clear each other. If Zoho ever renames the id this
+   rule simply stops applying, which is the current behaviour anyway. */
+@media (max-width: 480px) {
+  #zsiq_float {
+    bottom: 5.75rem !important;
   }
 }
 
@@ -1263,8 +1285,14 @@ body.menu-open canvas {
    half the page width on desktop instead of a third. */
 .work-card {
   position: relative;
-  flex: 0 0 clamp(24rem, 55vw, 56rem);
+  /* min() in the lower bound so a 24rem card never runs wider than a
+     375px phone — it used to overhang the viewport there. */
+  flex: 0 0 clamp(min(24rem, 86vw), 55vw, 56rem);
   aspect-ratio: 16 / 9;
+  /* Type inside scales against the CARD, not the viewport — the card is
+     the thing whose size the type has to look right against, and it
+     stops growing at 56rem while the viewport keeps going. */
+  container-type: inline-size;
   display: block;
   overflow: hidden;
   border-radius: 1.25rem;
@@ -1279,6 +1307,23 @@ body.menu-open canvas {
 .work-card:hover {
   transform: translateY(-6px);
   box-shadow: 0 26px 55px -22px rgba(40, 20, 10, 0.6);
+}
+/* A 16:9 card is only 216px tall once it narrows to ~384px, which isn't
+   enough for a title plus three stat chips — measured, the content
+   overflowed by 36px and got clipped. Narrow cards get taller ratios,
+   and the smallest ones drop the tag row (it repeats on the detail page). */
+@media (max-width: 1023px) {
+  .work-card {
+    aspect-ratio: 3 / 2;
+  }
+}
+@media (max-width: 699px) {
+  .work-card {
+    aspect-ratio: 4 / 3;
+  }
+  .work-card .work-tag-row {
+    display: none;
+  }
 }
 /* Geometric motif, one per project — the same art the detail page opens
    with, so the card and the cover are the same object. */
@@ -1320,7 +1365,7 @@ body.menu-open canvas {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1.75rem 1.75rem 1.6rem;
+  padding: clamp(1.15rem, 3cqw, 2.4rem);
   color: #fff;
 }
 .work-card-feature {
@@ -1329,15 +1374,26 @@ body.menu-open canvas {
   font-size: clamp(1.35rem, 1.1vw + 1rem, 1.9rem);
   line-height: 1.12;
   letter-spacing: -0.025em;
-  color: var(--citron);
+  /* Tan, not citron: measured against the actual scrim-over-photo
+     background the two are within 3% of each other on contrast (12.9:1
+     vs 13.3:1 average, 5.2 vs 5.3 worst case), so legibility doesn't
+     pick a winner — hierarchy does. Citron is the one rationed accent
+     and it belongs on the numbers, which are the payoff; when the title
+     wore it too, nothing on the card was actually emphasised. */
+  color: #eed6c8;
 }
-/* A full case-study title runs longer than a short feature name, so it
-   needs a smaller size and a capped width to keep three lines from
-   crowding the card. */
+/* A full case-study title carries the card, so it scales with the card:
+   ~4.4% of card width, which lands at 35px on a 792px card instead of
+   the 21.6px (2.7%) it used to sit at. Clamped to two lines so a long
+   title can never push the stats out of a short card. */
 .work-card-feature--title {
-  font-size: clamp(1.05rem, 0.75vw + 0.8rem, 1.35rem);
-  line-height: 1.2;
-  max-width: 30rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  font-size: clamp(1.25rem, 4.4cqw, 2.4rem);
+  line-height: 1.12;
+  max-width: min(94%, 42rem);
 }
 /* All three cover stats, scaled down to chip size for the card face —
    the same numbers and labels as the cover, not a card-only summary. */
@@ -1366,7 +1422,7 @@ body.menu-open canvas {
 }
 .work-card-stat-chip-label {
   font-family: var(--font-sans);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   font-weight: 600;
   /* Fixed tan, not var(--tan) — this label sits on the fixed-green field
      (.work-hero-split/.work-card use a hardcoded green, not the theme
@@ -1398,7 +1454,33 @@ body.menu-open canvas {
 }
 .work-tag-pill--sm {
   padding: 0.25rem 0.65rem;
-  font-size: 0.68rem;
+  font-size: 0.75rem;
+}
+/* Chips and pills are shared with the bento hover slide, which is a much
+   shorter banner — so the base sizes above stay tuned for that, and the
+   carousel card (a container, see .work-card) scales its own copies up
+   against its width. 10.4px labels were below any sensible reading floor. */
+.work-card .work-card-stat-chip {
+  gap: 0.2rem;
+  border-radius: clamp(0.7rem, 1.3cqw, 0.95rem);
+  padding: clamp(0.45rem, 1.15cqw, 0.8rem) clamp(0.7rem, 1.7cqw, 1.15rem);
+}
+.work-card .work-card-stat-chip-value {
+  font-size: clamp(1.05rem, 2.3cqw, 1.45rem);
+}
+.work-card .work-card-stat-chip-label {
+  font-size: clamp(0.75rem, 1.5cqw, 0.88rem);
+}
+.work-card .work-tag-pill--sm {
+  padding: clamp(0.25rem, 0.7cqw, 0.4rem) clamp(0.65rem, 1.5cqw, 0.95rem);
+  font-size: clamp(0.78rem, 1.45cqw, 0.9rem);
+}
+.work-card .work-card-stats {
+  gap: clamp(0.5rem, 1.1cqw, 0.75rem);
+  margin-top: clamp(0.75rem, 1.8cqw, 1.25rem);
+}
+.work-card .work-tag-row--sm {
+  margin-top: clamp(0.6rem, 1.4cqw, 1rem);
 }
 .work-card-stat {
   display: flex;
@@ -1582,7 +1664,7 @@ body.menu-open canvas {
   font-size: clamp(1.75rem, 3vw + 1rem, 3rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
-  color: var(--citron);
+  color: #eed6c8;
 }
 .work-hero-meta {
   margin-top: 0.6rem;
@@ -1629,13 +1711,16 @@ body.menu-open canvas {
   gap: 0.9rem;
   padding: clamp(1.75rem, 3vw, 3rem);
 }
+/* Same rule as the carousel card: title in tan, citron kept for the
+   numbers below it. Measured on the flat forest field the two are 8.8:1
+   vs 9.1:1 — again a tie on contrast, so hierarchy decides. */
 .work-hero-title {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.9rem, 2.4vw + 1rem, 2.75rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
-  color: var(--citron);
+  color: #eed6c8;
 }
 /* Secondary copy on the green field reads as plain white-on-green — tan
    (the same warm off-white used for tag fills elsewhere) gives it a
@@ -1729,15 +1814,38 @@ body.menu-open canvas {
   flex-direction: column;
   gap: 1.25rem;
 }
+/* Heading in a left rail, prose in the column beside it. Stacking the two
+   left a ~480px void down the right of every full-width card; this uses
+   that width for structure instead — every heading lands on the same
+   vertical line, so the eye can run down the labels to find a section,
+   and the prose still keeps a ~75-character measure. */
 .work-body-section {
+  display: grid;
+  grid-template-columns: minmax(8.5rem, 11rem) minmax(0, 1fr);
+  column-gap: 2.5rem;
+  align-items: start;
   border-radius: 1.25rem;
   border: 1px solid var(--border);
   background: var(--paper-raised);
-  padding: 1.5rem 1.75rem;
+  padding: 1.6rem 1.85rem;
 }
 .work-body-section .work-body-text {
-  margin-top: 0.6rem;
-  max-width: 42rem;
+  margin-top: 0;
+  max-width: 46rem;
+}
+/* Matches the prose line box so the heading's first line sits on the same
+   baseline as the paragraph's, rather than floating a few px above it. */
+.work-body-section .work-section-heading {
+  line-height: 1.65;
+}
+@media (max-width: 767px) {
+  .work-body-section {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 0.6rem;
+  }
+  .work-body-section .work-section-heading {
+    line-height: 1.3;
+  }
 }
 .work-section-heading {
   display: flex;
@@ -1791,7 +1899,7 @@ body.menu-open canvas {
 .work-section-label {
   display: block;
   font-family: var(--font-sans);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
