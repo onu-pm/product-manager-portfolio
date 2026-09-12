@@ -1416,6 +1416,22 @@ body.menu-open canvas {
   line-height: 1.12;
   max-width: min(94%, 42rem);
 }
+/* A POV card has no stats to show, so its description takes that visual
+   slot instead — same role, same position in the stack, sized down from
+   the cover's italic treatment to fit a card instead of a full hero. */
+.work-card-description {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  margin-top: 0.5rem;
+  max-width: min(94%, 38rem);
+  font-family: var(--font-sans);
+  font-style: italic;
+  font-size: clamp(0.85rem, 1.7cqw, 1.05rem);
+  line-height: 1.4;
+  color: #eed6c8;
+}
 /* All three cover stats, scaled down to chip size for the card face —
    the same numbers and labels as the cover, not a card-only summary. */
 .work-card-stats {

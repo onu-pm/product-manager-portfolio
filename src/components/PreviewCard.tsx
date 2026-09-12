@@ -8,10 +8,11 @@ export type Slide = {
   number: string;
   label: string;
   image?: string;
-  /** A "rich" slide — same title/stats/tags as the Work carousel card and
-   *  cover, for a project that has real content behind it. Slides without
-   *  a title fall back to the plain numeral + label. */
+  /** A "rich" slide — same title/description/stats/tags as the carousel
+   *  card and cover, for a project that has real content behind it.
+   *  Slides without a title fall back to the plain numeral + label. */
   title?: string;
+  description?: string;
   stats?: { value: string; label: string }[];
   tags?: string[];
 };
@@ -101,6 +102,7 @@ export default function PreviewCard({
                 {s.title ? (
                   <>
                     <span className="card-cover-title">{s.title}</span>
+                    {s.description && <span className="work-card-description">{s.description}</span>}
                     {s.stats && s.stats.length > 0 && (
                       <span className="work-card-stats">
                         {s.stats.map((stat) => (

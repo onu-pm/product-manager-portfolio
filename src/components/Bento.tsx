@@ -83,12 +83,21 @@ export default function Bento() {
           name="POV"
           description="Products I picked myself, and wrote my own thesis on."
           ctaText="4 theses"
-          slides={caseStudies.map((c, i) => ({
-            number: `0${i + 1}`,
-            label: tagLabel(c.tag),
-            image: c.coverImage,
-            title: c.coverImage ? c.bentoLabel ?? c.title : undefined,
-          }))}
+          slides={caseStudies.map((c, i) => {
+            // Same decoupling as the detail page — rich content ships as
+            // soon as a case study has real deck content, independent of
+            // whether its cover photo has been supplied yet. Title only,
+            // same as Work's bento slide: this banner is far shorter than
+            // the carousel card, and description + tags together measured
+            // taller than the slot, overflowing into the dots below it.
+            const rich = !!(c.coverDescription || c.sections);
+            return {
+              number: `0${i + 1}`,
+              label: tagLabel(c.tag),
+              image: c.coverImage,
+              title: rich ? c.bentoLabel ?? c.title : undefined,
+            };
+          })}
         />
 
         <PreviewCard

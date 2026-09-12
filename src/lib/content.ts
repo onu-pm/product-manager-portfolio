@@ -373,41 +373,7 @@ export type CaseStudy = {
 // and says so.
 export const caseStudies: CaseStudy[] = [
   {
-    tag: "01 · Cross-sell Strategy",
-    title: "Getting SpringVerify accounts to make their first hire in Goodfit",
-    slug: "springverify-goodfit",
-    subject: "SpringVerify × Goodfit",
-    hook: "Goodfit already sits inside SpringVerify. Discovery isn't the problem, the ask is.",
-    problem:
-      "Goodfit already sits inside SpringVerify, so discovery isn't the issue. The problem is asking someone who opens SpringVerify to do a compliance job to start a hiring job from scratch, when they don't even own the role they'd be posting.",
-    approach: [
-      "Mapped HR Ops' actual day and found they can't post a job themselves, so the pitch could never be \"hire better\", it had to work with the job they already have.",
-      "Weighed four ways in (a failed check, post-hire assessment, referrals, or pulling in their existing hiring tool) and worked out why the first three lose before picking the fourth.",
-      "Designed a one-read, one-write, one-event sync with their ATS so Goodfit fills itself in instead of asking them to type the same thing twice.",
-    ],
-    outcome:
-      "Reframed the ask from \"post a job in a tool you don't own\" to a background sync that turns an empty dashboard into one that already reflects the hiring they're doing elsewhere.",
-    watch: "North star to track: accounts that pay for their first assessment, not sign-ins or free credits.",
-  },
-  {
-    tag: "02 · Product Thesis",
-    title: "Making it easier to know you're talking to the same person on Beeper",
-    slug: "beeper-people-layer",
-    subject: "Beeper",
-    hook: "Beeper's own search already knows two chats are the same person. Merge just doesn't act on it.",
-    problem:
-      "Beeper's own search already knows when two chats across networks are the same person, but Merge only joins them when its matcher happens to catch the pair, and misses are silent, so duplicate contacts quietly stay duplicate.",
-    approach: [
-      "Traced the gap to a unit-of-organization problem: Beeper treats a chat as the thing it organizes, not a person, even though search already computes the person-level match.",
-      "Sequenced the fix by trust, not effort: reuse the signal search already has, merge on facts like a shared number or email automatically, and only ask once before guessing on a name-and-photo match.",
-      "Drew one line that doesn't move regardless of model quality: never merge on a name alone, since a wrong merge shows one person another person's messages.",
-    ],
-    outcome:
-      "Turns Merge from a feature you have to go looking for into a person layer that applies consistently, and makes the case that unlocking it is what justifies paying for the multi-account tiers.",
-    watch: "Key gap to instrument first: missed-match rate, since misses are currently invisible to Beeper's own metrics.",
-  },
-  {
-    tag: "03 · Platform Strategy",
+    tag: "01 · Platform Strategy",
     title: "Making it easier for customers to connect their existing systems to an external HRIS or EOR",
     slug: "remote-integration-coverage",
     subject: "Remote.com",
@@ -483,6 +449,40 @@ export const caseStudies: CaseStudy[] = [
         body: "Read from how these integrations typically fail across the category, not internal data. Next step: instrument these three before and after launch to see which one actually moves.",
       },
     ],
+  },
+  {
+    tag: "02 · Cross-sell Strategy",
+    title: "Getting SpringVerify accounts to make their first hire in Goodfit",
+    slug: "springverify-goodfit",
+    subject: "SpringVerify × Goodfit",
+    hook: "Goodfit already sits inside SpringVerify. Discovery isn't the problem, the ask is.",
+    problem:
+      "Goodfit already sits inside SpringVerify, so discovery isn't the issue. The problem is asking someone who opens SpringVerify to do a compliance job to start a hiring job from scratch, when they don't even own the role they'd be posting.",
+    approach: [
+      "Mapped HR Ops' actual day and found they can't post a job themselves, so the pitch could never be \"hire better\", it had to work with the job they already have.",
+      "Weighed four ways in (a failed check, post-hire assessment, referrals, or pulling in their existing hiring tool) and worked out why the first three lose before picking the fourth.",
+      "Designed a one-read, one-write, one-event sync with their ATS so Goodfit fills itself in instead of asking them to type the same thing twice.",
+    ],
+    outcome:
+      "Reframed the ask from \"post a job in a tool you don't own\" to a background sync that turns an empty dashboard into one that already reflects the hiring they're doing elsewhere.",
+    watch: "North star to track: accounts that pay for their first assessment, not sign-ins or free credits.",
+  },
+  {
+    tag: "03 · Product Thesis",
+    title: "Making it easier to know you're talking to the same person on Beeper",
+    slug: "beeper-people-layer",
+    subject: "Beeper",
+    hook: "Beeper's own search already knows two chats are the same person. Merge just doesn't act on it.",
+    problem:
+      "Beeper's own search already knows when two chats across networks are the same person, but Merge only joins them when its matcher happens to catch the pair, and misses are silent, so duplicate contacts quietly stay duplicate.",
+    approach: [
+      "Traced the gap to a unit-of-organization problem: Beeper treats a chat as the thing it organizes, not a person, even though search already computes the person-level match.",
+      "Sequenced the fix by trust, not effort: reuse the signal search already has, merge on facts like a shared number or email automatically, and only ask once before guessing on a name-and-photo match.",
+      "Drew one line that doesn't move regardless of model quality: never merge on a name alone, since a wrong merge shows one person another person's messages.",
+    ],
+    outcome:
+      "Turns Merge from a feature you have to go looking for into a person layer that applies consistently, and makes the case that unlocking it is what justifies paying for the multi-account tiers.",
+    watch: "Key gap to instrument first: missed-match rate, since misses are currently invisible to Beeper's own metrics.",
   },
   {
     tag: "04 · Systems Design",
