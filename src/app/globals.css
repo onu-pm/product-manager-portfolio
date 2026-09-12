@@ -613,7 +613,9 @@ body {
    swallow every click even where nothing was visibly drawn over it. */
 .bulb-button {
   position: absolute;
-  top: 0;
+  /* Cleared below the fixed logo / day-date-location chip in the corner,
+     which sit at top-6 (1.5rem) and run about 2.5rem tall. */
+  top: 4.5rem;
   right: 4%;
   z-index: 10;
   width: 3rem;
@@ -765,7 +767,7 @@ body {
   font-size: min(clamp(1.5rem, 0.9vw + 1.25rem, 2.05rem), 3.9vh);
   line-height: 1.08;
   letter-spacing: -0.02em;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--plum-800);
 }
 

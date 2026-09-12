@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import Nav from "@/components/Nav";
 import Logo from "@/components/Logo";
+import TopMeta from "@/components/TopMeta";
 import PageChrome from "@/components/PageChrome";
 
 const siteUrl = "https://poums.in";
@@ -57,6 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body className="min-h-full flex flex-col">
         <Logo />
+        <TopMeta />
         <PageChrome>{children}</PageChrome>
         <Nav />
 
