@@ -142,7 +142,7 @@ export default function WorkDetail({ slug }: { slug: string }) {
             </div>
           )}
 
-          <div className="work-body-section work-body-section--result">
+          <div className="work-body-section">
             <SectionHeading wide>Results</SectionHeading>
             <p className="work-body-text">{p.outcome}</p>
           </div>

@@ -100,11 +100,6 @@ export default function PreviewCard({
                 )}
                 {s.title ? (
                   <>
-                    {/* The number still anchors the top corner, same as the
-                        plain slides — without it, a short bottom-anchored
-                        block in a banner this tall read as floating in the
-                        middle rather than deliberately bottom-set. */}
-                    <span className="card-cover-number">{s.number}</span>
                     <span className="card-cover-title">{s.title}</span>
                     {s.stats && s.stats.length > 0 && (
                       <span className="work-card-stats">

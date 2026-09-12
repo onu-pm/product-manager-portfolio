@@ -937,8 +937,16 @@ body {
    to two lines and only one stat rides along, rather than the full
    three-stat spread that fits there. */
 .card-cover-slide--rich {
-  padding: 1.1rem 1.5rem 1.25rem;
+  /* Top-anchored, not bottom — the title reads as a caption sitting over
+     the photo rather than pinned to the floor of the card, and it leaves
+     the empty space at the bottom of the frame instead of stranding it
+     above a bottom-anchored block. */
+  justify-content: flex-start;
+  padding: 1.25rem 1.5rem 1.1rem;
   gap: 0.4rem;
+}
+.card-cover-slide--rich .card-cover-scrim {
+  background: linear-gradient(to bottom, rgba(8, 10, 6, 0.88) 0%, rgba(8, 10, 6, 0.5) 48%, rgba(8, 10, 6, 0.08) 80%);
 }
 /* Exactly .card-name's size formula — every other bento card's title is
    this size, so the Work card's hover state has to match it too instead
@@ -1281,12 +1289,14 @@ body.menu-open canvas {
      --work-field colour and the motif image, so they resolve together. */
   background-color: var(--work-field, var(--forest));
 }
-/* A scrim so the overlaid type stays legible over the artwork. */
+/* A scrim so the overlaid type stays legible over the artwork. Darkens the
+   TOP of the frame, matching .work-card-content anchoring the type there
+   rather than at the bottom. */
 .work-card-scrim {
   position: absolute;
   inset: 0;
   background: linear-gradient(
-    to top,
+    to bottom,
     rgba(28, 16, 10, 0.82) 0%,
     rgba(28, 16, 10, 0.45) 38%,
     rgba(28, 16, 10, 0.05) 72%
@@ -1297,7 +1307,7 @@ body.menu-open canvas {
    against it. */
 .work-card-scrim--strong {
   background: linear-gradient(
-    to top,
+    to bottom,
     rgba(8, 10, 6, 0.94) 0%,
     rgba(8, 10, 6, 0.78) 32%,
     rgba(8, 10, 6, 0.4) 62%,
@@ -1306,11 +1316,11 @@ body.menu-open canvas {
 }
 .work-card-content {
   position: absolute;
-  inset: auto 0 0 0;
+  inset: 0 0 auto 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 1.6rem 1.75rem 1.75rem;
+  padding: 1.75rem 1.75rem 1.6rem;
   color: #fff;
 }
 .work-card-feature {
@@ -1728,18 +1738,6 @@ body.menu-open canvas {
 .work-body-section .work-body-text {
   margin-top: 0.6rem;
   max-width: 42rem;
-}
-/* Results is the payoff the other four sections build toward — a tinted
-   field and a slightly bigger paragraph mark it as the one to read last,
-   not just another card in the stack. */
-.work-body-section--result {
-  background: color-mix(in srgb, var(--citron) 10%, var(--paper-raised));
-  border-color: color-mix(in srgb, var(--citron) 30%, var(--border));
-}
-.work-body-section--result .work-body-text {
-  font-size: 1.05rem;
-  font-weight: 500;
-  color: var(--ink);
 }
 .work-section-heading {
   display: flex;
