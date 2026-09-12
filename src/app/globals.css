@@ -40,55 +40,51 @@
 }
 
 :root {
-  /* Palette: Ivory & Citron, after the leoparpeix.com reference — an ivory
-     ground, near-black type, forest green for secondary accents and a
-     single rationed citron yellow. A flat, solid-block system rather than a
-     gradient one. Token names (paper/ink/plum/rose/solar) are kept so no
-     component has to change; only what each token points to. */
+  /* Palette: black & white. No hue anywhere — every surface, text and
+     accent token resolves to black, white, or a step of neutral grey.
+     Token names (paper/ink/plum/rose/solar/citron/forest) are kept so no
+     component has to change; only what each token points to. `citron` and
+     `forest` keep their original roles (a light "pop" tone and its dark
+     invert-partner, e.g. the marker highlight and the hover-inverted
+     chip) — just in grey instead of yellow/green. */
   --paper: #f7f7f5;
   --paper-raised: #ffffff;
   --surface-tinted: #ececec;
-  /* Measured off the reference: its body copy is a near-black forest green
-     used ~670 times, while mid-green and citron are used as text exactly
-     zero times. Colour there comes from SURFACES (tan, grey, citron,
-     forest blocks), not from tinted type — which is why an earlier pass
-     that coloured every label mid-green read as "just white and green". */
-  --ink: #022016;
-  --ink-secondary: #4a5852;
-  --ink-tertiary: #8b9791;
-  --border: #e0ded7;
+  --ink: #0a0a0a;
+  --ink-secondary: #595959;
+  --ink-tertiary: #8c8c8c;
+  --border: #e5e5e5;
 
-  --citron: #f6e016;
-  --forest: #083d2a;
-  --tan: #eed6c8;
+  --citron: #ececec;
+  --forest: #0a0a0a;
+  --tan: #e5e5e5;
 
-  /* Text tokens all resolve to the one near-black green. Interactive text
+  /* Text tokens all resolve to the one near-black. Interactive text
      separates itself with underlines, arrows and hover — not with hue. */
-  --plum-950: #022016;
-  --plum-900: #022016;
-  --plum-800: #022016;
-  --plum-700: #022016;
-  --plum-600: #022016;
-  --plum-500: #022016;
-  --plum-400: #6f7d76;
-  --plum-300: #d6d3cb;
-  --plum-200: #e0ded7;
-  /* Chip/tag fills are tan — this is where the warmth comes from. */
-  --plum-100: #eed6c8;
-  --plum-50: #f1efe9;
+  --plum-950: #0a0a0a;
+  --plum-900: #0a0a0a;
+  --plum-800: #0a0a0a;
+  --plum-700: #0a0a0a;
+  --plum-600: #0a0a0a;
+  --plum-500: #0a0a0a;
+  --plum-400: #6e6e6e;
+  --plum-300: #d9d9d9;
+  --plum-200: #e5e5e5;
+  --plum-100: #ececec;
+  --plum-50: #f2f2f2;
 
-  --rose-500: #eed6c8;
-  --rose-300: #f3e9df;
-  --rose-100: #faf6f1;
+  --rose-500: #ececec;
+  --rose-300: #f5f5f5;
+  --rose-100: #fafafa;
 
-  /* "solar" carries the citron. */
-  --solar-500: #f6e016;
-  --solar-200: #fcf3a8;
+  /* "solar" carries the same light-grey pop as citron. */
+  --solar-500: #ececec;
+  --solar-200: #f2f2f2;
 
-  /* Flat colour system: the one approved gradient is dark -> forest ->
-     citron, reserved for the hero statement. Buttons are solid fills. */
-  --gradient-primary: linear-gradient(135deg, #022016, #083d2a 60%, #0f5138);
-  --gradient-primary-hover: linear-gradient(135deg, #022016, #083d2a 60%, #0f5138);
+  /* Flat colour system: the one approved gradient is dark -> mid-grey ->
+     light-grey, reserved for the hero statement. Buttons are solid fills. */
+  --gradient-primary: linear-gradient(135deg, #0a0a0a, #333333 60%, #595959);
+  --gradient-primary-hover: linear-gradient(135deg, #0a0a0a, #262626 60%, #404040);
   --gradient-playful: linear-gradient(120deg, var(--plum-800), var(--forest) 55%, var(--citron));
   --gradient-glow: radial-gradient(
     circle at 30% 30%,
@@ -96,7 +92,7 @@
     var(--surface-tinted) 45%,
     transparent 70%
   );
-  --highlight-tint: rgba(246, 224, 22, 0.45);
+  --highlight-tint: rgba(10, 10, 10, 0.1);
 
   /* Light mode: the bulb is off. */
   --bulb-wire: var(--ink-tertiary);
@@ -109,109 +105,114 @@
 }
 
 :root[data-theme="dark"] {
-  --paper: #0a0f0c;
-  --paper-raised: #12140f;
-  --surface-tinted: #1b1a14;
-  --ink: #f5f4ef;
-  --ink-secondary: #b7b5ac;
-  --ink-tertiary: #787770;
-  --border: #26261f;
+  /* Black & white, dark surface: near-black, flat, no hue anywhere. Same
+     grey-scale `citron`/`forest` invert pair as light mode. */
+  --paper: #0a0a0a;
+  --paper-raised: #141414;
+  --surface-tinted: #1a1a1a;
+  --ink: #f2f2f2;
+  --ink-secondary: #a3a3a3;
+  --ink-tertiary: #6e6e6e;
+  --border: #262626;
 
-  --citron: #f6e016;
-  --forest: #3a7a57;
-  --tan: #d9bba4;
+  --citron: #ececec;
+  --forest: #0a0a0a;
+  --tan: #333333;
 
-  --plum-950: #f5f4ef;
-  --plum-900: #f6e016;
-  --plum-800: #f5f4ef;
-  --plum-700: #f6e016;
-  --plum-600: #f6e016;
-  --plum-500: #f6e016;
-  --plum-400: #3a7a57;
-  --plum-300: #3a7a57;
-  --plum-200: #2f3a33;
-  --plum-100: #1b1a14;
-  --plum-50: #12140f;
+  --plum-950: #f2f2f2;
+  --plum-900: #ececec;
+  --plum-800: #f2f2f2;
+  --plum-700: #ececec;
+  --plum-600: #ececec;
+  --plum-500: #ececec;
+  --plum-400: #4d4d4d;
+  --plum-300: #333333;
+  --plum-200: #1c1c1c;
+  --plum-100: #1a1a1a;
+  --plum-50: #141414;
 
-  --rose-500: #d9bba4;
-  --rose-300: #8a6b55;
-  --rose-100: #1b1a14;
+  --rose-500: #333333;
+  --rose-300: #4d4d4d;
+  --rose-100: #1a1a1a;
 
-  --solar-500: #f6e016;
-  --solar-200: #2a2a16;
+  --solar-500: #ececec;
+  --solar-200: #262626;
 
-  /* Starts at the lightened forest, not near-black: a near-black first
-     stop on a near-black page made the hero's opening words vanish. */
-  --gradient-primary: linear-gradient(135deg, #3a7a57, #8fbf5f 45%, #f6e016);
-  --gradient-primary-hover: linear-gradient(135deg, #46906a, #9fcf6f 45%, #f6e016);
+  /* Starts at mid-grey, not near-black: a near-black first stop on a
+     near-black page made the hero's opening words vanish. */
+  --gradient-primary: linear-gradient(135deg, #4d4d4d, #a6a6a6 45%, #ffffff);
+  --gradient-primary-hover: linear-gradient(135deg, #595959, #b3b3b3 45%, #ffffff);
   --gradient-glow: radial-gradient(
     circle at 30% 30%,
-    rgba(58, 122, 87, 0.35) 0%,
-    rgba(246, 224, 22, 0.16) 45%,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 45%,
     transparent 70%
   );
-  --highlight-tint: rgba(246, 224, 22, 0.22);
+  --highlight-tint: rgba(255, 255, 255, 0.14);
 
-  /* Dark mode: the bulb is switched on. */
-  --bulb-wire: #4a4a44;
+  /* Dark mode: the bulb is switched on, glowing white instead of yellow. */
+  --bulb-wire: #4d4d4d;
   --bulb-glass: rgba(0, 0, 0, 0.3);
-  --bulb-fill: #f6e016;
-  --bulb-cap-line: #1b1a14;
-  --bulb-filament: #8a7a10;
+  --bulb-fill: #ececec;
+  --bulb-cap-line: #1a1a1a;
+  --bulb-filament: #6e6e6e;
   --bulb-ray-opacity: 0.85;
   --bulb-glow-opacity: 0.55;
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --paper: #0a0f0c;
-    --paper-raised: #12140f;
-    --surface-tinted: #1b1a14;
-    --ink: #f5f4ef;
-    --ink-secondary: #b7b5ac;
-    --ink-tertiary: #787770;
-    --border: #26261f;
+    /* BentoX pass: near-black, flat, one restrained accent (citron)
+       instead of the forest-green tint that used to run through every
+       surface. Mirrors the explicit [data-theme="dark"] block above. */
+    --paper: #0a0a0a;
+    --paper-raised: #141414;
+    --surface-tinted: #1a1a1a;
+    --ink: #f2f2f2;
+    --ink-secondary: #a3a3a3;
+    --ink-tertiary: #6e6e6e;
+    --border: #262626;
 
-    --citron: #f6e016;
-    --forest: #3a7a57;
-    --tan: #d9bba4;
+    --citron: #ececec;
+    --forest: #0a0a0a;
+    --tan: #333333;
 
-    --plum-950: #f5f4ef;
-    --plum-900: #f6e016;
-    --plum-800: #f5f4ef;
-    --plum-700: #f6e016;
-    --plum-600: #f6e016;
-    --plum-500: #f6e016;
-    --plum-400: #3a7a57;
-    --plum-300: #3a7a57;
-    --plum-200: #2f3a33;
-    --plum-100: #1b1a14;
-    --plum-50: #12140f;
+    --plum-950: #f2f2f2;
+    --plum-900: #ececec;
+    --plum-800: #f2f2f2;
+    --plum-700: #ececec;
+    --plum-600: #ececec;
+    --plum-500: #ececec;
+    --plum-400: #4d4d4d;
+    --plum-300: #333333;
+    --plum-200: #1c1c1c;
+    --plum-100: #1a1a1a;
+    --plum-50: #141414;
 
-    --rose-500: #d9bba4;
-    --rose-300: #8a6b55;
-    --rose-100: #1b1a14;
+    --rose-500: #333333;
+    --rose-300: #4d4d4d;
+    --rose-100: #1a1a1a;
 
-    --solar-500: #f6e016;
-    --solar-200: #2a2a16;
+    --solar-500: #ececec;
+    --solar-200: #262626;
 
-    /* Starts at the lightened forest, not near-black: a near-black first
-       stop on a near-black page made the hero's opening words vanish. */
-    --gradient-primary: linear-gradient(135deg, #3a7a57, #8fbf5f 45%, #f6e016);
-    --gradient-primary-hover: linear-gradient(135deg, #46906a, #9fcf6f 45%, #f6e016);
+    /* Starts at mid-grey, not near-black: a near-black first stop on a
+       near-black page made the hero's opening words vanish. */
+    --gradient-primary: linear-gradient(135deg, #4d4d4d, #a6a6a6 45%, #ffffff);
+    --gradient-primary-hover: linear-gradient(135deg, #595959, #b3b3b3 45%, #ffffff);
     --gradient-glow: radial-gradient(
       circle at 30% 30%,
-      rgba(58, 122, 87, 0.35) 0%,
-      rgba(246, 224, 22, 0.16) 45%,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.05) 45%,
       transparent 70%
     );
-    --highlight-tint: rgba(246, 224, 22, 0.22);
+    --highlight-tint: rgba(255, 255, 255, 0.14);
 
-    --bulb-wire: #4a4a44;
+    --bulb-wire: #4d4d4d;
     --bulb-glass: rgba(0, 0, 0, 0.3);
-    --bulb-fill: #f6e016;
-    --bulb-cap-line: #1b1a14;
-    --bulb-filament: #8a7a10;
+    --bulb-fill: #ececec;
+    --bulb-cap-line: #1a1a1a;
+    --bulb-filament: #6e6e6e;
     --bulb-ray-opacity: 0.85;
     --bulb-glow-opacity: 0.55;
   }
@@ -363,10 +364,8 @@ body {
   border-radius: 999px;
   font-family: var(--font-sans);
   font-weight: 700;
-  box-shadow: 0 6px 16px -8px rgba(10, 10, 8, 0.45);
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: none;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .btn-primary::after {
   content: "";
@@ -379,9 +378,7 @@ body {
 }
 .btn-primary:hover {
   transform: scale(1.04);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.22),
-    0 10px 22px -6px rgba(40, 20, 10, 0.55);
+  box-shadow: none;
 }
 .btn-primary:hover::after {
   background-position: -100% 0;
@@ -485,14 +482,12 @@ body {
   border-radius: 999px;
   background: var(--forest);
   color: var(--citron);
-  box-shadow: 0 6px 16px -8px rgba(10, 10, 8, 0.4);
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: none;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .icon-btn:hover {
   transform: scale(1.12) rotate(-4deg);
-  box-shadow: 0 10px 20px -6px rgba(40, 20, 10, 0.5);
+  box-shadow: none;
 }
 .icon-btn:active {
   transform: scale(0.95);
@@ -522,22 +517,20 @@ body {
   position: absolute;
   inset: 0;
   background-image:
-    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(217, 164, 65, 0.16), transparent 70%),
-    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(217, 116, 58, 0.14), transparent 70%);
+    radial-gradient(ellipse 60% 40% at 15% 0%, rgba(255, 255, 255, 0.16), transparent 70%),
+    radial-gradient(ellipse 55% 45% at 100% 100%, rgba(255, 255, 255, 0.14), transparent 70%);
   pointer-events: none;
 }
 
 .glass-card {
   position: relative;
   overflow: hidden;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   padding: 1.75rem;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(14px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    0 20px 40px -24px rgba(10, 4, 4, 0.6);
+  box-shadow: none;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .glass-card:hover {
@@ -606,19 +599,11 @@ body {
   overflow: hidden;
   pointer-events: none;
 }
+/* Flat reads as flat: no ambient blurred glow behind the grid, light or
+   dark. Was a soft coloured blob; on black-&-white it just showed up as a
+   stray dark smudge in the corner, so it's switched off outright. */
 .bento-backdrop span {
-  position: absolute;
-  border-radius: 999px;
-  filter: blur(70px);
-  opacity: 0.55;
-}
-:root[data-theme="dark"] .bento-backdrop span {
-  opacity: 0.32;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .bento-backdrop span {
-    opacity: 0.32;
-  }
+  display: none;
 }
 
 /* Interactive light bulb: off (plain outline) in light mode, glowing in
@@ -628,7 +613,9 @@ body {
    swallow every click even where nothing was visibly drawn over it. */
 .bulb-button {
   position: absolute;
-  top: 0;
+  /* Cleared below the fixed logo / day-date-location chip in the corner,
+     which sit at top-6 (1.5rem) and run about 2.5rem tall. */
+  top: 4.5rem;
   right: 4%;
   z-index: 10;
   width: 3rem;
@@ -721,25 +708,19 @@ body {
   align-items: flex-start;
   text-align: left;
   overflow: hidden;
-  border-radius: 1.75rem;
-  border: 1px solid color-mix(in srgb, white 30%, var(--border) 70%);
-  background: color-mix(in srgb, var(--paper-raised) 58%, transparent);
-  backdrop-filter: blur(22px) saturate(160%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, white 30%, transparent),
-    0 8px 30px -18px rgba(40, 20, 10, 0.25);
+  border-radius: 1.1rem;
+  border: 1px solid var(--border);
+  /* Flat, solid surface — no glass blur. A backdrop-filter on a card whose
+     children cross-fade their own opacity (the cover-flow slide below) is
+     what caused Safari to sometimes leave the old frame painted on hover:
+     dropping the blur removes that whole class of compositing bug, not
+     just the "glass" look. */
+  background: var(--paper-raised);
+  box-shadow: none;
   padding: 1.45rem;
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.4s ease;
+  transition: border-color 0.4s ease;
 }
 .bento-card:hover {
-  transform: translateY(-3px);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, white 22%, transparent),
-    0 20px 40px -20px rgba(40, 20, 10, 0.32);
   border-color: var(--plum-300);
 }
 
@@ -748,18 +729,11 @@ body {
    flow photo-album slide (below) takes over as the hover state itself,
    instead of changing the face's own content. */
 .link-card {
-  transition:
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.4s ease;
+  transition: border-color 0.4s ease;
 }
 .link-card:hover {
-  transform: translateY(-3px);
-  border-color: color-mix(in srgb, var(--plum-400) 70%, transparent);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, white 30%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--plum-400) 35%, transparent),
-    0 0 46px -10px var(--plum-400);
+  border-color: var(--plum-400);
+  box-shadow: none;
 }
 
 /* Every card shares one layout contract: a content block pinned to the top
@@ -773,6 +747,12 @@ body {
   flex-direction: column;
   justify-content: space-between;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease;
+  /* Forces its own compositing layer so the opacity cross-fade with
+     .card-cover repaints reliably (some WebKit builds would otherwise
+     leave the old layer's pixels on screen once the card itself lost its
+     backdrop-filter's implicit layer). */
+  will-change: opacity;
+  transform: translateZ(0);
 }
 
 /* One ladder, repeated on all six cards: title -> description -> CTA.
@@ -787,7 +767,7 @@ body {
   font-size: min(clamp(1.5rem, 0.9vw + 1.25rem, 2.05rem), 3.9vh);
   line-height: 1.08;
   letter-spacing: -0.02em;
-  font-weight: 700;
+  font-weight: 500;
   color: var(--plum-800);
 }
 
@@ -864,7 +844,7 @@ body {
    iPhone Photos slideshow), auto-advancing while hovered/focused. */
 .link-card:hover .card-face,
 .link-card:focus-within .card-face {
-  transform: translateY(-6px);
+  transform: translateY(-6px) translateZ(0);
   opacity: 0;
 }
 
@@ -876,6 +856,8 @@ body {
   opacity: 0;
   transition: opacity 0.35s ease;
   pointer-events: none;
+  will-change: opacity;
+  transform: translateZ(0);
 }
 .link-card:hover .card-cover,
 .link-card:focus-within .card-cover {
@@ -908,7 +890,7 @@ body {
   position: absolute;
   inset: 0;
   z-index: 0;
-  background: linear-gradient(to top, rgba(8, 10, 6, 0.88) 0%, rgba(8, 10, 6, 0.5) 48%, rgba(8, 10, 6, 0.08) 80%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.5) 48%, rgba(0, 0, 0, 0.08) 80%);
 }
 .card-cover-number {
   position: absolute;
@@ -946,7 +928,7 @@ body {
   gap: 0.4rem;
 }
 .card-cover-slide--rich .card-cover-scrim {
-  background: linear-gradient(to bottom, rgba(8, 10, 6, 0.88) 0%, rgba(8, 10, 6, 0.5) 48%, rgba(8, 10, 6, 0.08) 80%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.5) 48%, rgba(0, 0, 0, 0.08) 80%);
 }
 /* Exactly .card-name's size formula — every other bento card's title is
    this size, so the Work card's hover state has to match it too instead
@@ -972,7 +954,7 @@ body {
    behind it (unlike the cover and carousel card), so the chip needs a
    solid field, not a faint glass tint, to stay legible. */
 .card-cover-slide--rich .work-card-stat-chip {
-  background: rgba(8, 10, 6, 0.55);
+  background: rgba(0, 0, 0, 0.55);
   border-color: rgba(255, 255, 255, 0.28);
 }
 .card-cover-dots {
@@ -1038,17 +1020,11 @@ body {
   display: flex;
   align-items: center;
   gap: 0.15rem;
-  border-radius: 1.75rem;
-  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
-  /* Opaque enough to stay legible over whatever scrolls underneath it — a
-     55% glass tint let page content (and, on a short page, the footer
-     directly beneath) read right through the bar. */
-  background: color-mix(in srgb, var(--paper-raised) 88%, transparent);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  box-shadow:
-    inset 0 1px 0 color-mix(in srgb, white 25%, transparent),
-    0 16px 36px -16px rgba(40, 20, 10, 0.35);
+  border-radius: 1.1rem;
+  border: 1px solid var(--border);
+  /* Flat, solid pill — no glass blur, no drop shadow. */
+  background: var(--paper-raised);
+  box-shadow: none;
   padding: 0.45rem 0.55rem;
   padding-bottom: max(0.45rem, env(safe-area-inset-bottom));
 }
@@ -1152,12 +1128,10 @@ body {
   flex-direction: column;
   gap: 0.15rem;
   min-width: 11rem;
-  border-radius: 1.25rem;
-  border: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
-  background: color-mix(in srgb, var(--paper-raised) 96%, transparent);
-  backdrop-filter: blur(20px) saturate(140%);
-  -webkit-backdrop-filter: blur(20px) saturate(140%);
-  box-shadow: 0 20px 44px -18px rgba(40, 20, 10, 0.4);
+  border-radius: 0.85rem;
+  border: 1px solid var(--border);
+  background: var(--paper-raised);
+  box-shadow: none;
   padding: 0.5rem;
 }
 .dock-more-item {
@@ -1295,18 +1269,11 @@ body.menu-open canvas {
   container-type: inline-size;
   display: block;
   overflow: hidden;
-  border-radius: 1.25rem;
+  border-radius: 0.85rem;
   border: 1px solid color-mix(in srgb, white 14%, transparent);
   background-color: var(--forest);
   text-align: left;
-  box-shadow: 0 18px 40px -24px rgba(40, 20, 10, 0.5);
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
-}
-.work-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 26px 55px -22px rgba(40, 20, 10, 0.6);
+  box-shadow: none;
 }
 /* A 16:9 card is only 216px tall once it narrows to ~384px, which isn't
    enough for a title plus three stat chips — measured, the content
@@ -1362,9 +1329,9 @@ body.menu-open canvas {
   inset: 0;
   background: linear-gradient(
     to bottom,
-    rgba(28, 16, 10, 0.82) 0%,
-    rgba(28, 16, 10, 0.45) 38%,
-    rgba(28, 16, 10, 0.05) 72%
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.45) 38%,
+    rgba(0, 0, 0, 0.05) 72%
   );
 }
 /* Real photography carries far more visual noise than the flat colour
@@ -1373,10 +1340,10 @@ body.menu-open canvas {
 .work-card-scrim--strong {
   background: linear-gradient(
     to bottom,
-    rgba(8, 10, 6, 0.94) 0%,
-    rgba(8, 10, 6, 0.78) 32%,
-    rgba(8, 10, 6, 0.4) 62%,
-    rgba(8, 10, 6, 0.05) 88%
+    rgba(0, 0, 0, 0.94) 0%,
+    rgba(0, 0, 0, 0.78) 32%,
+    rgba(0, 0, 0, 0.4) 62%,
+    rgba(0, 0, 0, 0.05) 88%
   );
 }
 .work-card-content {
@@ -1430,7 +1397,7 @@ body.menu-open canvas {
   font-style: italic;
   font-size: clamp(0.85rem, 1.7cqw, 1.05rem);
   line-height: 1.4;
-  color: #eed6c8;
+  color: #ececec;
 }
 /* All three cover stats, scaled down to chip size for the card face —
    the same numbers and labels as the cover, not a card-only summary. */
@@ -1465,7 +1432,7 @@ body.menu-open canvas {
      (.work-hero-split/.work-card use a hardcoded green, not the theme
      token), so its accent stays fixed too rather than drifting with the
      site's light/dark toggle. */
-  color: #eed6c8;
+  color: #ececec;
 }
 /* Category tags — one shared component, used identically on the cover and
    the carousel card so a project's tags never read differently in two
@@ -1487,7 +1454,7 @@ body.menu-open canvas {
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #eed6c8;
+  color: #ececec;
 }
 .work-tag-pill--sm {
   padding: 0.25rem 0.65rem;
@@ -1556,50 +1523,50 @@ body.menu-open canvas {
 /* Solid colour fields, one per project — a flat block system, so each card
    is a single colour with a white motif over it rather than a blend. */
 .work-art--0 {
-  --work-field: #0f3d2a;
+  --work-field: #1a1a1a;
 }
 .work-art--1 {
-  --work-field: #0a0a08;
+  --work-field: #0a0a0a;
 }
 .work-art--2 {
-  --work-field: #06251a;
+  --work-field: #101010;
 }
 .work-art--3 {
-  --work-field: #23302a;
+  --work-field: #262626;
 }
 .work-art--4 {
-  --work-field: #15503a;
+  --work-field: #202020;
 }
 :root[data-theme="dark"] .work-art--0 {
-  --work-field: #14432f;
+  --work-field: #242424;
 }
 :root[data-theme="dark"] .work-art--1 {
-  --work-field: #1b1a14;
+  --work-field: #1e1e1e;
 }
 :root[data-theme="dark"] .work-art--2 {
-  --work-field: #0e3928;
+  --work-field: #161616;
 }
 :root[data-theme="dark"] .work-art--3 {
-  --work-field: #27352e;
+  --work-field: #2b2b2b;
 }
 :root[data-theme="dark"] .work-art--4 {
-  --work-field: #2f6b4d;
+  --work-field: #333333;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .work-art--0 {
-    --work-field: #14432f;
+    --work-field: #242424;
   }
   :root:not([data-theme="light"]) .work-art--1 {
-    --work-field: #1b1a14;
+    --work-field: #1e1e1e;
   }
   :root:not([data-theme="light"]) .work-art--2 {
-    --work-field: #0e3928;
+    --work-field: #161616;
   }
   :root:not([data-theme="light"]) .work-art--3 {
-    --work-field: #27352e;
+    --work-field: #2b2b2b;
   }
   :root:not([data-theme="light"]) .work-art--4 {
-    --work-field: #2f6b4d;
+    --work-field: #333333;
   }
 }
 
@@ -1683,7 +1650,7 @@ body.menu-open canvas {
 .work-hero {
   position: relative;
   overflow: hidden;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   aspect-ratio: 16 / 6;
   background-color: var(--forest);
 }
@@ -1725,16 +1692,16 @@ body.menu-open canvas {
   display: grid;
   grid-template-columns: 1.15fr 1fr;
   gap: 0;
-  border-radius: 1.5rem;
+  border-radius: 1rem;
   overflow: hidden;
-  background-color: #0f3d2a;
+  background-color: #1a1a1a;
 }
 :root[data-theme="dark"] .work-hero-split {
-  background-color: #14432f;
+  background-color: #242424;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .work-hero-split {
-    background-color: #14432f;
+    background-color: #242424;
   }
 }
 @media (max-width: 860px) {
@@ -1769,7 +1736,7 @@ body.menu-open canvas {
   font-style: italic;
   font-size: 1.02rem;
   line-height: 1.5;
-  color: #eed6c8;
+  color: #ececec;
 }
 .work-hero-stats {
   display: flex;
@@ -1782,7 +1749,7 @@ body.menu-open canvas {
   flex-direction: column;
   gap: 0.25rem;
   min-width: 7.5rem;
-  border-radius: 1rem;
+  border-radius: 0.7rem;
   border: 1px solid color-mix(in srgb, white 14%, transparent);
   background: rgba(255, 255, 255, 0.06);
   padding: 0.9rem 1.1rem;
@@ -1799,7 +1766,7 @@ body.menu-open canvas {
   font-family: var(--font-sans);
   font-size: 0.72rem;
   font-weight: 600;
-  color: #eed6c8;
+  color: #ececec;
 }
 .work-hero-image-wrap {
   position: relative;
@@ -1815,28 +1782,28 @@ body.menu-open canvas {
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(to right, #0f3d2a 0%, transparent 14%);
+  background: linear-gradient(to right, #1a1a1a 0%, transparent 14%);
   pointer-events: none;
 }
 :root[data-theme="dark"] .work-hero-image-wrap::before {
-  background: linear-gradient(to right, #14432f 0%, transparent 14%);
+  background: linear-gradient(to right, #242424 0%, transparent 14%);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .work-hero-image-wrap::before {
-    background: linear-gradient(to right, #14432f 0%, transparent 14%);
+    background: linear-gradient(to right, #242424 0%, transparent 14%);
   }
 }
 @media (max-width: 860px) {
   .work-hero-image-wrap::before {
-    background: linear-gradient(to bottom, #0f3d2a 0%, transparent 14%);
+    background: linear-gradient(to bottom, #1a1a1a 0%, transparent 14%);
   }
   :root[data-theme="dark"] .work-hero-image-wrap::before {
-    background: linear-gradient(to bottom, #14432f 0%, transparent 14%);
+    background: linear-gradient(to bottom, #242424 0%, transparent 14%);
   }
 }
 @media (max-width: 860px) and (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) .work-hero-image-wrap::before {
-    background: linear-gradient(to bottom, #14432f 0%, transparent 14%);
+    background: linear-gradient(to bottom, #242424 0%, transparent 14%);
   }
 }
 
@@ -1863,7 +1830,7 @@ body.menu-open canvas {
   grid-template-columns: minmax(8.5rem, 11rem) minmax(0, 1fr);
   column-gap: 2.5rem;
   align-items: start;
-  border-radius: 1.25rem;
+  border-radius: 0.85rem;
   border: 1px solid var(--border);
   background: var(--paper-raised);
   padding: 1.6rem 1.85rem;

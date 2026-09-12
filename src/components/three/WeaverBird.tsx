@@ -4,14 +4,14 @@ import { forwardRef, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Baya weaver colouring, stylised toward "cute" over "accurate": bright
-// golden-yellow crown and breast, small dark cheek patches instead of a full
-// face mask, warm brown wings and tail.
-const YELLOW = "#F7C948";
-const YELLOW_SOFT = "#FDE28A";
-const CHEEK = "#3A2A1E";
-const WING = "#C4863F";
-const BEAK = "#5B4632";
+// Baya weaver, same "cute" chibi proportions, black-and-white colouring:
+// light-grey crown and breast, dark cheek patches instead of a full face
+// mask, mid-grey wings and tail. No hue, only value contrast.
+const YELLOW = "#e0e0e0";
+const YELLOW_SOFT = "#f2f2f2";
+const CHEEK = "#262626";
+const WING = "#7a7a7a";
+const BEAK = "#333333";
 
 const clay = { roughness: 0.7, metalness: 0.02 } as const;
 
