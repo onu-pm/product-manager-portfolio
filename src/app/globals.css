@@ -1330,6 +1330,21 @@ body.menu-open canvas {
     aspect-ratio: 4 / 3;
   }
 }
+
+/* A photo-cover POV card, dropped into the existing bento-grid slot
+   (see CaseStudies.tsx) rather than a dedicated carousel — its content
+   is absolutely positioned (.work-card-art/.work-card-content), so unlike
+   its plain, padded siblings it has no intrinsic height of its own and
+   needs one set explicitly or it collapses to zero in the grid row. */
+.pov-card {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  min-height: 16rem;
+}
+.pov-card .work-card-feature {
+  font-size: clamp(1.15rem, 1.6vw + 0.85rem, 1.6rem);
+}
+
 /* Geometric motif, one per project — the same art the detail page opens
    with, so the card and the cover are the same object. */
 .work-card-art {

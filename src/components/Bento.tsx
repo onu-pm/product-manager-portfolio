@@ -83,7 +83,12 @@ export default function Bento() {
           name="POV"
           description="Products I picked myself, and wrote my own thesis on."
           ctaText="4 theses"
-          slides={caseStudies.map((c, i) => ({ number: `0${i + 1}`, label: tagLabel(c.tag) }))}
+          slides={caseStudies.map((c, i) => ({
+            number: `0${i + 1}`,
+            label: tagLabel(c.tag),
+            image: c.coverImage,
+            title: c.coverImage ? c.bentoLabel ?? c.title : undefined,
+          }))}
         />
 
         <PreviewCard

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import { caseStudies } from "@/lib/content";
@@ -25,26 +26,60 @@ export default function CaseStudies() {
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-4">
-          {caseStudies.map((c, i) => (
-            <Link
-              key={c.slug}
-              href={`/pov/${c.slug}`}
-              className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--border)] bg-paper-raised p-6 text-left transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(2,32,22,0.22)] ${spans[i % spans.length]}`}
-            >
-              <div>
-                <span className="chapter-tab mb-3 block">{c.tag}</span>
-                <h3 className="text-xl md:text-2xl">{c.title}</h3>
-                <p className="mt-2 text-sm text-ink-secondary">{c.subject}</p>
-              </div>
-
-              <div className="mt-6 flex items-end justify-between gap-4">
-                <p className="line-clamp-2 text-base text-ink-secondary">{c.hook}</p>
-                <span className="accordion-icon shrink-0 transition-transform duration-300 group-hover:rotate-45">
-                  +
+          {caseStudies.map((c, i) =>
+            c.coverImage ? (
+              // Same photo-cover treatment as a Work carousel card — image,
+              // scrim, citron title, tan tags (company first) — dropped
+              // into this card's existing grid slot rather than changing
+              // the grid itself.
+              <Link
+                key={c.slug}
+                href={`/pov/${c.slug}`}
+                className={`pov-card group relative flex flex-col justify-between overflow-hidden rounded-3xl text-left transition-transform duration-300 ease-out hover:-translate-y-1 ${spans[i % spans.length]}`}
+              >
+                <Image
+                  src={c.coverImage}
+                  alt=""
+                  fill
+                  sizes="(max-width: 767px) 100vw, 50vw"
+                  className="work-card-art"
+                  style={{ objectFit: "cover" }}
+                />
+                <span className="work-card-scrim work-card-scrim--strong" />
+                <span className="work-card-content">
+                  <span className="work-card-feature">{c.title}</span>
+                  {c.coverTags && c.coverTags.length > 0 && (
+                    <span className="work-tag-row">
+                      {c.coverTags.map((t) => (
+                        <span key={t} className="work-tag-pill">
+                          {t}
+                        </span>
+                      ))}
+                    </span>
+                  )}
                 </span>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ) : (
+              <Link
+                key={c.slug}
+                href={`/pov/${c.slug}`}
+                className={`group relative flex flex-col justify-between overflow-hidden rounded-3xl border border-[var(--border)] bg-paper-raised p-6 text-left transition-transform duration-300 ease-out hover:-translate-y-1 hover:shadow-[0_16px_32px_-16px_rgba(2,32,22,0.22)] ${spans[i % spans.length]}`}
+              >
+                <div>
+                  <span className="chapter-tab mb-3 block">{c.tag}</span>
+                  <h3 className="text-xl md:text-2xl">{c.title}</h3>
+                  <p className="mt-2 text-sm text-ink-secondary">{c.subject}</p>
+                </div>
+
+                <div className="mt-6 flex items-end justify-between gap-4">
+                  <p className="line-clamp-2 text-base text-ink-secondary">{c.hook}</p>
+                  <span className="accordion-icon shrink-0 transition-transform duration-300 group-hover:rotate-45">
+                    +
+                  </span>
+                </div>
+              </Link>
+            )
+          )}
         </div>
       </div>
     </section>

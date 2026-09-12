@@ -349,6 +349,23 @@ export type CaseStudy = {
   approach: string[];
   outcome: string;
   watch: string;
+  /** Real photography for the cover, in the same treatment as a Work
+   *  project — no coverStats here, since a POV thesis has no metrics of
+   *  its own to report. */
+  coverImage?: string;
+  coverDescription?: string;
+  /** Company first, then category tags — rendered as one tag row, so the
+   *  company reads as "given right under the description" without a
+   *  separate component. */
+  coverTags?: string[];
+  /** Short phrase for the homepage bento preview, same role as a Work
+   *  project's bentoLabel. */
+  bentoLabel?: string;
+  /** Full write-up, straight from the source deck's own section titles,
+   *  rendered as the same heading + prose/bullet cards a Work case study
+   *  uses. Only present once a case study has real deck content behind it;
+   *  falls back to problem/approach/outcome/watch otherwise. */
+  sections?: { heading: string; body: string | string[] }[];
 };
 
 // Self-directed product theses: companies I picked myself to show how I think,
@@ -391,10 +408,20 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     tag: "03 · Platform Strategy",
-    title: "Closing the integration coverage gap for Remote.com",
+    title: "Making it easier for customers to connect their existing systems to an external HRIS or EOR",
     slug: "remote-integration-coverage",
     subject: "Remote.com",
     hook: "Every new system starts from zero. That's a template problem, not a data problem.",
+    // Cover photo pending — the file hasn't been supplied yet. Every other
+    // field below is ready; add the path back once the real image is in
+    // public/pov/ and this entry switches over to the photo treatment
+    // (cover, carousel card, bento hover) automatically, same as a Work
+    // project. Until then this falls back to the plain motif hero.
+    // coverImage: "/pov/remote-integration-coverage-cover.jpg",
+    coverDescription:
+      "My POV of how Remote.com can make it easier for their customers — existing and new — to connect their existing systems.",
+    coverTags: ["Remote.com", "Integrations", "HRIS", "EOR"],
+    bentoLabel: "Closing the integration coverage gap",
     problem:
       "Most connections between a customer's HR system and an external HRIS or EOR run on a weekly file drop and cover a handful of fields, and every new system today means starting from zero.",
     approach: [
@@ -405,6 +432,57 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Reframes coverage as a template-matching problem instead of a bespoke-engineering one, where every new connector makes the next one faster to build.",
     watch: "Three numbers this would move: build cost per new system, payroll errors from stale data, and compliance scrambles before filing deadlines.",
+    sections: [
+      {
+        heading: "Problem statement",
+        body: [
+          "Every connector is built like it's the first one — ten systems need 45 point-to-point connections, and only the common few are ever worth a bespoke build.",
+          "Most connections run on a schedule — without native webhooks, a raise or an offboarding needs manual attention, which delays everything downstream.",
+          "What's synced is shallower than it looks — standard syncs cover common fields across platforms, but custom fields never make it across.",
+          "Not a data problem: it's how connections get built, when they update, and what they actually show.",
+        ],
+      },
+      {
+        heading: "Who feels it",
+        body: [
+          "The HR/People Ops Lead can't tell which fields are actually syncing until one goes missing — for them, the gap shows up as drift.",
+          "The IT/Systems Admin owns a fix nobody else can read, so every vendor API update risks silently breaking it — for them, the gap shows up as debt.",
+        ],
+      },
+      {
+        heading: "The solution",
+        body: [
+          "A reusable mapping template, not a bespoke build — a new system starts from the closest existing template instead of zero.",
+          "Frequent diffing, not a weekly file drop — a raise or an offboarding shows up in hours, not a pay cycle.",
+          "A visible completeness score, not a silent gap — shows exactly what's covered, and flags what isn't, before it becomes a problem.",
+          "None of this needs new data from the EOR's API. It changes how a connection gets built, how often it updates, and what it shows.",
+        ],
+      },
+      {
+        heading: "Where this leads",
+        body: "Connect is the first chapter, not the whole story. Build gets sharper, not busier: what's left in the queue is a genuinely new template, not a repeat of one that exists. And Compound is Connect run in reverse — every new mapping template raises the match rate for the next similar system. One loop: Connect builds the templates, and Compound is those templates getting reused.",
+      },
+      {
+        heading: "Value for customers",
+        body: [
+          "Uncommon systems don't get skipped — a closer template match means even a less common system is worth connecting quickly.",
+          "Changes show up in hours, not pay cycles — frequent diff-checks catch a raise or an offboarding before the next payroll run.",
+          "You can see exactly what's synced — a completeness score shows what's covered, and what still needs a human look.",
+        ],
+      },
+      {
+        heading: "Impact",
+        body: [
+          "Lower build cost per new system, since reused mapping templates mean less bespoke engineering per connector.",
+          "Fewer payroll errors from stale data, since diff-based sync catches a change before the next pay run, not after.",
+          "Fewer compliance scrambles before deadlines, since visible completeness catches a gap weeks early, not three weeks before a filing.",
+        ],
+      },
+      {
+        heading: "What I'd watch",
+        body: "Read from how these integrations typically fail across the category, not internal data. Next step: instrument these three before and after launch to see which one actually moves.",
+      },
+    ],
   },
   {
     tag: "04 · Systems Design",
