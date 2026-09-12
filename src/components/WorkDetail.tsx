@@ -97,12 +97,15 @@ export default function WorkDetail({ slug }: { slug: string }) {
       )}
 
       {wide ? (
-        // A photo-cover write-up spans the full shell width, so instead of
-        // one column stretched edge-to-edge (a line length no one can
-        // comfortably read), short related sections pair up side by side —
-        // each column stays close to a normal reading measure, and "Work I
-        // did" (the longest, link-bearing section) takes the full row.
-        <div className="work-body-grid mt-10">
+        // Every section is a full-width card, stacked in a single column,
+        // in the exact order it should be read — a 2-column pairing looked
+        // efficient but broke the natural top-to-bottom scan (which section
+        // pairs with which wasn't obvious, and "Work I did" jumping back to
+        // full-width mid-grid made it worse). The card boundary still fills
+        // the width even though the paragraph itself caps at a comfortable
+        // reading measure, so this isn't a return to the earlier "narrow
+        // column with dead space on the right" layout.
+        <div className="work-body-stack mt-10">
           <div className="work-body-section">
             <SectionHeading wide>Context</SectionHeading>
             <p className="work-body-text">{p.problem}</p>
@@ -115,7 +118,7 @@ export default function WorkDetail({ slug }: { slug: string }) {
             </div>
           )}
 
-          <div className="work-body-section work-body-section--full">
+          <div className="work-body-section">
             <SectionHeading wide>Work I did</SectionHeading>
             {p.approach.length === 1 ? (
               <p className="work-body-text">
@@ -139,13 +142,13 @@ export default function WorkDetail({ slug }: { slug: string }) {
             </div>
           )}
 
-          <div className="work-body-section">
+          <div className="work-body-section work-body-section--result">
             <SectionHeading wide>Results</SectionHeading>
             <p className="work-body-text">{p.outcome}</p>
           </div>
 
           {p.metric && (
-            <div className="work-body-section work-body-section--full">
+            <div className="work-body-section">
               <SectionHeading wide>Numbers</SectionHeading>
               <p className="work-body-text font-semibold text-plum-700">{p.metric}</p>
             </div>

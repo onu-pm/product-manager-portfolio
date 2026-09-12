@@ -76,17 +76,22 @@ export default function PreviewCard({
         </span>
       </div>
 
-      {/* Cover-flow style slide reveal on hover, like flipping through a
-          photo album: one "cover" per item, auto-advancing while hovered. */}
+      {/* Cover-flow style slide reveal on hover: one "cover" per item,
+          auto-advancing while hovered. Slides crossfade in place rather
+          than sliding past each other — a horizontal slide transition
+          meant two adjacent slides' text was genuinely visible at once,
+          overlapping, for the whole 0.6s of every transition. */}
       {slides.length > 0 && (
         <div className="card-cover">
-          <div className="card-cover-track" style={{ transform: `translateX(-${index * 100}%)` }}>
-            {slides.map((s, i) => (
-              <div
-                className={s.title ? "card-cover-slide card-cover-slide--rich" : "card-cover-slide"}
-                key={s.label}
-                style={s.image ? undefined : { background: SLIDE_COLORS[i % SLIDE_COLORS.length] }}
-              >
+          {slides.map((s, i) => (
+            <div
+              className={s.title ? "card-cover-slide card-cover-slide--rich" : "card-cover-slide"}
+              key={s.label}
+              style={{
+                opacity: i === index ? 1 : 0,
+                ...(s.image ? undefined : { background: SLIDE_COLORS[i % SLIDE_COLORS.length] }),
+              }}
+            >
                 {s.image && (
                   <>
                     <Image src={s.image} alt="" fill sizes="50vw" className="card-cover-image" style={{ objectFit: "cover" }} />
@@ -128,8 +133,7 @@ export default function PreviewCard({
                   </>
                 )}
               </div>
-            ))}
-          </div>
+          ))}
           {slides.length > 1 && (
             <div className="card-cover-dots">
               {slides.map((s, i) => (
