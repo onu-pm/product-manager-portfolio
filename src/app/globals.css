@@ -927,7 +927,7 @@ body {
   font-size: 1.05rem;
   line-height: 1.25;
   letter-spacing: -0.01em;
-  color: #eed6c8;
+  color: var(--citron);
 }
 /* A "rich" slide (real project content behind it) drops the decorative
    numeral entirely and sizes its title to match .card-name exactly — the
@@ -962,7 +962,7 @@ body {
   font-size: min(clamp(1.5rem, 0.9vw + 1.25rem, 2.05rem), 3.9vh);
   line-height: 1.08;
   letter-spacing: -0.02em;
-  color: #eed6c8;
+  color: var(--citron);
   max-width: 34rem;
 }
 .card-cover-slide--rich .work-card-stats {
@@ -1317,12 +1317,17 @@ body.menu-open canvas {
     aspect-ratio: 3 / 2;
   }
 }
+@media (max-width: 767px) {
+  /* Tags go first: from here down the card pins to ~385px wide, the three
+     stat chips wrap to two rows, and keeping the tag row too left exactly
+     0px of headroom at 700px — measured. Tags repeat on the detail page. */
+  .work-card .work-tag-row {
+    display: none;
+  }
+}
 @media (max-width: 699px) {
   .work-card {
     aspect-ratio: 4 / 3;
-  }
-  .work-card .work-tag-row {
-    display: none;
   }
 }
 /* Geometric motif, one per project — the same art the detail page opens
@@ -1374,13 +1379,14 @@ body.menu-open canvas {
   font-size: clamp(1.35rem, 1.1vw + 1rem, 1.9rem);
   line-height: 1.12;
   letter-spacing: -0.025em;
-  /* Tan, not citron: measured against the actual scrim-over-photo
-     background the two are within 3% of each other on contrast (12.9:1
-     vs 13.3:1 average, 5.2 vs 5.3 worst case), so legibility doesn't
-     pick a winner — hierarchy does. Citron is the one rationed accent
-     and it belongs on the numbers, which are the payoff; when the title
-     wore it too, nothing on the card was actually emphasised. */
-  color: #eed6c8;
+  /* Two text colours on these dark surfaces, assigned by role rather than
+     scattered: citron carries the headline AND the numbers (the two things
+     the card exists to say), tan carries the supporting layer — stat
+     labels, tags, cover description. Measured, citron and tan sit within
+     3% of each other on contrast here (13.3:1 vs 12.9:1 average over the
+     scrim-and-photo composite), so this is a hierarchy call, not a
+     legibility one. */
+  color: var(--citron);
 }
 /* A full case-study title carries the card, so it scales with the card:
    ~4.4% of card width, which lands at 35px on a 792px card instead of
@@ -1465,8 +1471,11 @@ body.menu-open canvas {
   border-radius: clamp(0.7rem, 1.3cqw, 0.95rem);
   padding: clamp(0.45rem, 1.15cqw, 0.8rem) clamp(0.7rem, 1.7cqw, 1.15rem);
 }
+/* The numbers are the payoff, so they carry weight close to the title
+   rather than sitting at label scale — ~3.6% of card width against the
+   title's 4.4%. */
 .work-card .work-card-stat-chip-value {
-  font-size: clamp(1.05rem, 2.3cqw, 1.45rem);
+  font-size: clamp(1.3rem, 3.6cqw, 2.15rem);
 }
 .work-card .work-card-stat-chip-label {
   font-size: clamp(0.75rem, 1.5cqw, 0.88rem);
@@ -1664,7 +1673,7 @@ body.menu-open canvas {
   font-size: clamp(1.75rem, 3vw + 1rem, 3rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
-  color: #eed6c8;
+  color: var(--citron);
 }
 .work-hero-meta {
   margin-top: 0.6rem;
@@ -1711,16 +1720,15 @@ body.menu-open canvas {
   gap: 0.9rem;
   padding: clamp(1.75rem, 3vw, 3rem);
 }
-/* Same rule as the carousel card: title in tan, citron kept for the
-   numbers below it. Measured on the flat forest field the two are 8.8:1
-   vs 9.1:1 — again a tie on contrast, so hierarchy decides. */
+/* Same two-tier rule as the carousel card and the bento slide: citron on
+   the headline and the numbers, tan on everything supporting them. */
 .work-hero-title {
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.9rem, 2.4vw + 1rem, 2.75rem);
   line-height: 1.08;
   letter-spacing: -0.03em;
-  color: #eed6c8;
+  color: var(--citron);
 }
 /* Secondary copy on the green field reads as plain white-on-green — tan
    (the same warm off-white used for tag fills elsewhere) gives it a

@@ -179,7 +179,7 @@ export const projects: Project[] = [
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
     coverImage: "/work/integrations-marketplace-cover.jpg",
-    bentoLabel: "Embedded HRIS Ecosystem",
+    bentoLabel: "Embedded HRIS ecosystem",
     coverDescription:
       "How an HRIS native marketplace went from a blank page to becoming a partner ecosystem and a real revenue channel for both sides.",
     coverStats: [
@@ -215,7 +215,7 @@ export const projects: Project[] = [
     tag: "02 · Workflow Automation",
     slug: "workflow-automation",
     feature: "Workflow Automation",
-    title: "Automating Recruitment and Onboarding Workflows",
+    title: "Automating recruitment and onboarding workflows",
     company: "Repute",
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
@@ -247,12 +247,12 @@ export const projects: Project[] = [
     tag: "03 · Agentic AI",
     slug: "agentic-ai-assistant",
     feature: "Agentic AI",
-    title: "Four-Agent AI Assistant for HR",
+    title: "Four-agent AI assistant for HR",
     company: "Repute",
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
     coverImage: "/work/agentic-ai-cover.jpg",
-    bentoLabel: "Agentic AI for All-things-HR",
+    bentoLabel: "Agentic AI for all-things-HR",
     coverDescription:
       "A live assistant that answers recruitment, payroll, onboarding, and compliance questions inside the HRIS itself.",
     coverStats: [
@@ -278,12 +278,12 @@ export const projects: Project[] = [
     tag: "04 · Payroll Compliance",
     slug: "dpdp-compliance",
     feature: "Payroll Compliance",
-    title: "Cutting Statutory Filing to Minutes",
+    title: "Cutting statutory filing to minutes",
     company: "Repute",
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
     coverImage: "/work/compliance-filing-cover.jpg",
-    bentoLabel: "Automating Compliance Filing",
+    bentoLabel: "Automating compliance filing",
     coverDescription:
       "Moved statutory payroll filing directly into the HRIS, so employers stopped juggling government portals by hand.",
     coverStats: [
@@ -309,7 +309,7 @@ export const projects: Project[] = [
     tag: "05 · Integrations Architecture",
     slug: "unified-api",
     feature: "Unified API",
-    title: "Unified API Layer for Bespoke Integrations",
+    title: "Unified API layer for bespoke integrations",
     company: "Repute",
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
