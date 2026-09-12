@@ -69,7 +69,7 @@ export default function HeroScene() {
 
   return (
     <div ref={wrapperRef} style={{ height: `${SCROLL_HEIGHT_VH}vh`, position: "relative" }}>
-      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[linear-gradient(180deg,#EAF6FF_0%,#FFF7E6_55%,#FFF1D6_100%)]">
+      <div className="sticky top-0 h-screen w-full overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f2f2f2_55%,#e5e5e5_100%)]">
         <Canvas
           shadows
           camera={{ position: [0.2, 1.9, 3.4], fov: 45 }}
@@ -83,7 +83,7 @@ export default function HeroScene() {
             castShadow
             shadow-mapSize={[1024, 1024]}
           />
-          <directionalLight position={[-4, 2, -3]} intensity={0.4} color="#cfe8ff" />
+          <directionalLight position={[-4, 2, -3]} intensity={0.4} color="#e5e5e5" />
           <Suspense fallback={null}>
             <group scale={1.5}>
               <WeaverNestScene progressRef={progressRef} targetRef={targetRef} />

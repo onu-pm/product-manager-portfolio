@@ -20,12 +20,13 @@ export type Slide = {
 // Dark fields only. These previously pulled from the plum ramp, which in
 // dark mode resolves to citron — so a white-on-yellow slide had almost no
 // contrast. Citron is a highlight colour, never a text-bearing surface.
+// Black & white palette: five near-black greys instead of five greens.
 const SLIDE_COLORS = [
-  "#0f3d2a",
-  "#0a0a08",
-  "#06251a",
-  "#23302a",
-  "#15503a",
+  "#1a1a1a",
+  "#0a0a0a",
+  "#101010",
+  "#262626",
+  "#202020",
 ];
 
 export default function PreviewCard({

@@ -37,13 +37,13 @@ export const metadata: Metadata = {
 };
 
 // Applies the stored theme before first paint so there's no light/dark flash.
+// Default is light regardless of OS preference — only an explicit stored
+// choice (via the dock's theme toggle) switches to dark.
 const themeInitScript = `
 (function () {
   try {
     var stored = localStorage.getItem("theme");
-    var theme = stored === "light" || stored === "dark"
-      ? stored
-      : (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    var theme = stored === "light" || stored === "dark" ? stored : "light";
     document.documentElement.setAttribute("data-theme", theme);
   } catch (e) {}
 })();

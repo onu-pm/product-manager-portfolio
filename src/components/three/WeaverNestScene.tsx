@@ -6,8 +6,8 @@ import * as THREE from "three";
 import { buildNestPoints, NEST_TOTAL_POINTS } from "@/lib/nestCurve";
 import WeaverBird from "./WeaverBird";
 
-const STRAW = "#C99A4B";
-const STRAW_DARK = "#A97B36";
+const STRAW = "#a6a6a6";
+const STRAW_DARK = "#737373";
 
 export default function WeaverNestScene({
   progressRef,
