@@ -1103,6 +1103,56 @@ body {
   transform: translateX(-50%);
 }
 
+/* Home-only footer bar: fixed, so it adds zero document height and can
+   never force the locked dashboard to scroll — stacked directly above the
+   dock rather than in the normal document flow the way Footer is. Shown
+   only where .home-section actually locks (min-width:640px and
+   min-height:660px, matching that rule exactly): below that breakpoint
+   the home page already scrolls on its own (same rule), so a fixed bar
+   would stay pinned mid-screen and drift over whatever card the page had
+   scrolled to — .home-footer-fallback's normal in-flow Footer covers
+   that case instead. */
+.home-footer-bar {
+  display: none;
+  position: fixed;
+  left: 50%;
+  bottom: 6rem;
+  z-index: 45;
+  transform: translateX(-50%);
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.78rem;
+  color: var(--ink-secondary);
+  white-space: nowrap;
+}
+@media (min-width: 640px) and (min-height: 660px) {
+  .home-footer-bar {
+    display: flex;
+  }
+  .home-footer-fallback {
+    display: none;
+  }
+}
+/* Matches Footer's own pb-28 exactly, but only below the locked
+   breakpoint — at that breakpoint Bento's own section already reserves
+   dock clearance internally, so main must add none of its own or the
+   page grows past 100dvh and the "locked" dashboard scrolls again. */
+.home-main-pb {
+  padding-bottom: 7rem;
+}
+@media (min-width: 640px) and (min-height: 660px) {
+  .home-main-pb {
+    padding-bottom: 0;
+  }
+  /* Belt-and-suspenders: main measures out at exactly 100dvh here, but a
+     few px of scrollable slack still showed up (dvh vs the "h-full"
+     percentage height on html/body resolving a hair apart) — clip it at
+     the body level too rather than trust the arithmetic to land exact. */
+  body:has(.home-section) {
+    overflow: hidden;
+  }
+}
+
 /* Floating "back to top" — replaces the old inline text link so the
    footer's own row stays reserved for the social icons. Sits clear of
    the centered dock since it's pinned to the right edge instead. */
