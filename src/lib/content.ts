@@ -23,8 +23,7 @@ export const profile = {
   email: "onu@poums.in",
   linkedin: "https://www.linkedin.com/in/anupamkalita/",
   github: "https://github.com/onu-pm",
-  // Set to the real profile URL to show the Instagram icon in the footer.
-  instagram: undefined as string | undefined,
+  instagram: "https://www.instagram.com/osinakiloratu/",
   resumeUrl: "/resume.pdf",
   location: "Bangalore, India",
 };
