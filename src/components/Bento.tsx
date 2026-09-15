@@ -108,11 +108,9 @@ export default function Bento() {
           ctaText="Take a look"
           slides={labProjects.map((p, i) => ({
             number: `0${i + 1}`,
-            label: p.title,
+            label: p.category,
             image: p.coverImage,
-            title: p.title,
-            description: p.hook,
-            tags: [p.category, ...p.tags],
+            title: p.bentoLabel,
           }))}
         />
 

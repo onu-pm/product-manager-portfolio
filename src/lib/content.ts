@@ -725,6 +725,11 @@ export type LabProject = {
   title: string;
   /** One-liner used as the card/cover description. */
   hook: string;
+  /** Short phrase for the homepage bento preview, same role as a Work
+   *  project's bentoLabel — the bento slot is a short banner, so the
+   *  hover state shows this alone, not the full title/description/tags
+   *  spread that fits on the carousel card and cover. */
+  bentoLabel: string;
   /** Shown as the first tag pill, the same role a company name plays on
    *  a POV card — the category this build sits in. */
   category: string;
@@ -740,6 +745,7 @@ export const labProjects: LabProject[] = [
     slug: "artsylens",
     title: "ArtsyLens — a tour guide that answers back",
     hook: "A working prototype that treats a museum or monument like a conversation instead of a map.",
+    bentoLabel: "AI Museum Guide",
     category: "Travel & Culture",
     tags: ["AI Prototype", "Multimodal", "Progressive Generation"],
     coverImage: "/lab/artsylens-cover.jpg",
@@ -775,6 +781,7 @@ export const labProjects: LabProject[] = [
     slug: "hisab-app",
     title: "Hisab App — bookkeeping that reads a handwritten mandi slip",
     hook: "A working prototype for the Indian kirana shopkeeper's oldest problem: the bahi-khata.",
+    bentoLabel: "Kirana Bookkeeping",
     category: "SMB FinTech",
     tags: ["OCR", "GST Automation", "Multilingual"],
     coverImage: "/lab/hisab-app-cover.jpg",
