@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import AboutMe from "@/components/AboutMe";
 import Capabilities from "@/components/Capabilities";
 import Craft from "@/components/Craft";
-import Approach from "@/components/Approach";
-import FAQ from "@/components/FAQ";
 import Contact from "@/components/Contact";
 import Reveal from "@/components/Reveal";
 
@@ -23,12 +21,6 @@ export default function AboutPage() {
       </Reveal>
       <Reveal>
         <Craft />
-      </Reveal>
-      <Reveal>
-        <Approach />
-      </Reveal>
-      <Reveal>
-        <FAQ />
       </Reveal>
       <Reveal>
         <Contact />

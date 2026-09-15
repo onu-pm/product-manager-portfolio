@@ -1,37 +1,46 @@
-import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { aboutMe } from "@/lib/content";
+import { aboutMe, profile } from "@/lib/content";
 
 export default function AboutMe() {
   return (
     <section className="page-shell py-20">
-      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "About" }]} />
+      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "About me" }]} />
 
-      <div className="about-hero mt-6">
-        <div className="about-photo-wrap">
-          {aboutMe.photo ? (
-            <Image src={aboutMe.photo} alt="Anupam Kalita" fill sizes="(max-width: 767px) 60vw, 20rem" priority />
+      <div className="mt-6 flex flex-col items-start gap-3">
+        <h1 className="text-3xl md:text-4xl">{aboutMe.greeting}</h1>
+        <p className="text-lg font-semibold text-ink">{aboutMe.tagline}</p>
+        <p className="max-w-xl text-[15px] leading-relaxed text-ink/70">
+          {aboutMe.introBefore}
+          {aboutMe.reputeUrl ? (
+            <a
+              href={aboutMe.reputeUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="font-semibold text-plum-700 underline underline-offset-2"
+            >
+              Repute
+            </a>
           ) : (
-            <span className="about-photo-fallback" aria-hidden="true">
-              AK
-            </span>
+            <span className="font-semibold text-ink">Repute</span>
           )}
-        </div>
-        <div className="flex flex-col items-start gap-3">
-          <span className="chapter-tab">About</span>
-          <h1 className="text-3xl md:text-4xl">
-            {aboutMe.greetingLead} <span className="marker-highlight">{aboutMe.greetingAccent}</span>.
-          </h1>
-          <p className="text-lg font-semibold text-ink">{aboutMe.tagline}</p>
-          <p className="max-w-xl text-[15px] leading-relaxed text-ink/70">{aboutMe.intro}</p>
+          {aboutMe.introAfter}
+        </p>
+
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          <a href="#contact" className="btn-primary px-6 py-2.5 text-sm">
+            Connect
+          </a>
+          <a href={`mailto:${profile.email}`} className="btn-secondary px-6 py-2.5 text-sm">
+            Email
+          </a>
         </div>
       </div>
 
       <div className="mt-14 grid gap-10 md:grid-cols-2">
         <div>
-          <h3 className="mb-4 text-lg">{aboutMe.builtLabel}</h3>
-          <ul className="list-disc space-y-3 pl-5 text-[15px] leading-relaxed text-ink/70">
+          <h3 className="work-section-heading">{aboutMe.builtLabel}</h3>
+          <ul className="work-body-text list-disc space-y-3 pl-5">
             {aboutMe.built.map((line) => (
               <li key={line}>{line}</li>
             ))}
@@ -42,8 +51,8 @@ export default function AboutMe() {
         </div>
 
         <div>
-          <h3 className="mb-4 text-lg">{aboutMe.lessonsLabel}</h3>
-          <ul className="list-disc space-y-3 pl-5 text-[15px] leading-relaxed text-ink/70">
+          <h3 className="work-section-heading">{aboutMe.lessonsLabel}</h3>
+          <ul className="work-body-text list-disc space-y-3 pl-5">
             {aboutMe.lessons.map((line) => (
               <li key={line}>{line}</li>
             ))}
@@ -51,9 +60,7 @@ export default function AboutMe() {
         </div>
       </div>
 
-      <p className="about-personal mt-14 max-w-2xl text-[15px] italic leading-relaxed text-ink/70">
-        {aboutMe.personal}
-      </p>
+      <p className="about-personal work-body-text mt-14 max-w-2xl">{aboutMe.personal}</p>
     </section>
   );
 }

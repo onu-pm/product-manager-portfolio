@@ -16,10 +16,10 @@ export default function Craft() {
           </p>
         </div>
 
-        <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
+        <div className="simple-bento-grid">
           {craft.map((c) => (
-            <div key={c.title}>
-              <h3 className="mb-1.5 text-base">{c.title}</h3>
+            <div key={c.title} className="bento-card">
+              <h3 className="text-base">{c.title}</h3>
               <p className="text-[15px] leading-relaxed text-ink/70">{c.body}</p>
             </div>
           ))}

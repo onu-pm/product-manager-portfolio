@@ -420,46 +420,35 @@ body {
   border: 1px solid var(--plum-100);
 }
 
-/* ---- About Me: the bio hero at the top of /about ---------------------- */
-.about-hero {
-  display: grid;
-  grid-template-columns: 12rem 1fr;
-  gap: clamp(1.5rem, 4vw, 3rem);
-  align-items: center;
-}
-@media (max-width: 640px) {
-  .about-hero {
-    grid-template-columns: 1fr;
-    justify-items: start;
-  }
-}
-.about-photo-wrap {
-  position: relative;
-  width: 12rem;
-  aspect-ratio: 1 / 1;
-  border-radius: 999px;
-  overflow: hidden;
-  background: var(--surface-tinted);
-  border: 1px solid var(--border);
-}
-.about-photo-wrap img {
-  object-fit: cover;
-}
-.about-photo-fallback {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 3rem;
-  color: var(--ink-secondary);
-  background: linear-gradient(160deg, var(--plum-50), var(--surface-tinted) 120%);
-}
+/* ---- About Me: the bio section at the top of /about -------------------- */
 .about-personal {
   border-top: 1px solid var(--border);
   padding-top: 1.75rem;
+}
+
+/* A plain responsive bento grid for a page section that isn't the
+   homepage's fixed asymmetric layout — reuses .bento-card's look (border,
+   radius, hover) without the named grid-areas that only make sense for
+   that specific 6-card arrangement. */
+.simple-bento-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 640px) {
+  .simple-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1024px) {
+  .simple-bento-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.simple-bento-grid .bento-card {
+  min-height: 11rem;
+  justify-content: flex-start;
+  gap: 0.6rem;
 }
 
 .section-divider {

@@ -81,12 +81,13 @@ export const highlights = [
 // Personal bio for the top of /about — the "who is this person" section,
 // distinct from Capabilities' "what I can do for you" pitch below it.
 export const aboutMe = {
-  // Set once the real portrait (background removed) is in public/about/.
-  photo: undefined as string | undefined,
-  greetingLead: "Hi, I'm Anupam",
-  greetingAccent: "(Poums)",
+  greeting: "Hi, I'm Anupam.",
   tagline: "Currently a Product Manager, Formerly a Marketer, Always a Human.",
-  intro: "I'm a Senior Product Manager at Repute, where I've spent the last five years doing exactly that.",
+  // Split around the company name so it can render as a real link.
+  introBefore: "I'm a Senior Product Manager at ",
+  // Set to Repute's real URL to make the company name a link.
+  reputeUrl: undefined as string | undefined,
+  introAfter: ", where I've spent the last five years doing exactly that.",
   builtLabel: "In the last 5 years, I have built,",
   built: [
     "An integrations marketplace from zero to becoming the independent revenue channel for HRIS and marketplace partners.",
@@ -106,24 +107,28 @@ export const aboutMe = {
 
 export const capabilities = [
   {
+    title: "HRIS & Payroll Systems",
+    body: "Five years in, I still think in payroll cycles and filing deadlines. I know where these platforms actually lose people's trust — a wrong compliance filing, not a slow page load — and I design around that first.",
+  },
+  {
     title: "0-to-1 Product Strategy",
-    body: "When you need a founding PM to take a system from a mandate to a roadmap a CTO, partners, and sales can all get behind, I'll define the bets, the sequencing, and what's deliberately out of scope for v1.",
+    body: "I like the mandate that doesn't have a roadmap yet. Hand me a blank page and a business goal, and I'll come back with the bets worth making, the sequencing, and what I'd deliberately leave out of v1.",
   },
   {
     title: "Integrations & Platform Architecture",
-    body: "When bespoke, one-off integrations are eating your engineering budget, I design a canonical data model and API layer so the tenth build costs less than the first, not just faster.",
+    body: "I've watched bespoke, one-off integrations quietly eat an engineering team's whole quarter. My default is a canonical data model and API layer, so the tenth partner costs less to onboard than the first.",
   },
   {
     title: "Workflow Automation",
-    body: "When a feature's shipped but barely used, I dig into activation and usage data to find the highest-friction manual step and automate that first, instead of guessing at what's next.",
+    body: "A feature that shipped but barely gets used is a data problem before it's a roadmap problem. I go looking for the manual step people are quietly working around, and automate that one first.",
   },
   {
     title: "Agentic AI, Grounded",
-    body: "When you want AI in the product without the hallucination risk, I define the orchestration layer and the accuracy benchmarks (with human review) that make it trustworthy before rollout.",
+    body: "I want AI in the product too, just not AI that guesses. I design the orchestration layer and the accuracy benchmarks, with human review, so it earns trust before rollout instead of costing it.",
   },
   {
     title: "Compliance & Data Trust",
-    body: "When employee or customer data starts crossing a regulatory line, I build consent, data minimisation, and audit requirements into the spec itself, not a checklist we bolt on after launch.",
+    body: "Employee and payroll data isn't like other product data — a mistake there is a legal problem, not a bug ticket. I build consent, data minimisation, and audit trails into the spec itself, not a checklist after launch.",
   },
 ];
 
@@ -704,38 +709,6 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
-export const approachSteps = [
-  {
-    step: "01",
-    title: "Start from the ecosystem, not the feature",
-    body: "Before I design a single flow, I look at what's already connecting into the platform — other integrations, the data model, the partners depending on it — so what I build doesn't turn into the next one-off nobody can maintain.",
-  },
-  {
-    step: "02",
-    title: "Build for the integration, not just the interface",
-    body: "A clean screen doesn't matter if the API behind it can't scale to the next 50 partners. I design the data model and reference architecture first, so new integrations become repeatable instead of custom builds each time.",
-  },
-  {
-    step: "03",
-    title: "Ship the infra before the layer on top",
-    body: "The impressive part — an AI assistant, a slick flow — only works if the boring plumbing underneath it (orchestration, filing pipelines, sync) is solid first. That's what gets built before anything customer-facing goes live.",
-  },
-];
-
-export const faqs = [
-  {
-    q: "What kind of B2B SaaS problems do you specialize in?",
-    a: "HRIS and payroll platforms, embedded integration marketplaces, workflow automation, and more recently, agentic AI grounded in live product data. I've done this as a founding PM, owning discovery through release sign-off.",
-  },
-  {
-    q: "Have you managed a team, or been an IC PM?",
-    a: "IC and founding PM. I own the full loop myself (discovery, specs, prioritization, QA, release sign-off), while working closely with a CTO and partner teams on things like AI orchestration and compliance requirements.",
-  },
-  {
-    q: "What's your process for a 0-to-1 feature vs. an established product?",
-    a: "For 0-to-1 work, like the integrations marketplace or the AI assistant, I front-load architecture decisions (a canonical data model, an orchestration layer) so the tenth build is cheap, not just the first. For established products, I lead with usage data to find the highest-friction manual step before proposing anything new.",
-  },
-];
 
 export type LabSection = {
   heading: string;

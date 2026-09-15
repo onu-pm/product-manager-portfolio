@@ -15,18 +15,14 @@ export default function Capabilities() {
         </p>
       </div>
 
-      <div className="flex flex-col divide-y divide-plum-100">
+      <div className="simple-bento-grid">
         {capabilities.map((c) => (
-          <div key={c.title} className="py-6 first:pt-0">
-            <h3 className="mb-2 text-lg">{c.title}</h3>
+          <div key={c.title} className="bento-card">
+            <h3 className="text-lg">{c.title}</h3>
             <p className="text-[15px] leading-relaxed text-ink/70">{c.body}</p>
           </div>
         ))}
       </div>
-
-      <a href="#contact" className="btn-primary mt-10 inline-flex px-7 py-3 text-sm">
-        Ways to connect
-      </a>
     </section>
   );
 }
