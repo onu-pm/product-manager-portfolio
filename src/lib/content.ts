@@ -224,16 +224,16 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Integrations Ecosystem"],
     problem:
-      "Repute builds HRIS — the software a company's HR team uses every day to run payroll, track leave, and manage hiring, basically HR's version of an operating system. Inside that software, Repute also runs a marketplace: a place where an employer can add extra tools, like a background-check provider or a tax filing service, without leaving the HR platform they already use. When I joined, that marketplace didn't exist yet. The partner HR platforms had no built-in aisle where an employer could even discover these add-ons, let alone install one, so employers never found them and the vendors offering them never got the business.",
+      "Repute builds HRIS, the software a company's HR team uses every day to run payroll, track leave, and manage hiring. Basically HR's version of an operating system. I joined as a founding product manager in December 2021, and one thing Repute didn't have yet was a marketplace: a place inside the HR software itself where an employer could add extra tools, like a background check provider or a tax filing service, without ever leaving the platform they already used every day. Four different HR platforms sit under the Repute umbrella, GreytHR, AdrenalinMAX, GelyxHR, and PocketHRMS, and none of them had this. If an HR manager wanted a background check vendor, they had to go find one on their own, sign a separate contract, and figure out how to connect it themselves. There was no aisle to browse, so employers rarely found these tools, and the vendors offering them never got the business.",
     whatWasNeeded:
-      "Just listing apps wasn't going to be enough — a page of logos nobody clicks isn't a marketplace. If the partner vendors we listed didn't see real business coming from it, they'd stop caring about being listed at all, and the whole thing would quietly die.",
+      "Just adding a page of logos wasn't going to work. I'd seen enough software marketplaces to know the pattern: a company builds a directory, gets a partner or two to sign up, and then nothing happens because nobody actually buys anything through it. If the vendors we listed didn't see real business coming from being on Repute, they'd stop caring about the listing within a few months, and the whole thing would quietly die. So the real question wasn't how to build a marketplace page. It was how to make browsing actually turn into a signed deal for the partner on the other end.",
     approach: [
-      "I built the marketplace from scratch across four HRIS platforms: GreytHR, AdrenalinMAX, GelyxHR, and PocketHRMS. Then I designed a sales flow so a browsing employer could actually turn into a closed deal for the partner, and built a developer platform — a self-serve dashboard — so partner vendors could list their own apps directly instead of waiting on my team every time.",
+      "I built the marketplace from the ground up across all four HR platforms, spanning categories like HR tech, tax, accounting, benefits, and IT service management, so an employer could find whatever kind of tool they needed in one place. Then I designed the part that actually mattered: a sales flow that could take someone from browsing a listing to a closed deal, not just a click-through to another website. Once that was working, I built a developer platform so partner vendors could list and manage their own apps directly, instead of emailing my team every time they wanted to update a listing or add a new one.",
     ],
     whatHelped:
-      "I onboarded the first batch of partners by hand before building the self-serve version, so I actually knew what made a listing worth trusting.",
+      "Before I built the self-serve version, I onboarded the first batch of partners by hand myself. I sat with them, listed their tools, and watched what happened next. That's how I learned what actually made a listing worth trusting, things like clear pricing, an honest description, and a fast response time, rather than guessing at it from a spreadsheet.",
     outcome:
-      "The marketplace now covers roughly 35,000 employers across India and the Middle East. Within six months, it was driving 45% of partners' monthly closures — taking the marketplace from zero revenue to 3X monthly revenue within 18 months.",
+      "The marketplace now covers roughly 35,000 employers across India and the Middle East. Within six months of launch, it was already driving 45% of partners' monthly closures, meaning almost half the deals our partner vendors closed each month were coming directly through Repute. That took the marketplace from zero revenue to 3X monthly revenue within 18 months.",
     metric: "",
     stat: { value: "45%", label: "of partner monthly closures" },
     links: [
@@ -250,14 +250,14 @@ export const projects: Project[] = [
     tag: "02 · Workflow Automation",
     slug: "workflow-automation",
     feature: "Workflow Automation",
-    title: "Automating recruitment and onboarding workflows",
+    title: "Automating recruitment and payroll workflows",
     company: "Repute",
     role: "Founding Product Manager",
     timeframe: "Dec 2021 – Present",
     coverImage: "/work/workflow-automation-cover.jpg",
     bentoLabel: "Automating HR workflows",
     coverDescription:
-      "Zapier-style automations removed manual, repetitive steps from the recruitment and onboarding modules.",
+      "Zapier-style automations removed manual, repetitive steps from the recruitment and payroll modules.",
     coverStats: [
       { value: "5X", label: "Module Activation" },
       { value: "25K", label: "Active Users" },
@@ -265,16 +265,16 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Workflow Automation"],
     problem:
-      "HR teams spent most of their day inside Repute's recruitment and onboarding screens — the parts of the software that handle hiring someone and getting them set up on their first day. But a lot of what they did there was the same repetitive, manual steps every single time: move a candidate to the next stage, send the same onboarding email, update the same status field. None of it needed a human decision, just a human clicking the same button again.",
+      "HR teams spent most of their day inside two parts of Repute: the recruitment module, where they moved candidates through hiring stages, and the payroll module, where they ran monthly payroll and handled everything around it. A lot of what they did in both places was the exact same manual action, over and over. Move a candidate to the next stage, then remember to send the same email. Run payroll, then manually update two or three other systems with the result. None of it needed a real decision. It just needed a person to click the same button again.",
     whatWasNeeded:
-      "Something that removed those steps without forcing HR teams to pick up a new tool, since most of them barely had time to learn the one they already had.",
+      "Something that removed those repeat steps without asking HR teams to learn a new tool, since most of them barely had time to learn the one they already had. It also had to work quietly in the background. Nobody wanted a system that needed babysitting.",
     approach: [
-      "I built Zapier-style automations directly into the HRIS — think of it like a row of dominoes: finishing one action (say, moving a candidate to \"Offer Sent\") automatically knocks over the next one (sending the offer letter), across recruitment and employee onboarding, instead of someone doing each step by hand.",
+      "I built Zapier-style automations directly inside the HRIS. Think of dominoes: finishing one action, like moving a candidate to \"Offer Sent,\" would automatically knock over the next one, like sending the offer letter, without anyone doing it by hand. I did the same across payroll, so completing one step in a payroll run could trigger the next set of updates on its own, instead of an HR person repeating them manually every single month.",
     ],
     whatHelped:
-      "I picked the two or three steps HR teams repeated the most and fixed those first, instead of trying to automate every workflow at once.",
+      "I didn't try to automate every workflow on day one. I looked at what HR teams repeated the most, picked the two or three steps that ate the most time, and fixed those first. Once those landed and people trusted them, expanding to the rest of the module was a much easier conversation.",
     outcome:
-      "Module activation jumped 5X in three months. Monthly active users went from 10,000 to 25,000, and ARR grew 4X over 18 months.",
+      "Module activation for recruitment and payroll jumped 5X within three months. Monthly active users went from 10,000 to 25,000, and annual recurring revenue grew 4X over the next 18 months.",
     metric: "",
     stat: { value: "4X", label: "ARR Growth" },
   },
@@ -296,22 +296,22 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Agentic AI"],
     problem:
-      "If an HR person had a question — has this candidate been background-checked yet, why didn't this month's payroll run, what's the leave policy for someone still on probation — they'd have to dig through the right screen themselves or wait on a support ticket. Recruitment, payroll, onboarding, and compliance each needed their own back-and-forth before someone actually got an answer.",
+      "By this point, Repute already had automations running quietly in the background, but people still had to go find their own answers. If an HR person wanted to know whether a candidate's background check had come back, why a payroll run hadn't gone through, what the leave policy was for someone still on probation, or whether a compliance filing was overdue, they had to hunt through the right screen themselves, or open a support ticket and wait. Recruitment, payroll, onboarding, and compliance are four very different parts of HR, and each one needed its own separate back and forth before someone actually got an answer.",
     whatWasNeeded:
-      "One assistant that could handle all four areas correctly. Not a chatbot that sounded confident but got the details wrong.",
+      "What we needed was one assistant that could actually handle all four areas correctly, not a chatbot that sounded confident and got the details wrong. In HR and payroll, a wrong answer isn't just annoying. Telling someone the wrong leave balance or missing a compliance deadline has real consequences. So this had to be something people could trust, not just something that looked impressive in a demo.",
     approach: [
-      "I shipped a live assistant made up of four specialist AI agents — one each for recruitment, payroll, onboarding, and compliance, like four subject-matter experts instead of one generalist guessing outside its lane. I worked with our CTO on the \"orchestration layer\" — the traffic-control system that reads a question and routes it to the right specialist agent — made sure every answer was grounded in Repute's actual live data instead of the AI making something up, and set accuracy benchmarks with a human checking its work before it went live.",
+      "I shipped a live assistant made up of four specialist agents, one each for recruitment, payroll checks, onboarding, and compliance. Think of it as four subject matter experts on call instead of one generalist trying to answer everything and occasionally guessing outside its lane. I worked with our CTO to define the orchestration layer, which is really just the traffic control system that reads a person's question and sends it to the right specialist agent. I made sure every answer was grounded in Repute's actual live data instead of the assistant making something up, and I set accuracy benchmarks with a human checking its answers before we let it go live for customers.",
     ],
     whatHelped:
-      "I insisted on the accuracy benchmarks before we scaled it up, rather than shipping fast and hoping it held.",
+      "I pushed to get the accuracy benchmarks in place before we scaled the assistant up to more customers, instead of shipping fast and hoping it held. It slowed the launch down by a few weeks, but it meant we caught the cases where the assistant was wrong before customers did, not after.",
     outcome:
-      "The assistant is live today across all four areas and helped grow HRIS ARR by 2X.",
+      "The assistant has been live across all four areas for a while now, and it's helped grow HRIS annual recurring revenue by 2X.",
     metric: "",
     stat: { value: "2X", label: "ARR Impact" },
   },
   {
     tag: "04 · Payroll Compliance",
-    slug: "dpdp-compliance",
+    slug: "statutory-filing",
     feature: "Payroll Compliance",
     title: "Cutting statutory filing to minutes",
     company: "Repute",
@@ -327,16 +327,16 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Payroll Compliance"],
     problem:
-      "Every month, employers are legally required to report payroll details to the government — things like provident fund and tax deductions — and pay what's owed. Doing that meant logging into separate government websites, manually preparing the numbers, and uploading everything themselves, on top of running payroll in the first place.",
+      "Every month, employers using Repute are legally required to report certain payroll details to the government and pay what's owed. Provident fund contributions, tax deductions, things like that. Before this, doing that reporting meant logging into separate government websites, one for each requirement, manually preparing the numbers to match whatever format that portal wanted, and uploading everything by hand. All of this sat on top of running payroll itself, which was already its own job.",
     whatWasNeeded:
-      "A way to remove that whole coordination effort, not just make the existing process a bit faster.",
+      "I didn't want to just make the existing process a little faster. Government portals are slow and clunky no matter what you do, so shaving a few minutes off data entry wasn't going to change how employers felt about this. What was actually needed was to remove the coordination effort entirely: the back and forth between running payroll, preparing separate filings, and logging into multiple portals to submit them.",
     approach: [
-      "I shipped compliance filing workflows directly into the HRIS payroll module, so employers could prepare and submit statutory returns and remit payroll taxes without ever leaving the HRIS or logging into a government portal.",
+      "I shipped compliance filing workflows directly inside the HRIS payroll module. Once payroll was run, an employer could prepare and submit their statutory returns and pay what was owed right there, without ever leaving the HRIS or opening a government portal in a separate tab.",
     ],
     whatHelped:
-      "I mapped out exactly where employers were losing time — manual coordination, data prep, portal uploads — before deciding what to automate.",
+      "Before deciding what to automate, I mapped out exactly where employers were actually losing time: the manual coordination between payroll and filing, the data prep to match each portal's format, and the uploads themselves. That map is what told me which steps were worth automating first, instead of guessing.",
     outcome:
-      "What used to take HR teams multiple days or weeks now takes about 10 minutes.",
+      "What used to take HR teams multiple days or weeks, coordinating between payroll and separate government filings, now takes about 10 minutes inside the HRIS itself.",
     metric: "",
     stat: { value: "10 min", label: "Filing Time" },
   },
@@ -358,16 +358,16 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Integrations Architecture"],
     problem:
-      "Every time Repute connected to a new partner service — say, a background-check vendor or a tax tool — engineers built that connection from scratch, as its own mini project. Each one worked fine, but none of the underlying pipework was shared, so the tenth partner took nearly as long to connect as the first.",
+      "Every time Repute connected to a new partner, whether that was a background check vendor, a tax tool, or a benefits provider, engineers built that connection from scratch as its own separate project. Each one worked fine on its own, but none of the underlying plumbing was shared between them. That meant the tenth partner we connected took almost as long to build as the first one had, because we were solving the same problem over and over instead of learning from it.",
     whatWasNeeded:
-      "A way to stop rebuilding the same plumbing every time a new partner came along.",
+      "We needed a way to stop rebuilding the same plumbing every time a new partner came along, and we needed it before the catalog got big enough that this became unmanageable. At 75 integrations, it was already slow. At double that, it would have been a real bottleneck.",
     approach: [
-      "I replaced the one-off builds with a single API layer — a shared connector, like a universal power adapter instead of a different plug for every country — sitting on one canonical data model (one common way of describing an employee's data that every partner maps into), so every new integration could follow the same blueprint instead of starting from zero.",
+      "I replaced the one-off builds with a single API layer sitting on one canonical data model, which is really just one common, agreed-upon way of describing an employee's data (their name, salary, tax details, leave balance, and so on) that every partner could map their own system into. Instead of engineers custom-building a new connection every time, a new integration could follow the same reference architecture, the same blueprint, that every integration before it had used.",
     ],
     whatHelped:
-      "I stopped treating each integration as a special case and just solved the underlying problem once, properly.",
+      "I stopped treating each new integration as a special case that needed its own design conversation. Once the API layer and data model existed, the question for a new partner became \"how does your data map into what we already have,\" not \"how do we build this from zero.\" That mental shift did as much work as the API layer itself.",
     outcome:
-      "The integration catalog grew from 75 to over 175, and new integrations started shipping noticeably faster, from months to days.",
+      "The integration catalog grew from 75 to over 175. Just as importantly, new integrations started shipping in days instead of months, because most of the hard design work was already done before the first line of code got written for a new partner.",
     metric: "",
     stat: { value: "175+", label: "Integration Catalog" },
   },
