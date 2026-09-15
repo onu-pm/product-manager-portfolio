@@ -382,7 +382,7 @@ export const caseStudies: CaseStudy[] = [
     coverDescription:
       "My POV of how Remote.com can make it easier for their customers — existing and new — to connect their existing systems.",
     coverTags: ["Remote.com", "Integrations", "HRIS", "EOR"],
-    bentoLabel: "Closing the integration coverage gap",
+    bentoLabel: "Remote Build Integrations",
     problem:
       "Most connections between a customer's HR system and an external HRIS or EOR run on a weekly file drop and cover a handful of fields, and every new system today means starting from zero.",
     approach: [
@@ -455,7 +455,7 @@ export const caseStudies: CaseStudy[] = [
     coverDescription:
       "My POV of how Deel can close the gap between how fast simple and complex customers activate their payroll.",
     coverTags: ["Deel", "Payroll Activation", "Compliance", "Automation"],
-    bentoLabel: "Making complex payroll activation as fast as simple",
+    bentoLabel: "Deel Payroll Activation",
     problem:
       "Simple customers self-serve their payroll activation in weeks. Multi-entity, complex customers wait on a person working a compliance playbook by hand, and how well that goes depends on who's assigned.",
     approach: [
@@ -527,7 +527,83 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    tag: "03 · Cross-sell Strategy",
+    tag: "03 · Product Thesis",
+    title: "Making it easier to know you're talking to the same person on Beeper",
+    slug: "beeper-people-layer",
+    subject: "Beeper",
+    hook: "Beeper's own search already knows two chats are the same person. Merge just doesn't act on it.",
+    coverImage: "/pov/beeper-people-layer-cover.jpg",
+    coverDescription:
+      "My POV of how Beeper can turn a signal it already computes into a single, unified contact across every network.",
+    coverTags: ["Beeper", "Integrations", "Merge", "People Layer"],
+    bentoLabel: "Beeper People Layer",
+    problem:
+      "Beeper's own search already knows when two chats across networks are the same person, but Merge only joins them when its matcher happens to catch the pair, and misses are silent, so duplicate contacts quietly stay duplicate.",
+    approach: [
+      "Traced the gap to a unit-of-organization problem: Beeper treats a chat as the thing it organizes, not a person, even though search already computes the person-level match.",
+      "Sequenced the fix by trust, not effort: reuse the signal search already has, merge on facts like a shared number or email automatically, and only ask once before guessing on a name-and-photo match.",
+      "Drew one line that doesn't move regardless of model quality: never merge on a name alone, since a wrong merge shows one person another person's messages.",
+    ],
+    outcome:
+      "Turns Merge from a feature you have to go looking for into a person layer that applies consistently, and makes the case that unlocking it is what justifies paying for the multi-account tiers.",
+    watch: "Key gap to instrument first: missed-match rate, since misses are currently invisible to Beeper's own metrics.",
+    sections: [
+      {
+        heading: "Problem statement",
+        body: [
+          "Beeper connects every network you use, but still treats each network as a separate person.",
+          "Its own search already labels and stacks the same contact across networks the moment you type a name.",
+          "Merge can join them, but only when its matcher happens to catch the pair, and misses are silent.",
+        ],
+      },
+      {
+        heading: "Who feels it",
+        body: [
+          "The Cross-Network Professional runs client and vendor relationships across Slack, WhatsApp and email, often the same person on two of the three, splitting one relationship's history across two threads and unable to tell at a glance which network a contact actually replies on.",
+          "The Everyday Connector keeps up with family and friends spread across WhatsApp, iMessage and Telegram, ending up with duplicate contacts for the people who overlap networks, with no single place to see one person instead of one app at a time.",
+        ],
+      },
+      {
+        heading: "The solution",
+        body: [
+          "Merge already joins two chats into one thread well, once you find the right pair, that part isn't what's being proposed.",
+          "What's missing sits one level up: a person, not a chat, as the unit Beeper tracks, matched the moment a shared signal exists, not only when you go looking for it.",
+          "Not a new matcher: it's Beeper deciding a person is what it's organizing, and applying the matching it already has to that unit, consistently.",
+        ],
+      },
+      {
+        heading: "How I'd sequence it",
+        body: [
+          "Start by reusing the signal, not rebuilding it: search already computes the duplicate signal, so feeding it into Merge's suggestion engine is one matching function doing the work of two.",
+          "Trust facts before guesses: a shared phone number or email across networks isn't a prediction, it's a fact, so let those merge on their own first.",
+          "Only then let it guess, once and out loud: a same name-and-photo match is a good guess, not a fact, so ask a single time and remember the answer.",
+          "Keep one line that never moves: never merge on a name alone, since a wrong merge shows one person another person's messages, a privacy incident, not a tuning knob.",
+        ],
+      },
+      {
+        heading: "Value for users",
+        body: [
+          "A single view of every contact: one thread per person, not one per network.",
+          "No more duplicate-hunting, since matching happens on facts already given to Beeper, a number, an email, not on the user noticing and fixing it by hand.",
+          "Control stays with the user: nothing merges on a guess, ambiguous matches ask once, and wrong merges don't happen silently.",
+        ],
+      },
+      {
+        heading: "Business impact",
+        body: [
+          "Multi-network adds value instead of clutter: a working People Layer makes each new connected network complete someone's contacts, instead of mostly adding duplicate threads.",
+          "The real size of the problem is invisible today, since silent misses mean Merge usage can look healthy while duplicate contacts stay common.",
+          "A stronger pitch for the paid, multi-account tiers, since a People Layer is the reason to actually use that capacity, instead of a limit paid to raise.",
+        ],
+      },
+      {
+        heading: "What I'd watch",
+        body: "Missed-match rate first, since misses are currently silent and invisible to Beeper's own metrics without instrumenting it, then how many pairs like this exist that were never suggested.",
+      },
+    ],
+  },
+  {
+    tag: "04 · Cross-sell Strategy",
     title: "Getting SpringVerify accounts to make their first hire in Goodfit",
     slug: "springverify-goodfit",
     subject: "SpringVerify × Goodfit",
@@ -542,23 +618,6 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Reframed the ask from \"post a job in a tool you don't own\" to a background sync that turns an empty dashboard into one that already reflects the hiring they're doing elsewhere.",
     watch: "North star to track: accounts that pay for their first assessment, not sign-ins or free credits.",
-  },
-  {
-    tag: "04 · Product Thesis",
-    title: "Making it easier to know you're talking to the same person on Beeper",
-    slug: "beeper-people-layer",
-    subject: "Beeper",
-    hook: "Beeper's own search already knows two chats are the same person. Merge just doesn't act on it.",
-    problem:
-      "Beeper's own search already knows when two chats across networks are the same person, but Merge only joins them when its matcher happens to catch the pair, and misses are silent, so duplicate contacts quietly stay duplicate.",
-    approach: [
-      "Traced the gap to a unit-of-organization problem: Beeper treats a chat as the thing it organizes, not a person, even though search already computes the person-level match.",
-      "Sequenced the fix by trust, not effort: reuse the signal search already has, merge on facts like a shared number or email automatically, and only ask once before guessing on a name-and-photo match.",
-      "Drew one line that doesn't move regardless of model quality: never merge on a name alone, since a wrong merge shows one person another person's messages.",
-    ],
-    outcome:
-      "Turns Merge from a feature you have to go looking for into a person layer that applies consistently, and makes the case that unlocking it is what justifies paying for the multi-account tiers.",
-    watch: "Key gap to instrument first: missed-match rate, since misses are currently invisible to Beeper's own metrics.",
   },
 ];
 
