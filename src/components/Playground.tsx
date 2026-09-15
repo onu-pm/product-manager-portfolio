@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import GithubCalendar from "@/components/GithubCalendar";
 import { useCardRail } from "@/hooks/useCardRail";
-import { githubUsername, playgroundProjects } from "@/lib/content";
+import { githubUsername, labProjects } from "@/lib/content";
 
 function Arrow({ dir }: { dir: "left" | "right" }) {
   return (
@@ -20,7 +21,7 @@ function Arrow({ dir }: { dir: "left" | "right" }) {
 
 export default function Playground() {
   const { railRef, barRef, index, scrollToIndex, railHandlers, onCardClick } = useCardRail(
-    playgroundProjects.length,
+    labProjects.length,
     ".work-card",
   );
 
@@ -39,10 +40,10 @@ export default function Playground() {
           </p>
         </div>
 
-        {playgroundProjects.length > 1 && (
+        {labProjects.length > 1 && (
           <div className="flex items-center gap-2">
             <span className="work-counter">
-              {index + 1} / {playgroundProjects.length}
+              {index + 1} / {labProjects.length}
             </span>
             <button
               type="button"
@@ -56,7 +57,7 @@ export default function Playground() {
             <button
               type="button"
               onClick={() => scrollToIndex(index + 1)}
-              disabled={index >= playgroundProjects.length - 1}
+              disabled={index >= labProjects.length - 1}
               aria-label="Next project"
               className="work-nav-btn"
             >
@@ -66,7 +67,7 @@ export default function Playground() {
         )}
       </div>
 
-      {playgroundProjects.length === 0 ? (
+      {labProjects.length === 0 ? (
         <div className="tint-card rounded-3xl p-8 text-center">
           <p className="text-[15px] leading-relaxed text-ink-secondary">
             First write-ups are still landing here. Ask me directly if you want a preview.
@@ -75,54 +76,31 @@ export default function Playground() {
       ) : (
         <>
           <div ref={railRef} className="work-rail" {...railHandlers}>
-            {playgroundProjects.map((p, i) => {
-              const card = (
-                <>
-                  {p.coverImage ? (
-                    <Image
-                      src={p.coverImage}
-                      alt=""
-                      fill
-                      sizes="(max-width: 767px) 86vw, 55vw"
-                      className="work-card-art"
-                      style={{ objectFit: "cover" }}
-                    />
-                  ) : (
-                    <span className={`work-card-art work-art--${i % 5}`} />
-                  )}
-                  <span className={p.coverImage ? "work-card-scrim work-card-scrim--strong" : "work-card-scrim"} />
-                  <span className="work-card-content">
-                    <span className="work-card-feature work-card-feature--title">{p.title}</span>
-                    <span className="work-card-description">{p.body}</span>
-                    {p.tags && p.tags.length > 0 && (
-                      <span className="work-tag-row work-tag-row--sm">
-                        {p.tags.map((t) => (
-                          <span key={t} className="work-tag-pill work-tag-pill--sm">
-                            {t}
-                          </span>
-                        ))}
+            {labProjects.map((p) => (
+              <Link key={p.slug} href={`/lab/${p.slug}`} className="work-card" onClick={onCardClick}>
+                <Image
+                  src={p.coverImage}
+                  alt=""
+                  fill
+                  sizes="(max-width: 767px) 86vw, 55vw"
+                  className="work-card-art"
+                  style={{ objectFit: "cover" }}
+                />
+                <span className="work-card-scrim work-card-scrim--strong" />
+                <span className="work-card-content">
+                  <span className="work-card-feature work-card-feature--title">{p.title}</span>
+                  <span className="work-card-description">{p.hook}</span>
+                  <span className="work-tag-row work-tag-row--sm">
+                    <span className="work-tag-pill work-tag-pill--sm">{p.category}</span>
+                    {p.tags.map((t) => (
+                      <span key={t} className="work-tag-pill work-tag-pill--sm">
+                        {t}
                       </span>
-                    )}
+                    ))}
                   </span>
-                </>
-              );
-              return p.href ? (
-                <a
-                  key={p.title}
-                  href={p.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="work-card"
-                  onClick={onCardClick}
-                >
-                  {card}
-                </a>
-              ) : (
-                <div key={p.title} className="work-card work-card--static">
-                  {card}
-                </div>
-              );
-            })}
+                </span>
+              </Link>
+            ))}
           </div>
 
           <div className="work-progress mt-4">

@@ -711,32 +711,100 @@ export const faqs = [
   },
 ];
 
-export type PlaygroundProject = {
-  title: string;
-  body: string;
-  href?: string;
-  /** Real photography for the cover, same treatment as a Work project.
-   *  Falls back to a solid motif field when not supplied yet. */
-  coverImage?: string;
-  tags?: string[];
+export type LabSection = {
+  heading: string;
+  body: string | string[];
+  /** Optional inline clip shown right after this section — a short,
+   *  autoplaying/looping/muted screen recording styled like a gif so it
+   *  reads as part of the paragraph flow, not a heavy embedded video. */
+  clip?: string;
 };
 
-// Placeholder layout content until real vibe-coded projects are swapped in.
-export const playgroundProjects: PlaygroundProject[] = [
+export type LabProject = {
+  slug: string;
+  title: string;
+  /** One-liner used as the card/cover description. */
+  hook: string;
+  /** Shown as the first tag pill, the same role a company name plays on
+   *  a POV card — the category this build sits in. */
+  category: string;
+  tags: string[];
+  coverImage: string;
+  liveUrl: string;
+  sections: LabSection[];
+};
+
+// Real, working prototypes, built solo with Claude Code outside of any job.
+export const labProjects: LabProject[] = [
   {
-    title: "Inbox Triage Agent",
-    body: "A small AI agent that reads incoming support email, tags intent, and drafts a first-pass reply for review.",
-    tags: ["AI Agent", "Support"],
+    slug: "artsylens",
+    title: "ArtsyLens — a tour guide that answers back",
+    hook: "A working prototype that treats a museum or monument like a conversation instead of a map.",
+    category: "Travel & Culture",
+    tags: ["AI Prototype", "Multimodal", "Progressive Generation"],
+    coverImage: "/lab/artsylens-cover.jpg",
+    liveUrl: "https://artsy-lens-nu.vercel.app/",
+    sections: [
+      {
+        heading: "Context",
+        body: "The AI travel-planning category is loud right now — Wonderplan, Mindtrip, and a dozen others are all racing to generate the perfect day-by-day itinerary. That's a real problem, but it's also the easy half of a trip. The itinerary tells you where to stand. It doesn't tell you why the gate you just walked through was built to make the Taj Mahal look closer than it is, or what the pietra dura inlay above your head actually means. That gap — the moment you're physically standing in front of something and have no one to ask — is where a printed guidebook and a generic AI itinerary both go quiet. ArtsyLens is built for that exact moment, not the planning stage before it.",
+      },
+      {
+        heading: "The product decision that mattered",
+        body: [
+          "The default build here is obvious: generate a 5-stop itinerary, show it as a list, done — that's what every AI trip planner already ships. I rejected stopping there because a list of stop names is just a fancier map pin. The decision was to make each checkpoint its own conversation: when you open a stop, ArtsyLens doesn't recite a paragraph and move on — it hands you a chat, seeded with specific \"things to spot\" for that exact spot, three suggested questions to get you started, and an open box to ask anything else. You can even snap a photo of what's in front of you for it to analyze. That's a materially harder product to build than a static description, and a less impressive-looking landing page, but it's the only version that's actually useful once you're standing there rather than reading about it on a couch.",
+          "The second decision was pacing the generation. I could have generated the full 5-stop itinerary and every checkpoint's content in one shot before showing anything — simpler to build, and it's what most AI itinerary tools do. I built it to stream instead: the itinerary list appears immediately with the first couple of stops fully written, and the rest fill in progressively (\"Preparing Guide...\") while you're already reading stop one. For a product whose whole pitch is \"don't make the user wait around planning, get them exploring,\" making them stare at a loading spinner before they see anything would have undercut the premise on the very first screen.",
+          "The third was tone. Every competitor in this space reads like a corporate travel-booking site — blue gradients, stock airplane icons. I deliberately built ArtsyLens around a hand-illustrated, Van-Gogh-textured aesthetic with playful copy (\"Curated by ArtsyLens,\" checkpoint cards that feel like a travel journal). That's a positioning bet, not a decoration choice: the target user isn't a business traveler optimizing a layover, it's someone who wants a museum or a monument to feel like discovery again, and the UI has to signal that before a single word of copy loads.",
+        ],
+      },
+      {
+        heading: "What it does today",
+        body: "A user picks a destination — a museum, a city, a monument — and gets a self-paced itinerary of checkpoints, each with a short orienting description, specific \"things to spot\" grounded in that location's actual history and architecture, and a live guide chat with suggested questions and photo analysis. Past journeys are saved so a user can pick up a half-finished trip. It works for both a single landmark (the Taj Mahal) and a sprawling one (the Louvre), which forced the itinerary logic to scale from 5 stops to dozens without the experience changing shape.",
+      },
+      {
+        heading: "What I'd need to prove next",
+        body: "The honest gap: this is a content-generation and conversation prototype, not a location-aware one yet — it doesn't know where you're physically standing, so it can't yet nudge you from stop to stop or confirm you're actually looking at the right pietra dura panel. That's the next real product question, and it's a genuinely hard one (indoor positioning, computer-vision confirmation against a reference image, offline reliability in a museum basement with no signal) rather than a checkbox feature — the kind of constraint that would shape a real roadmap rather than a demo.",
+      },
+      {
+        heading: "What this shows about how I work",
+        body: "I didn't chase the crowded, easy-to-demo part of this category (itinerary generation). I looked for the moment existing tools abandon the user — standing in front of the thing itself — and built for that, even though it meant a harder architecture (per-checkpoint chat, progressive generation, multimodal photo input) than a single generated PDF would have needed. That's the trade I'd make on a real product too: build for the moment of actual use, not the moment that's easiest to screenshot.",
+      },
+    ],
   },
   {
-    title: "Meeting Notes → Tickets",
-    body: "Vibe-coded over a weekend: turns a raw meeting transcript into a scoped list of tickets with acceptance criteria.",
-    tags: ["Vibe-coded", "Productivity"],
-  },
-  {
-    title: "Resume Diff Tool",
-    body: "A tiny tool that diffs two resume versions and flags what quietly changed, built to sanity-check my own edits.",
-    tags: ["Vibe-coded", "Utility"],
+    slug: "hisab-app",
+    title: "Hisab App — bookkeeping that reads a handwritten mandi slip",
+    hook: "A working prototype for the Indian kirana shopkeeper's oldest problem: the bahi-khata.",
+    category: "SMB FinTech",
+    tags: ["OCR", "GST Automation", "Multilingual"],
+    coverImage: "/lab/hisab-app-cover.jpg",
+    liveUrl: "https://vyaparmoney.ai.studio/",
+    sections: [
+      {
+        heading: "Context",
+        body: "Every Indian kirana shop still runs on two books: a purchase register kept by whoever's least busy that week, and a khata — a credit ledger — for the regulars who pay \"next Tuesday, bhaiya.\" Both are usually handwritten. Both are why the shop owner's accountant charges a premium every GST filing season, reconciling stacks of paper bills against a return that's already overdue. There is no shortage of apps trying to fix this — Vyapar, Khatabook, OkCredit, myBillBook, Zoho Books all sell into the same shelf. That crowding was the first thing I had to reckon with before writing a line of a build prompt: if I was going to spend time on this, it couldn't be \"another invoicing app with a nicer UI.\" It had to attack the one step every competitor still leaves to the shopkeeper — turning a stack of paper into a ledger in the first place.",
+      },
+      {
+        heading: "The product decision that mattered",
+        body: [
+          "The obvious build is a manual entry app: shopkeeper types in supplier, amount, GST rate, done. Every incumbent in this category has that screen. I rejected it, because it doesn't remove the actual cost — a semi-literate or time-starved shopkeeper still has to sit down and become a data-entry clerk every evening, which is exactly the behavior that makes the paper register win by default. So the core of Hisab App isn't the ledger screen, it's the intake: point a phone camera at a supplier's invoice, mandi slip, or even a handwritten chit, and let the app extract supplier, GST number, line items, and tax split on its own. The harder call was what to do when the model isn't sure. I deliberately didn't ship a black-box \"trust the AI\" flow — every captured bill carries a confidence score, and anything under a threshold lands in a \"Review & Verify\" queue instead of posting straight to the ledger, with duplicate-bill detection sitting alongside it. That's a slower, less impressive demo than \"scan and forget,\" but it's the difference between a toy and something a shop owner would actually let touch their GST filing — one wrong auto-posted credit note is enough to lose that trust permanently.",
+          "The second decision was language. Every competitor I looked at defaults to English with a Hindi toggle bolted on. I built the interface language-first instead — eleven languages including Hinglish, Gujarati, Marathi, Tamil, Telugu, Bengali, Punjabi — because the shop owner this is for is not the shop owner's college-going son who's fluent in app-English; it's the person actually standing behind the counter.",
+          "The third: GST in India isn't one flow, it's three. A shop can be on Regular scheme (full input tax credit), Composition (flat 1%, no ITC), or exempt under the ₹40L threshold — and the tax logic (CGST+SGST vs IGST) changes depending on whether the sale crosses a state line. I built the tax engine to ask which scheme a shop is on and compute accordingly, rather than assuming every user is a full Regular-scheme filer the way a lot of \"GST billing\" apps quietly do. That's a decision most vibe-coded finance demos skip because it's invisible in a screenshot — it only shows up when the numbers are actually right.",
+        ],
+      },
+      {
+        heading: "What it does today",
+        body: "A shop owner can log purchases by photo, run sales through a POS-style \"New Sale\" flow, track customer credit (khata) with per-customer balances and a one-tap payment reminder, and see a monthly Profit & Revenue view that nets output GST against input tax credit to show what's actually payable to the government — not just what came in and went out. Cash-vs-credit sales are split automatically, and the whole financial summary is exportable to WhatsApp, because that's the channel this shop owner already uses to talk to their accountant.",
+      },
+      {
+        heading: "What I'd need to prove next",
+        body: "This is a prototype, not a shipped product — the OCR is simulated against realistic Indian invoice formats rather than trained on a live document pipeline, and there's no real payments or filing integration yet. The open question I'd want to test with actual shopkeepers: does a confidence-scored review queue actually get used, or does it get rubber-stamped the way most \"please review\" UIs do in practice? That's a behavioral question no amount of solo building answers — it's the next thing I'd want real usage data on.",
+      },
+      {
+        heading: "What this shows about how I work",
+        body: "I didn't start from \"what can Claude Code build me quickly.\" I started from where the existing category was leaving money on the table — the capture step, not the ledger step — and built the parts that are boring to demo but load-bearing for trust: confidence thresholds, scheme-aware tax logic, a language list that matches who's actually behind the counter. That's the same instinct I'd bring to any product decision: build the invisible thing that makes the visible thing trustworthy.",
+      },
+    ],
   },
 ];
 

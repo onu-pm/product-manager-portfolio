@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { profile, projects, caseStudies, playgroundProjects, alterEgo } from "@/lib/content";
+import { profile, projects, caseStudies, labProjects, alterEgo } from "@/lib/content";
 import PreviewCard from "@/components/PreviewCard";
 import LightBulb from "@/components/LightBulb";
 
@@ -106,13 +106,13 @@ export default function Bento() {
           name="Lab"
           description="AI and vibe-coded builds, made for fun outside of any job."
           ctaText="Take a look"
-          slides={playgroundProjects.map((p, i) => ({
+          slides={labProjects.map((p, i) => ({
             number: `0${i + 1}`,
             label: p.title,
             image: p.coverImage,
             title: p.title,
-            description: p.body,
-            tags: p.tags,
+            description: p.hook,
+            tags: [p.category, ...p.tags],
           }))}
         />
 
