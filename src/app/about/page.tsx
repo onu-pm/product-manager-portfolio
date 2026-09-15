@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import AboutMe from "@/components/AboutMe";
 import Capabilities from "@/components/Capabilities";
 import Craft from "@/components/Craft";
 import Approach from "@/components/Approach";
@@ -14,6 +15,9 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <Reveal>
+        <AboutMe />
+      </Reveal>
       <Reveal>
         <Capabilities />
       </Reveal>

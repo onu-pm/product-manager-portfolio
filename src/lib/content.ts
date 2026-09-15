@@ -78,6 +78,32 @@ export const highlights = [
   },
 ];
 
+// Personal bio for the top of /about — the "who is this person" section,
+// distinct from Capabilities' "what I can do for you" pitch below it.
+export const aboutMe = {
+  // Set once the real portrait (background removed) is in public/about/.
+  photo: undefined as string | undefined,
+  greetingLead: "Hi, I'm Anupam",
+  greetingAccent: "(Poums)",
+  tagline: "Currently a Product Manager, Formerly a Marketer, Always a Human.",
+  intro: "I'm a Senior Product Manager at Repute, where I've spent the last five years doing exactly that.",
+  builtLabel: "In the last 5 years, I have built,",
+  built: [
+    "An integrations marketplace from zero to becoming the independent revenue channel for HRIS and marketplace partners.",
+    "A compliance filing app and workflows inside HRIS that took statutory compliance filing from a multi-day process down to about 10 minutes.",
+    "An AI assistant that simplifies processes around recruitment, payroll, onboarding, and compliance.",
+  ],
+  lessonsLabel: "Best things I learned after crafting,",
+  lessons: [
+    "HRIS and Payroll systems are built on users' trust. They earn the right to be clever only after being reliable and relatable.",
+    "Be a fan of what you work on. It makes the unglamorous parts — talking to users, support tickets, edge cases, compliance rules — worth digging into instead of just clearing them.",
+    "Execution is everything — ship small and often.",
+    "Never stop learning.",
+  ],
+  personal:
+    "When I'm not building products, I write for magazines that have nothing to do with product management, travel solo to art museums and festivals, pet-sit pro bono for pet parents who need a hand, and help friends get their social media pages off the ground.",
+};
+
 export const capabilities = [
   {
     title: "0-to-1 Product Strategy",
@@ -681,18 +707,18 @@ export const caseStudies: CaseStudy[] = [
 export const approachSteps = [
   {
     step: "01",
-    title: "Understand",
-    body: "Start from data and the person feeling the problem: support tickets, usage patterns, a partner's monthly closure numbers, before I touch a roadmap.",
+    title: "Start from the ecosystem, not the feature",
+    body: "Before I design a single flow, I look at what's already connecting into the platform — other integrations, the data model, the partners depending on it — so what I build doesn't turn into the next one-off nobody can maintain.",
   },
   {
     step: "02",
-    title: "Shape",
-    body: "Turn the problem into a scoped bet: what gets a reusable architecture (like a canonical data model) versus what's a one-off, and what's deliberately out of scope for v1.",
+    title: "Build for the integration, not just the interface",
+    body: "A clean screen doesn't matter if the API behind it can't scale to the next 50 partners. I design the data model and reference architecture first, so new integrations become repeatable instead of custom builds each time.",
   },
   {
     step: "03",
-    title: "Ship & measure",
-    body: "Own it through release sign-off and QA, then track the metric that actually moved: activation, MAU, ARR, or an escalation rate. Not just whether it shipped.",
+    title: "Ship the infra before the layer on top",
+    body: "The impressive part — an AI assistant, a slick flow — only works if the boring plumbing underneath it (orchestration, filing pipelines, sync) is solid first. That's what gets built before anything customer-facing goes live.",
   },
 ];
 

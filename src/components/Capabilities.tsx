@@ -1,11 +1,9 @@
-import Breadcrumbs from "@/components/Breadcrumbs";
 import { capabilities } from "@/lib/content";
 
 export default function Capabilities() {
   return (
     <section id="capabilities" className="page-shell py-20">
-      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "About" }]} />
-      <div className="mb-10 mt-6 flex flex-col items-start gap-3">
+      <div className="mb-10 flex flex-col items-start gap-3">
         <span className="chapter-tab">Capabilities</span>
         <h2>
           <span>Where I&apos;m</span>{" "}
