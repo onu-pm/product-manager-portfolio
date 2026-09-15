@@ -11,7 +11,7 @@ import { socials } from "@/components/socials";
 export default function HomeFooter() {
   return (
     <div className="home-footer-bar">
-      <span>
+      <span className="home-footer-copyright">
         © {new Date().getFullYear()} {profile.name}
       </span>
       <div className="flex items-center gap-4">
