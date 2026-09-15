@@ -52,7 +52,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="page-shell py-24">
+    <section id="contact" className="page-shell py-14">
       <div className="mx-auto max-w-2xl text-center">
         <h2>
           <span>If this sounds right,</span> <span className="marker-highlight">let&apos;s talk.</span>
@@ -67,7 +67,7 @@ export default function Contact() {
           knows which channel they want. */}
       <div className="mt-14 grid gap-8 lg:grid-cols-2">
         <div className="contact-panel">
-          <h3>Let&apos;s start simple</h3>
+          <h3 className="card-title">Let&apos;s start simple</h3>
           {status === "sent" ? (
             <div className="mt-6 rounded-xl border border-plum-100 bg-paper p-6 text-center">
               <p className="text-lg font-semibold text-ink">Thanks, that&apos;s in.</p>
@@ -124,12 +124,12 @@ export default function Contact() {
         </div>
 
         <div className="contact-panel">
-          <h3>Choose your adventure</h3>
+          <h3 className="card-title">Choose your adventure</h3>
           <div className="mt-6 flex flex-col gap-3">
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="adventure-row">
+            <a href={profile.calUrl} target="_blank" rel="noreferrer" className="adventure-row">
               <span>
                 <span className="adventure-row-label">Connect</span>
-                <span className="adventure-row-sub">Say hi on LinkedIn</span>
+                <span className="adventure-row-sub">Grab time on my calendar</span>
               </span>
               <Arrow />
             </a>

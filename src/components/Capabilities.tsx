@@ -2,7 +2,7 @@ import { capabilities } from "@/lib/content";
 
 export default function Capabilities() {
   return (
-    <section id="capabilities" className="page-shell py-20">
+    <section id="capabilities" className="page-shell py-14">
       <div className="mb-10 flex flex-col items-start gap-3">
         <h2>
           <span>Where I&apos;m</span>{" "}
@@ -17,7 +17,7 @@ export default function Capabilities() {
       <div className="simple-bento-grid">
         {capabilities.map((c) => (
           <div key={c.title} className="bento-card">
-            <h3 className="text-lg">{c.title}</h3>
+            <h3 className="card-title">{c.title}</h3>
             <p className="text-[15px] leading-relaxed text-ink/70">{c.body}</p>
           </div>
         ))}

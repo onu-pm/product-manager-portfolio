@@ -2,7 +2,7 @@ import { craft } from "@/lib/content";
 
 export default function Craft() {
   return (
-    <section id="craft" className="tint-surface py-20">
+    <section id="craft" className="tint-surface py-14">
       <div className="page-shell">
         <div className="mb-10 flex flex-col items-start gap-3">
           <h2>
@@ -18,7 +18,7 @@ export default function Craft() {
         <div className="simple-bento-grid">
           {craft.map((c) => (
             <div key={c.title} className="bento-card">
-              <h3 className="text-base">{c.title}</h3>
+              <h3 className="card-title">{c.title}</h3>
               <p className="text-[15px] leading-relaxed text-ink/70">{c.body}</p>
             </div>
           ))}

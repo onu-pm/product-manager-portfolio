@@ -4,7 +4,7 @@ import { aboutMe, profile } from "@/lib/content";
 
 export default function AboutMe() {
   return (
-    <section className="page-shell py-20">
+    <section className="page-shell py-14">
       <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "About me" }]} />
 
       <div className="mt-6 flex flex-col items-start gap-4">
@@ -42,7 +42,7 @@ export default function AboutMe() {
       <div className="about-story-card mt-16">
         <div className="grid gap-10 md:grid-cols-2 md:divide-x md:divide-[var(--border)]">
           <div className="md:pr-10">
-            <h3>{aboutMe.builtLabel}</h3>
+            <h3 className="card-title">{aboutMe.builtLabel}</h3>
             <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/70">
               {aboutMe.built.map((line) => (
                 <li key={line}>{line}</li>
@@ -54,7 +54,7 @@ export default function AboutMe() {
           </div>
 
           <div className="md:pl-10">
-            <h3>{aboutMe.lessonsLabel}</h3>
+            <h3 className="card-title">{aboutMe.lessonsLabel}</h3>
             <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/70">
               {aboutMe.lessons.map((line) => (
                 <li key={line}>{line}</li>

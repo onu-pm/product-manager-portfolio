@@ -22,6 +22,8 @@ export const profile = {
     "I am a product manager crafting products and building features for HRIS and Payroll platforms that help them enhance their capability and experience.",
   email: "onu@poums.in",
   linkedin: "https://www.linkedin.com/in/anupamkalita/",
+  // Booking link used by the "Connect" CTA — a scheduled call, not LinkedIn.
+  calUrl: "https://cal.com/poums",
   github: "https://github.com/onu-pm",
   instagram: "https://www.instagram.com/osinakiloratu/",
   resumeUrl: "/resume.pdf",
