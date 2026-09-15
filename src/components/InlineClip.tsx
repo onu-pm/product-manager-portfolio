@@ -12,7 +12,7 @@ export default function InlineClip({ src, caption }: { src?: string; caption?: s
         <video src={src} autoPlay loop muted playsInline preload="metadata" />
       ) : (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt={caption ?? ""} />
+        <img src={src} alt={caption ?? ""} loading="lazy" decoding="async" />
       )}
       {caption && <figcaption className="lab-clip-caption">{caption}</figcaption>}
     </figure>

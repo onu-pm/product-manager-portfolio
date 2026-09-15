@@ -1992,6 +1992,17 @@ body.menu-open canvas {
    boxed section a Work/POV case study uses. Spans both grid columns of
    .work-body-section (heading rail + prose) rather than sitting only in
    the prose column, so it reads as a break in the section, not an aside. */
+/* Multi-paragraph section body: one grid child holding the whole prose
+   column, with paragraph rhythm inside it. */
+.work-body-prose {
+  max-width: 46rem;
+}
+.work-body-prose .work-body-text {
+  margin-top: 0;
+}
+.work-body-prose .work-body-text + .work-body-text {
+  margin-top: 1rem;
+}
 .work-body-section .lab-clip {
   grid-column: 1 / -1;
   margin: 0.5rem 0 0;
@@ -2000,9 +2011,16 @@ body.menu-open canvas {
 .lab-clip img,
 .lab-clip video {
   width: 100%;
+  height: auto;
+  /* Reserve the box before the file arrives. Without a height the img lays
+     out at ~0px, and a lazy image that never gets a real layout box never
+     enters the viewport as far as the loader is concerned — so it silently
+     never loads. "auto" keeps the real ratio once dimensions are known. */
+  aspect-ratio: auto 3 / 2;
   border-radius: 0.85rem;
   border: 1px solid var(--border);
   display: block;
+  background: var(--surface-tinted);
 }
 .lab-clip-caption {
   margin-top: 0.5rem;

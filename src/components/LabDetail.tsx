@@ -62,16 +62,22 @@ export default function LabDetail({ slug }: { slug: string }) {
         {p.sections.map((s) => (
           <div key={s.heading} className="work-body-section">
             <SectionHeading>{s.heading}</SectionHeading>
+            {/* One grid child, always. The section is a two-column grid
+                (heading rail + prose), so emitting each paragraph as its
+                own child drops every even paragraph into the narrow
+                heading column. */}
             {Array.isArray(s.body) ? (
-              s.body.map((para) => (
-                <p key={para} className="work-body-text">
-                  {para}
-                </p>
-              ))
+              <div className="work-body-prose">
+                {s.body.map((para) => (
+                  <p key={para} className="work-body-text">
+                    {para}
+                  </p>
+                ))}
+              </div>
             ) : (
               <p className="work-body-text">{s.body}</p>
             )}
-            <InlineClip src={s.clip} />
+            <InlineClip src={s.clip} caption={s.clipCaption} />
           </div>
         ))}
 

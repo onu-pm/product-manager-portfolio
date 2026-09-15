@@ -714,10 +714,12 @@ export const faqs = [
 export type LabSection = {
   heading: string;
   body: string | string[];
-  /** Optional inline clip shown right after this section — a short,
-   *  autoplaying/looping/muted screen recording styled like a gif so it
-   *  reads as part of the paragraph flow, not a heavy embedded video. */
+  /** Optional inline media shown right after this section: a screenshot of
+   *  the real app, or a short screen recording (autoplaying/looping/muted,
+   *  styled like a gif) so it reads as part of the paragraph flow rather
+   *  than a heavy embedded video. */
   clip?: string;
+  clipCaption?: string;
 };
 
 export type LabProject = {
@@ -762,10 +764,14 @@ export const labProjects: LabProject[] = [
           "The second decision was pacing the generation. I could have generated the full 5-stop itinerary and every checkpoint's content in one shot before showing anything — simpler to build, and it's what most AI itinerary tools do. I built it to stream instead: the itinerary list appears immediately with the first couple of stops fully written, and the rest fill in progressively (\"Preparing Guide...\") while you're already reading stop one. For a product whose whole pitch is \"don't make the user wait around planning, get them exploring,\" making them stare at a loading spinner before they see anything would have undercut the premise on the very first screen.",
           "The third was tone. Every competitor in this space reads like a corporate travel-booking site — blue gradients, stock airplane icons. I deliberately built ArtsyLens around a hand-illustrated, Van-Gogh-textured aesthetic with playful copy (\"Curated by ArtsyLens,\" checkpoint cards that feel like a travel journal). That's a positioning bet, not a decoration choice: the target user isn't a business traveler optimizing a layover, it's someone who wants a museum or a monument to feel like discovery again, and the UI has to signal that before a single word of copy loads.",
         ],
+        clip: "/lab/artsylens-chat.jpg",
+        clipCaption: "Each checkpoint opens as its own chat, seeded with things to spot and suggested questions.",
       },
       {
         heading: "What it does today",
         body: "A user picks a destination — a museum, a city, a monument — and gets a self-paced itinerary of checkpoints, each with a short orienting description, specific \"things to spot\" grounded in that location's actual history and architecture, and a live guide chat with suggested questions and photo analysis. Past journeys are saved so a user can pick up a half-finished trip. It works for both a single landmark (the Taj Mahal) and a sprawling one (the Louvre), which forced the itinerary logic to scale from 5 stops to dozens without the experience changing shape.",
+        clip: "/lab/artsylens-itinerary.jpg",
+        clipCaption: "A generated Taj Mahal itinerary — six checkpoints, each with its own things to spot.",
       },
       {
         heading: "What I'd need to prove next",
@@ -798,10 +804,15 @@ export const labProjects: LabProject[] = [
           "The second decision was language. Every competitor I looked at defaults to English with a Hindi toggle bolted on. I built the interface language-first instead — eleven languages including Hinglish, Gujarati, Marathi, Tamil, Telugu, Bengali, Punjabi — because the shop owner this is for is not the shop owner's college-going son who's fluent in app-English; it's the person actually standing behind the counter.",
           "The third: GST in India isn't one flow, it's three. A shop can be on Regular scheme (full input tax credit), Composition (flat 1%, no ITC), or exempt under the ₹40L threshold — and the tax logic (CGST+SGST vs IGST) changes depending on whether the sale crosses a state line. I built the tax engine to ask which scheme a shop is on and compute accordingly, rather than assuming every user is a full Regular-scheme filer the way a lot of \"GST billing\" apps quietly do. That's a decision most vibe-coded finance demos skip because it's invisible in a screenshot — it only shows up when the numbers are actually right.",
         ],
+        clip: "/lab/hisab-ledger.jpg",
+        clipCaption:
+          "Every captured bill carries a confidence score — the 72% mandi slip is held back for Review & Verify instead of posting straight to the ledger.",
       },
       {
         heading: "What it does today",
         body: "A shop owner can log purchases by photo, run sales through a POS-style \"New Sale\" flow, track customer credit (khata) with per-customer balances and a one-tap payment reminder, and see a monthly Profit & Revenue view that nets output GST against input tax credit to show what's actually payable to the government — not just what came in and went out. Cash-vs-credit sales are split automatically, and the whole financial summary is exportable to WhatsApp, because that's the channel this shop owner already uses to talk to their accountant.",
+        clip: "/lab/hisab-khata.jpg",
+        clipCaption: "The khata: per-customer outstanding balances with one-tap payment reminders.",
       },
       {
         heading: "What I'd need to prove next",

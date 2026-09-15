@@ -25,7 +25,11 @@ export default function Reveal({
           observer.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+      // threshold 0, not a fraction: this wraps a whole page, and a page
+      // taller than ~6.6x the viewport can never show 15% of itself at
+      // once — the observer would never fire and the page would stay at
+      // opacity 0 forever. Any intersection at all is the real signal.
+      { threshold: 0, rootMargin: "0px 0px -8% 0px" },
     );
     observer.observe(el);
     return () => observer.disconnect();
