@@ -715,6 +715,10 @@ export type PlaygroundProject = {
   title: string;
   body: string;
   href?: string;
+  /** Real photography for the cover, same treatment as a Work project.
+   *  Falls back to a solid motif field when not supplied yet. */
+  coverImage?: string;
+  tags?: string[];
 };
 
 // Placeholder layout content until real vibe-coded projects are swapped in.
@@ -722,16 +726,22 @@ export const playgroundProjects: PlaygroundProject[] = [
   {
     title: "Inbox Triage Agent",
     body: "A small AI agent that reads incoming support email, tags intent, and drafts a first-pass reply for review.",
+    tags: ["AI Agent", "Support"],
   },
   {
     title: "Meeting Notes → Tickets",
     body: "Vibe-coded over a weekend: turns a raw meeting transcript into a scoped list of tickets with acceptance criteria.",
+    tags: ["Vibe-coded", "Productivity"],
   },
   {
     title: "Resume Diff Tool",
     body: "A tiny tool that diffs two resume versions and flags what quietly changed, built to sanity-check my own edits.",
+    tags: ["Vibe-coded", "Utility"],
   },
 ];
+
+// GitHub handle whose contribution calendar renders on the Lab page.
+export const githubUsername = "onu-pm";
 
 export const building = {
   headline: "Something new, in stealth",

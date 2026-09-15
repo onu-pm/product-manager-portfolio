@@ -1645,6 +1645,74 @@ body.menu-open canvas {
   transition: width 0.15s linear;
 }
 
+/* ---- GitHub contribution calendar (Lab page) --------------------------
+   Deliberately not themed to the site palette: the whole point is to show
+   the same green squares github.com itself renders, so the colours here
+   are fixed, not CSS custom properties, and don't shift with dark mode. */
+.github-calendar-wrap {
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--paper-raised);
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+}
+.github-calendar-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+.github-calendar-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+.github-calendar-sub {
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+}
+.github-calendar-sub a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.github-calendar-scroll {
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+.github-calendar-grid {
+  display: flex;
+  gap: 3px;
+  width: max-content;
+}
+.github-calendar-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.github-calendar-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  background: #ebedf0;
+}
+.github-calendar-cell--empty {
+  background: transparent;
+}
+.github-calendar-legend {
+  margin-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  color: var(--ink-secondary);
+}
+.github-calendar-legend .github-calendar-cell {
+  width: 10px;
+  height: 10px;
+}
+
 /* ---- Case-study detail page ------------------------------------------ */
 
 .work-hero {

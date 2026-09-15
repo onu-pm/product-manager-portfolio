@@ -106,7 +106,14 @@ export default function Bento() {
           name="Lab"
           description="AI and vibe-coded builds, made for fun outside of any job."
           ctaText="Take a look"
-          slides={playgroundProjects.map((p, i) => ({ number: `0${i + 1}`, label: p.title }))}
+          slides={playgroundProjects.map((p, i) => ({
+            number: `0${i + 1}`,
+            label: p.title,
+            image: p.coverImage,
+            title: p.title,
+            description: p.body,
+            tags: p.tags,
+          }))}
         />
 
         <PreviewCard

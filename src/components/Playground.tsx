@@ -1,51 +1,138 @@
+"use client";
+
+import Image from "next/image";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import { playgroundProjects } from "@/lib/content";
+import GithubCalendar from "@/components/GithubCalendar";
+import { useCardRail } from "@/hooks/useCardRail";
+import { githubUsername, playgroundProjects } from "@/lib/content";
+
+function Arrow({ dir }: { dir: "left" | "right" }) {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+      <path
+        d={dir === "left" ? "M19 12H5M11 18l-6-6 6-6" : "M5 12h14M13 6l6 6-6 6"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
 
 export default function Playground() {
+  const { railRef, barRef, index, scrollToIndex, railHandlers, onCardClick } = useCardRail(
+    playgroundProjects.length,
+    ".work-card",
+  );
+
   return (
-    <section className="py-20">
-      <div className="page-shell">
-        <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Lab" }]} />
-        <div className="mb-10 mt-6 flex flex-col items-start gap-3">
+    <section className="page-shell py-14">
+      <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Lab" }]} />
+      <div className="flex flex-wrap items-end justify-between gap-6 pb-8 pt-5">
+        <div className="flex flex-col items-start gap-3">
           <span className="chapter-tab">Lab</span>
-          <h2>
-            <span>Lighter, faster,</span>{" "}
-            <span className="marker-highlight">more exploratory.</span>
+          <h2 className="work-title">
+            <span>Lighter, faster,</span> <span className="marker-highlight">more exploratory.</span>
           </h2>
-          <p className="max-w-xl text-ink-secondary">
+          <p className="prose-measure text-ink-secondary">
             AI and vibe-coded projects I build for fun, outside of any job. Some ship, some
             don&apos;t, all of it is real.
           </p>
         </div>
 
-        {playgroundProjects.length === 0 ? (
-          <div className="tint-card rounded-3xl p-8 text-center">
-            <p className="text-[15px] leading-relaxed text-ink-secondary">
-              First write-ups are still landing here. Ask me directly if you want a preview.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {playgroundProjects.map((p) => (
-              <div key={p.title} className="bento-card">
-                <div>
-                  <h3 className="text-lg">{p.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-ink-secondary">{p.body}</p>
-                </div>
-                {p.href && (
-                  <a
-                    href={p.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="mt-4 text-sm font-semibold text-plum-600"
-                  >
-                    Take a look →
-                  </a>
-                )}
-              </div>
-            ))}
+        {playgroundProjects.length > 1 && (
+          <div className="flex items-center gap-2">
+            <span className="work-counter">
+              {index + 1} / {playgroundProjects.length}
+            </span>
+            <button
+              type="button"
+              onClick={() => scrollToIndex(index - 1)}
+              disabled={index === 0}
+              aria-label="Previous project"
+              className="work-nav-btn"
+            >
+              <Arrow dir="left" />
+            </button>
+            <button
+              type="button"
+              onClick={() => scrollToIndex(index + 1)}
+              disabled={index >= playgroundProjects.length - 1}
+              aria-label="Next project"
+              className="work-nav-btn"
+            >
+              <Arrow dir="right" />
+            </button>
           </div>
         )}
+      </div>
+
+      {playgroundProjects.length === 0 ? (
+        <div className="tint-card rounded-3xl p-8 text-center">
+          <p className="text-[15px] leading-relaxed text-ink-secondary">
+            First write-ups are still landing here. Ask me directly if you want a preview.
+          </p>
+        </div>
+      ) : (
+        <>
+          <div ref={railRef} className="work-rail" {...railHandlers}>
+            {playgroundProjects.map((p, i) => {
+              const card = (
+                <>
+                  {p.coverImage ? (
+                    <Image
+                      src={p.coverImage}
+                      alt=""
+                      fill
+                      sizes="(max-width: 767px) 86vw, 55vw"
+                      className="work-card-art"
+                      style={{ objectFit: "cover" }}
+                    />
+                  ) : (
+                    <span className={`work-card-art work-art--${i % 5}`} />
+                  )}
+                  <span className={p.coverImage ? "work-card-scrim work-card-scrim--strong" : "work-card-scrim"} />
+                  <span className="work-card-content">
+                    <span className="work-card-feature work-card-feature--title">{p.title}</span>
+                    <span className="work-card-description">{p.body}</span>
+                    {p.tags && p.tags.length > 0 && (
+                      <span className="work-tag-row work-tag-row--sm">
+                        {p.tags.map((t) => (
+                          <span key={t} className="work-tag-pill work-tag-pill--sm">
+                            {t}
+                          </span>
+                        ))}
+                      </span>
+                    )}
+                  </span>
+                </>
+              );
+              return p.href ? (
+                <a
+                  key={p.title}
+                  href={p.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="work-card"
+                  onClick={onCardClick}
+                >
+                  {card}
+                </a>
+              ) : (
+                <div key={p.title} className="work-card work-card--static">
+                  {card}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="work-progress mt-4">
+            <span ref={barRef} style={{ width: "0%" }} />
+          </div>
+        </>
+      )}
+
+      <div className="mt-16">
+        <GithubCalendar username={githubUsername} />
       </div>
     </section>
   );
