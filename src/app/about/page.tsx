@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import AboutMe from "@/components/AboutMe";
 import Capabilities from "@/components/Capabilities";
+import CalEmbed from "@/components/CalEmbed";
 import Craft from "@/components/Craft";
 import Contact from "@/components/Contact";
 import Reveal from "@/components/Reveal";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <>
+      <CalEmbed />
       <Reveal>
         <AboutMe />
       </Reveal>

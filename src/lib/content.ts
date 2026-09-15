@@ -22,8 +22,10 @@ export const profile = {
     "I am a product manager crafting products and building features for HRIS and Payroll platforms that help them enhance their capability and experience.",
   email: "onu@poums.in",
   linkedin: "https://www.linkedin.com/in/anupamkalita/",
-  // Booking link used by the "Connect" CTA — a scheduled call, not LinkedIn.
-  calUrl: "https://cal.com/poums",
+  // Cal.com slug for the "Connect" CTA — opens as an in-page modal (see
+  // CalEmbed.tsx) rather than a link out, so booking a call never leaves
+  // the site the way `calUrl` + target="_blank" used to.
+  calLink: "poums",
   github: "https://github.com/onu-pm",
   instagram: "https://www.instagram.com/osinakiloratu/",
   resumeUrl: "/resume.pdf",

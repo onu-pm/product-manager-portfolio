@@ -18,6 +18,7 @@ export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<Status>("idle");
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -43,6 +44,7 @@ export default function Contact() {
         setName("");
         setEmail("");
         setMessage("");
+        setConsent(false);
       } else {
         setStatus("error");
       }
@@ -110,7 +112,21 @@ export default function Contact() {
                   className="rounded-lg border border-plum-200 px-3.5 py-2.5 text-[15px] font-normal leading-relaxed text-ink outline-none placeholder:text-ink/40 focus:border-plum-500"
                 />
               </label>
-              <button type="submit" disabled={status === "sending"} className="btn-primary mt-1 px-7 py-3 text-sm disabled:opacity-60">
+              <label className="flex items-start gap-2 text-xs leading-relaxed text-ink/70">
+                <input
+                  type="checkbox"
+                  required
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-0.5 h-4 w-4 shrink-0 accent-plum-600"
+                />
+                I consent to being contacted about the message above.
+              </label>
+              <button
+                type="submit"
+                disabled={status === "sending" || !consent}
+                className="btn-primary mt-1 px-7 py-3 text-sm disabled:opacity-60"
+              >
                 {status === "sending" ? "Sending..." : "Send it over"}
               </button>
               {status === "error" && (
@@ -126,13 +142,20 @@ export default function Contact() {
         <div className="contact-panel">
           <h3 className="card-title">Choose your adventure</h3>
           <div className="mt-6 flex flex-col gap-3">
-            <a href={profile.calUrl} target="_blank" rel="noreferrer" className="adventure-row">
+            {/* Opens Cal.com as an in-page modal (see CalEmbed.tsx) instead
+                of linking out — booking a call never leaves this page. */}
+            <button
+              type="button"
+              data-cal-link={profile.calLink}
+              data-cal-config='{"layout":"month_view"}'
+              className="adventure-row w-full text-left"
+            >
               <span>
                 <span className="adventure-row-label">Connect</span>
                 <span className="adventure-row-sub">Grab time on my calendar</span>
               </span>
               <Arrow />
-            </a>
+            </button>
             <a href={`mailto:${profile.email}`} className="adventure-row">
               <span>
                 <span className="adventure-row-label">Email</span>

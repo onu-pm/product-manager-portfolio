@@ -60,6 +60,9 @@ export default function AboutMe() {
                 <li key={line}>{line}</li>
               ))}
             </ul>
+            <Link href="/alter-ego" className="mt-5 inline-block text-sm font-semibold text-plum-700">
+              Explore my alter ego →
+            </Link>
           </div>
         </div>
 
