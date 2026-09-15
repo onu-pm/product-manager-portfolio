@@ -1920,6 +1920,12 @@ body.menu-open canvas {
   .work-body-section .work-section-heading {
     line-height: 1.3;
   }
+  /* Only one column exists here — "2 / -1" would create a phantom second
+     column instead of stacking, since grid honours an out-of-range line
+     by implicitly adding tracks to satisfy it. */
+  .work-body-section .lab-clip {
+    grid-column: 1 / -1;
+  }
 }
 .work-section-heading {
   display: flex;
@@ -2004,7 +2010,10 @@ body.menu-open canvas {
   margin-top: 1rem;
 }
 .work-body-section .lab-clip {
-  grid-column: 1 / -1;
+  /* Column 2 only, matching the prose above it — spanning from column 1
+     put the image under the heading rail instead of under the paragraph
+     it illustrates, so its left edge sat ~216px left of the text. */
+  grid-column: 2 / -1;
   margin: 0.5rem 0 0;
   max-width: 46rem;
 }
