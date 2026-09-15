@@ -5,7 +5,6 @@ export default function Craft() {
     <section id="craft" className="tint-surface py-20">
       <div className="page-shell">
         <div className="mb-10 flex flex-col items-start gap-3">
-          <span className="chapter-tab">Craft</span>
           <h2>
             <span>Making a product</span>{" "}
             <span className="marker-highlight">feel right.</span>

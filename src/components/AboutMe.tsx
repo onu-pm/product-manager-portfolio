@@ -7,25 +7,21 @@ export default function AboutMe() {
     <section className="page-shell py-20">
       <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "About me" }]} />
 
-      <div className="mt-6 flex flex-col items-start gap-3">
-        <h1 className="text-3xl md:text-4xl">{aboutMe.greeting}</h1>
-        <p className="text-lg font-semibold text-ink">{aboutMe.tagline}</p>
-        <p className="max-w-xl text-[15px] leading-relaxed text-ink/70">
-          {aboutMe.introBefore}
-          {aboutMe.reputeUrl ? (
-            <a
-              href={aboutMe.reputeUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="font-semibold text-plum-700 underline underline-offset-2"
-            >
-              Repute
-            </a>
-          ) : (
-            <span className="font-semibold text-ink">Repute</span>
-          )}
-          {aboutMe.introAfter}
-        </p>
+      <div className="mt-6 flex flex-col items-start gap-4">
+        <h1>{aboutMe.greeting}</h1>
+        <h2>
+          {aboutMe.taglineLead} at{" "}
+          <a
+            href={aboutMe.reputeUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-plum-600 underline decoration-plum-300 underline-offset-4 hover:decoration-plum-600"
+          >
+            Repute
+          </a>
+          {aboutMe.taglineTrail}
+        </h2>
+        <p className="max-w-2xl text-lg leading-relaxed text-ink/80">{aboutMe.philosophy}</p>
 
         <div className="mt-2 flex flex-wrap items-center gap-3">
           <a href="#contact" className="btn-primary px-6 py-2.5 text-sm">
@@ -34,13 +30,16 @@ export default function AboutMe() {
           <a href={`mailto:${profile.email}`} className="btn-secondary px-6 py-2.5 text-sm">
             Email
           </a>
+          <Link href="/work" className="btn-secondary px-6 py-2.5 text-sm">
+            Portfolio
+          </Link>
         </div>
       </div>
 
-      <div className="mt-14 grid gap-10 md:grid-cols-2">
+      <div className="mt-16 grid gap-10 md:grid-cols-2">
         <div>
-          <h3 className="work-section-heading">{aboutMe.builtLabel}</h3>
-          <ul className="work-body-text list-disc space-y-3 pl-5">
+          <h3>{aboutMe.builtLabel}</h3>
+          <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/70">
             {aboutMe.built.map((line) => (
               <li key={line}>{line}</li>
             ))}
@@ -51,8 +50,8 @@ export default function AboutMe() {
         </div>
 
         <div>
-          <h3 className="work-section-heading">{aboutMe.lessonsLabel}</h3>
-          <ul className="work-body-text list-disc space-y-3 pl-5">
+          <h3>{aboutMe.lessonsLabel}</h3>
+          <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/70">
             {aboutMe.lessons.map((line) => (
               <li key={line}>{line}</li>
             ))}
@@ -60,7 +59,9 @@ export default function AboutMe() {
         </div>
       </div>
 
-      <p className="about-personal work-body-text mt-14 max-w-2xl">{aboutMe.personal}</p>
+      <p className="about-personal mt-16 max-w-2xl text-lg leading-relaxed text-ink/70">
+        {aboutMe.personal}
+      </p>
     </section>
   );
 }

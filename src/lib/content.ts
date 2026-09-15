@@ -23,6 +23,8 @@ export const profile = {
   email: "onu@poums.in",
   linkedin: "https://www.linkedin.com/in/anupamkalita/",
   github: "https://github.com/onu-pm",
+  // Set to the real profile URL to show the Instagram icon in the footer.
+  instagram: undefined as string | undefined,
   resumeUrl: "/resume.pdf",
   location: "Bangalore, India",
 };
@@ -81,13 +83,12 @@ export const highlights = [
 // Personal bio for the top of /about — the "who is this person" section,
 // distinct from Capabilities' "what I can do for you" pitch below it.
 export const aboutMe = {
-  greeting: "Hi, I'm Anupam.",
-  tagline: "Currently a Product Manager, Formerly a Marketer, Always a Human.",
-  // Split around the company name so it can render as a real link.
-  introBefore: "I'm a Senior Product Manager at ",
-  // Set to Repute's real URL to make the company name a link.
-  reputeUrl: undefined as string | undefined,
-  introAfter: ", where I've spent the last five years doing exactly that.",
+  greeting: "Hi, I'm Anupam 👋🏼",
+  // Split around the company name so "Repute" can render as a real link.
+  taglineLead: "Currently a Product Manager",
+  reputeUrl: "https://repute.net",
+  taglineTrail: ", Formerly a Marketer, Always a Human.",
+  philosophy: "My approach to life and work is unique. Uniqueness is a virtue in itself.",
   builtLabel: "In the last 5 years, I have built,",
   built: [
     "An integrations marketplace from zero to becoming the independent revenue channel for HRIS and marketplace partners.",

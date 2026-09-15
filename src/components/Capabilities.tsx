@@ -4,7 +4,6 @@ export default function Capabilities() {
   return (
     <section id="capabilities" className="page-shell py-20">
       <div className="mb-10 flex flex-col items-start gap-3">
-        <span className="chapter-tab">Capabilities</span>
         <h2>
           <span>Where I&apos;m</span>{" "}
           <span className="marker-highlight">most useful.</span>
