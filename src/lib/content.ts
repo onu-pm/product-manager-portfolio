@@ -604,10 +604,15 @@ export const caseStudies: CaseStudy[] = [
   },
   {
     tag: "04 · Cross-sell Strategy",
-    title: "Getting SpringVerify accounts to make their first hire in Goodfit",
+    title: "Getting a SpringVerify client to make its first hire in Goodfit",
     slug: "springverify-goodfit",
     subject: "SpringVerify × Goodfit",
     hook: "Goodfit already sits inside SpringVerify. Discovery isn't the problem, the ask is.",
+    coverImage: "/pov/springworks-crosssell-cover.jpg",
+    coverDescription:
+      "My POV of how Springworks can get a SpringVerify client to make its first hire in Goodfit, without asking them to build a second hiring tool.",
+    coverTags: ["Springworks", "SpringVerify", "Goodfit", "Integrations"],
+    bentoLabel: "Springworks Cross-sell Strategy",
     problem:
       "Goodfit already sits inside SpringVerify, so discovery isn't the issue. The problem is asking someone who opens SpringVerify to do a compliance job to start a hiring job from scratch, when they don't even own the role they'd be posting.",
     approach: [
@@ -618,6 +623,58 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Reframed the ask from \"post a job in a tool you don't own\" to a background sync that turns an empty dashboard into one that already reflects the hiring they're doing elsewhere.",
     watch: "North star to track: accounts that pay for their first assessment, not sign-ins or free credits.",
+    sections: [
+      {
+        heading: "Problem statement",
+        body: [
+          "Goodfit already sits inside SpringVerify. The problem isn't discovery, it's asking someone doing a compliance job to start a hiring job from scratch.",
+          "Three entry points share one empty state: the jobs page says \"No jobs found\", the overview shows four counters at zero, and getting started asks for three setup steps before anything happens.",
+          "Every empty box here is already full in the tool they hire with. Filling it in means typing the same thing twice.",
+        ],
+      },
+      {
+        heading: "Who feels it",
+        body: "HR Ops runs the verification queue; they don't open the roles. Their day runs: someone gets hired, they open SpringVerify, send the form, chase documents, read the report. They want fewer people to chase and fewer surprises after the offer, but they cannot post a job, since they don't own the role, so anything starting with \"create a job\" gets ignored. So the pitch can't be \"hire better\", it has to be about the work they already have.",
+      },
+      {
+        heading: "Options considered",
+        body: [
+          "Wait for a check to fail and offer to screen earlier next time: wrong moment, since in India the check runs after the person has joined, so a bad report rarely undoes the hire.",
+          "Assess people after they join: wrong product, since Goodfit is built to hire people, not test people who already work there.",
+          "Ask new joiners for referrals: wrong messenger, since a verification company asking a new joiner to refer friends isn't HR's call to make.",
+          "Chosen instead: pull in their hiring tool. Read the open roles and applicants from the system they already run, the only option where the trigger is a fact, not a guess.",
+        ],
+      },
+      {
+        heading: "The solution",
+        body: [
+          "Today: a role opens in the ATS, gets screened by hand, hired, then SpringVerify is opened separately and the check starts by hand. Goodfit never appears anywhere on this line.",
+          "After the sync: the role shows up in SpringVerify with nobody creating a job, applicants arrive with nobody uploading a list, Goodfit screens with the interview already built, and hiring starts the check with no form to fill.",
+          "One read, one write back, one event: SpringVerify reads the open role and applicants from their ATS through Integrations, Goodfit gets the job and candidates ready to screen, the hire event triggers the background check automatically, and the ranked shortlist writes back into their ATS.",
+        ],
+      },
+      {
+        heading: "How I'd sequence it",
+        body: [
+          "First, the blocker everything else depends on: connect the hiring tool so roles and applicants come across and the jobs page has something in it.",
+          "Then, only once that's live: a dashboard task to add people to screen, since a counter at zero is worse than no counter at all.",
+          "Later, once accounts have actually hired through it: the check starting automatically on hire, and one balance across both products. If I had to cut, I'd cut all of \"later\", since none of it proves the idea works.",
+        ],
+      },
+      {
+        heading: "What I'd check first",
+        body: [
+          "Whether the integrations can read open roles, or only send results back, since that kills the first step if not.",
+          "How many accounts have a hiring tool connected at all, since that sets the real ceiling.",
+          "Whether HR owns the role or must forward it to someone, since that changes the main button on every screen.",
+          "Whether applicant data can legally move between the two products under DPDP, and whether ready-made interviews per job title exist or are a build.",
+        ],
+      },
+      {
+        heading: "What I'd watch",
+        body: "Accounts that pay for their first assessment, not sign-ins or free credits, is the number that means someone actually chose it. The early sign is connected accounts starting a role on the first visit. The line not to cross is check turnaround and satisfaction, since SpringVerify is bought on trust. If connected accounts start roles at the same rate as everyone else, setup was never the blocker.",
+      },
+    ],
   },
 ];
 
