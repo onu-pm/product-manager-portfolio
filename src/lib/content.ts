@@ -446,7 +446,88 @@ export const caseStudies: CaseStudy[] = [
     ],
   },
   {
-    tag: "02 · Cross-sell Strategy",
+    tag: "02 · Systems Design",
+    title: "Why complex payroll customers take months to activate when simple ones take weeks",
+    slug: "payroll-activation",
+    subject: "Global payroll platforms",
+    hook: "Simple customers self-serve in weeks. Complex ones wait on a person working a playbook by hand.",
+    coverImage: "/pov/deel-payroll-activation-cover.jpg",
+    coverDescription:
+      "My POV of how Deel can close the gap between how fast simple and complex customers activate their payroll.",
+    coverTags: ["Deel", "Payroll Activation", "Compliance", "Automation"],
+    bentoLabel: "Making complex payroll activation as fast as simple",
+    problem:
+      "Simple customers self-serve their payroll activation in weeks. Multi-entity, complex customers wait on a person working a compliance playbook by hand, and how well that goes depends on who's assigned.",
+    approach: [
+      "Weighed three alternatives (more implementation managers, one self-serve flow for everyone, fully auto-approving every setup) and rejected each for a specific reason rather than defaulting to \"add more automation\".",
+      "Proposed turning the static compliance playbook into rules the system executes for the deterministic parts, routing only real judgment calls to an implementation manager.",
+      "Sequenced rules before AI on purpose: a rule can be audited and a model's compliance judgment can't yet, so AI layers in only once the rules have earned a track record.",
+    ],
+    outcome:
+      "Turns a process that varies by \"who you get\" into one with a consistent, auditable outcome, without asking automation to own compliance judgment calls on day one.",
+    watch: "Would validate with: time-to-activation for complex accounts, % of playbook steps auto-completed, and spread in activation time by manager.",
+    sections: [
+      {
+        heading: "Problem statement",
+        body: [
+          "Simple customers self-serve their payroll activation in weeks. Complex, multi-entity customers wait on a person working a compliance playbook by hand, inconsistently, depending on who's assigned.",
+          "57% of global payroll professionals rank local compliance as their single biggest challenge (PayrollOrg, 2025), and that's exactly where activation stalls: one country and one entity at a time.",
+          "Built from public reviews and commentary on how global payroll platforms handle onboarding, not internal data, but a pattern worth acting on.",
+        ],
+      },
+      {
+        heading: "Who feels it",
+        body: "Priya, a VP of People Ops at a 600-person company formed through three acquisitions, now runs payroll across five entities. She isn't a payroll or compliance expert, was told her multi-entity setup needs a manual, phased rollout, and has heard from peers that the experience \"depends on who you get.\"",
+      },
+      {
+        heading: "Where it breaks down",
+        body: [
+          "Signs up, sold on a fast, self-serve activation timeline.",
+          "Flagged as complex, since a multi-entity structure from acquisitions triggers manual review.",
+          "Gets a manual, uneven process, where the playbook is followed by hand and quality depends on who's assigned.",
+          "Activation is delayed, well past the timeline simple customers get.",
+        ],
+      },
+      {
+        heading: "The proposal",
+        body: [
+          "Encode compliance rules per country and entity type, so the system handles the deterministic parts with the same outcome regardless of which manager is assigned.",
+          "Route only flagged exceptions to the implementation manager, so the customer sees consistent, real progress instead of a black box.",
+          "Rules first, AI next: a rule can be audited and a model's compliance judgment can't, yet, so AI layers in only once the rules have earned a track record.",
+        ],
+      },
+      {
+        heading: "Why this, not something simpler",
+        body: [
+          "Adding more implementation managers doesn't fix inconsistency, and the cost scales linearly.",
+          "One self-serve flow for everyone breaks down exactly where multi-entity complexity begins.",
+          "Fully auto-approving every setup is fast, but a wrong compliance call isn't just a UX issue.",
+          "Chosen instead: turn the static compliance playbook into rules, automating what's deterministic and routing judgment calls to the implementation manager.",
+        ],
+      },
+      {
+        heading: "Shipping it",
+        body: [
+          "V1, rules: encode the highest-hour country and entity-type combinations first, run deterministic checks with the same outcome regardless of manager, and have the manager review only what's flagged.",
+          "V2, AI layer: add AI extraction and classification on top of the proven rules, expand across every country and entity type, and improve accuracy from real setup data.",
+        ],
+      },
+      {
+        heading: "Business impact",
+        body: [
+          "Faster activation means faster time-to-revenue on the hardest-to-serve accounts.",
+          "A consistent experience removes the \"depends who you get\" risk seen in real reviews, a trust issue, not just a speed one.",
+          "Lower cost to serve, since implementation-manager time is the constrained resource and standardizing it protects margin at scale.",
+        ],
+      },
+      {
+        heading: "What I'd watch",
+        body: "Time-to-activation for the complex segment measured against the timeline simple customers already get, the % of playbook steps auto-completed, the spread in activation time by manager as a consistency proxy, and complex-customer activation NPS to see whether the simple-vs-complex gap is closing.",
+      },
+    ],
+  },
+  {
+    tag: "03 · Cross-sell Strategy",
     title: "Getting SpringVerify accounts to make their first hire in Goodfit",
     slug: "springverify-goodfit",
     subject: "SpringVerify × Goodfit",
@@ -463,7 +544,7 @@ export const caseStudies: CaseStudy[] = [
     watch: "North star to track: accounts that pay for their first assessment, not sign-ins or free credits.",
   },
   {
-    tag: "03 · Product Thesis",
+    tag: "04 · Product Thesis",
     title: "Making it easier to know you're talking to the same person on Beeper",
     slug: "beeper-people-layer",
     subject: "Beeper",
@@ -478,23 +559,6 @@ export const caseStudies: CaseStudy[] = [
     outcome:
       "Turns Merge from a feature you have to go looking for into a person layer that applies consistently, and makes the case that unlocking it is what justifies paying for the multi-account tiers.",
     watch: "Key gap to instrument first: missed-match rate, since misses are currently invisible to Beeper's own metrics.",
-  },
-  {
-    tag: "04 · Systems Design",
-    title: "Why complex payroll customers take months to activate when simple ones take weeks",
-    slug: "payroll-activation",
-    subject: "Global payroll platforms",
-    hook: "Simple customers self-serve in weeks. Complex ones wait on a person working a playbook by hand.",
-    problem:
-      "Simple customers self-serve their payroll activation in weeks. Multi-entity, complex customers wait on a person working a compliance playbook by hand, and how well that goes depends on who's assigned.",
-    approach: [
-      "Weighed three alternatives (more implementation managers, one self-serve flow for everyone, fully auto-approving every setup) and rejected each for a specific reason rather than defaulting to \"add more automation\".",
-      "Proposed turning the static compliance playbook into rules the system executes for the deterministic parts, routing only real judgment calls to an implementation manager.",
-      "Sequenced rules before AI on purpose: a rule can be audited and a model's compliance judgment can't yet, so AI layers in only once the rules have earned a track record.",
-    ],
-    outcome:
-      "Turns a process that varies by \"who you get\" into one with a consistent, auditable outcome, without asking automation to own compliance judgment calls on day one.",
-    watch: "Would validate with: time-to-activation for complex accounts, % of playbook steps auto-completed, and spread in activation time by manager.",
   },
 ];
 
