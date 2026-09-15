@@ -2304,10 +2304,20 @@ body.menu-open canvas {
 }
 
 
-/* Logo: sits directly on the page, no chip. The light/dark cuts swap on
-   data-theme so the mark always has contrast without a coloured backing. */
+/* Logo: fixed at the top-left of every page, so ordinary scrolling
+   content (the breadcrumb especially) passes directly underneath it. A
+   soft translucent backdrop keeps the wordmark legible instead of the two
+   texts visually colliding — most visible on mobile, where every page
+   scrolls through that exact spot on load. The light/dark cuts swap on
+   data-theme so the mark always has contrast against that backdrop. */
 .logo-mark {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  padding: 0.35rem 0.6rem;
+  margin: -0.35rem -0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s ease;
 }
 .logo-mark:hover {
   transform: scale(1.04);

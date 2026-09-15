@@ -224,11 +224,11 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Integrations Ecosystem"],
     problem:
-      "Repute is an embedded native marketplace for HRIS. When I joined, Repute didn't have a marketplace yet. Partner HRIS platforms had no built-in way for employers to discover and add integrations like background checks, tax tools, or benefits providers.",
+      "Repute builds HRIS — the software a company's HR team uses every day to run payroll, track leave, and manage hiring, basically HR's version of an operating system. Inside that software, Repute also runs a marketplace: a place where an employer can add extra tools, like a background-check provider or a tax filing service, without leaving the HR platform they already use. When I joined, that marketplace didn't exist yet. The partner HR platforms had no built-in aisle where an employer could even discover these add-ons, let alone install one, so employers never found them and the vendors offering them never got the business.",
     whatWasNeeded:
-      "Just listing apps wasn't going to be enough. If partners didn't see real business coming from being listed, they'd stop caring about the marketplace altogether.",
+      "Just listing apps wasn't going to be enough — a page of logos nobody clicks isn't a marketplace. If the partner vendors we listed didn't see real business coming from it, they'd stop caring about being listed at all, and the whole thing would quietly die.",
     approach: [
-      "I built the marketplace from scratch across four HRIS platforms: GreytHR, AdrenalinMAX, GelyxHR, and PocketHRMS. Then I designed a sales flow so a browsing employer could actually turn into a closed deal for the partner, and built a developer platform so partners could list their own apps instead of waiting on my team every time.",
+      "I built the marketplace from scratch across four HRIS platforms: GreytHR, AdrenalinMAX, GelyxHR, and PocketHRMS. Then I designed a sales flow so a browsing employer could actually turn into a closed deal for the partner, and built a developer platform — a self-serve dashboard — so partner vendors could list their own apps directly instead of waiting on my team every time.",
     ],
     whatHelped:
       "I onboarded the first batch of partners by hand before building the self-serve version, so I actually knew what made a listing worth trusting.",
@@ -265,11 +265,11 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Workflow Automation"],
     problem:
-      "HR teams already lived in the recruitment and onboarding modules, but much of what they did there was just repeating the same manual steps over and over.",
+      "HR teams spent most of their day inside Repute's recruitment and onboarding screens — the parts of the software that handle hiring someone and getting them set up on their first day. But a lot of what they did there was the same repetitive, manual steps every single time: move a candidate to the next stage, send the same onboarding email, update the same status field. None of it needed a human decision, just a human clicking the same button again.",
     whatWasNeeded:
       "Something that removed those steps without forcing HR teams to pick up a new tool, since most of them barely had time to learn the one they already had.",
     approach: [
-      "I built Zapier-style automations directly into the HRIS, so finishing one action would kick off the next one on its own, across recruitment and employee onboarding.",
+      "I built Zapier-style automations directly into the HRIS — think of it like a row of dominoes: finishing one action (say, moving a candidate to \"Offer Sent\") automatically knocks over the next one (sending the offer letter), across recruitment and employee onboarding, instead of someone doing each step by hand.",
     ],
     whatHelped:
       "I picked the two or three steps HR teams repeated the most and fixed those first, instead of trying to automate every workflow at once.",
@@ -296,11 +296,11 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Agentic AI"],
     problem:
-      "Recruitment, payroll, onboarding, and compliance questions each needed their own back-and-forth before someone actually got an answer.",
+      "If an HR person had a question — has this candidate been background-checked yet, why didn't this month's payroll run, what's the leave policy for someone still on probation — they'd have to dig through the right screen themselves or wait on a support ticket. Recruitment, payroll, onboarding, and compliance each needed their own back-and-forth before someone actually got an answer.",
     whatWasNeeded:
       "One assistant that could handle all four areas correctly. Not a chatbot that sounded confident but got the details wrong.",
     approach: [
-      "I shipped a live four-agent assistant covering all four areas. I worked with our CTO on the orchestration layer that routes each question to the right agent, grounded its answers in live HRIS data, and set accuracy benchmarks with human review built in.",
+      "I shipped a live assistant made up of four specialist AI agents — one each for recruitment, payroll, onboarding, and compliance, like four subject-matter experts instead of one generalist guessing outside its lane. I worked with our CTO on the \"orchestration layer\" — the traffic-control system that reads a question and routes it to the right specialist agent — made sure every answer was grounded in Repute's actual live data instead of the AI making something up, and set accuracy benchmarks with a human checking its work before it went live.",
     ],
     whatHelped:
       "I insisted on the accuracy benchmarks before we scaled it up, rather than shipping fast and hoping it held.",
@@ -327,7 +327,7 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Payroll Compliance"],
     problem:
-      "Employers had to file statutory payroll returns and remit payroll taxes by logging into separate government portals, preparing the data by hand, and uploading it themselves.",
+      "Every month, employers are legally required to report payroll details to the government — things like provident fund and tax deductions — and pay what's owed. Doing that meant logging into separate government websites, manually preparing the numbers, and uploading everything themselves, on top of running payroll in the first place.",
     whatWasNeeded:
       "A way to remove that whole coordination effort, not just make the existing process a bit faster.",
     approach: [
@@ -358,11 +358,11 @@ export const projects: Project[] = [
     ],
     coverTags: ["HRIS", "Integrations Architecture"],
     problem:
-      "Every partner integration up to that point had been built separately, from scratch. Each one worked fine, but each one was also its own little project.",
+      "Every time Repute connected to a new partner service — say, a background-check vendor or a tax tool — engineers built that connection from scratch, as its own mini project. Each one worked fine, but none of the underlying pipework was shared, so the tenth partner took nearly as long to connect as the first.",
     whatWasNeeded:
       "A way to stop rebuilding the same plumbing every time a new partner came along.",
     approach: [
-      "I replaced the custom builds with a single API layer sitting on one canonical data model, so every new integration could follow the same blueprint instead of starting from zero.",
+      "I replaced the one-off builds with a single API layer — a shared connector, like a universal power adapter instead of a different plug for every country — sitting on one canonical data model (one common way of describing an employee's data that every partner maps into), so every new integration could follow the same blueprint instead of starting from zero.",
     ],
     whatHelped:
       "I stopped treating each integration as a special case and just solved the underlying problem once, properly.",
@@ -415,7 +415,7 @@ export const caseStudies: CaseStudy[] = [
     hook: "Every new system starts from zero. That's a template problem, not a data problem.",
     coverImage: "/pov/remote-integration-coverage-cover.png",
     coverDescription:
-      "My POV of how Remote.com can make it easier for their customers — existing and new — to connect their existing systems.",
+      "My POV of how Remote.com — an Employer of Record (EOR) platform that lets a company hire staff in a country where it has no legal entity of its own — can make it easier for their customers to connect their existing HR software to it, whether they're a brand-new customer or one who's been on the platform for years.",
     coverTags: ["Remote.com", "Integrations", "HRIS", "EOR"],
     bentoLabel: "Remote Build Integrations",
     problem:
@@ -432,9 +432,9 @@ export const caseStudies: CaseStudy[] = [
       {
         heading: "Problem statement",
         body: [
-          "Every connector is built like it's the first one — ten systems need 45 point-to-point connections, and only the common few are ever worth a bespoke build.",
-          "Most connections run on a schedule — without native webhooks, a raise or an offboarding needs manual attention, which delays everything downstream.",
-          "What's synced is shallower than it looks — standard syncs cover common fields across platforms, but custom fields never make it across.",
+          "Every connector is built like it's the first one — think of each connection between two systems as its own custom-wired cable, not a shared plug. Ten systems then need 45 separate point-to-point connections (the math of wiring every pair to every other pair), and only the handful of common ones are ever worth building by hand.",
+          "Most connections run on a schedule, like a file that updates once a week, instead of the moment something actually changes (a live update is called a \"webhook\"). Without one, a raise or someone leaving the company needs a person to notice and fix it by hand, which delays everything downstream — payroll can end up running on stale numbers.",
+          "What's synced is shallower than it looks — the standard connection covers common fields like name and salary, but anything custom to a specific company, like a company-specific leave category, never makes it across.",
           "Not a data problem: it's how connections get built, when they update, and what they actually show.",
         ],
       },
@@ -449,7 +449,7 @@ export const caseStudies: CaseStudy[] = [
         heading: "The solution",
         body: [
           "A reusable mapping template, not a bespoke build — a new system starts from the closest existing template instead of zero.",
-          "Frequent diffing, not a weekly file drop — a raise or an offboarding shows up in hours, not a pay cycle.",
+          "Frequent diffing, not a weekly file drop — \"diffing\" just means checking what's changed since last time, so a raise or an offboarding shows up in hours, not a pay cycle.",
           "A visible completeness score, not a silent gap — shows exactly what's covered, and flags what isn't, before it becomes a problem.",
           "None of this needs new data from the EOR's API. It changes how a connection gets built, how often it updates, and what it shows.",
         ],
@@ -488,7 +488,7 @@ export const caseStudies: CaseStudy[] = [
     hook: "Simple customers self-serve in weeks. Complex ones wait on a person working a playbook by hand.",
     coverImage: "/pov/deel-payroll-activation-cover.jpg",
     coverDescription:
-      "My POV of how Deel can close the gap between how fast simple and complex customers activate their payroll.",
+      "My POV of how Deel — a platform that lets companies pay employees and contractors across different countries from one place — can close the gap between how fast simple and complex customers activate their payroll.",
     coverTags: ["Deel", "Payroll Activation", "Compliance", "Automation"],
     bentoLabel: "Deel Payroll Activation",
     problem:
@@ -506,13 +506,13 @@ export const caseStudies: CaseStudy[] = [
         heading: "Problem statement",
         body: [
           "Simple customers self-serve their payroll activation in weeks. Complex, multi-entity customers wait on a person working a compliance playbook by hand, inconsistently, depending on who's assigned.",
-          "57% of global payroll professionals rank local compliance as their single biggest challenge (PayrollOrg, 2025), and that's exactly where activation stalls: one country and one entity at a time.",
+          "57% of global payroll professionals rank local compliance (the different tax and labor rules each country has) as their single biggest challenge (PayrollOrg, 2025), and that's exactly where activation stalls: one country and one entity at a time.",
           "Built from public reviews and commentary on how global payroll platforms handle onboarding, not internal data, but a pattern worth acting on.",
         ],
       },
       {
         heading: "Who feels it",
-        body: "Priya, a VP of People Ops at a 600-person company formed through three acquisitions, now runs payroll across five entities. She isn't a payroll or compliance expert, was told her multi-entity setup needs a manual, phased rollout, and has heard from peers that the experience \"depends on who you get.\"",
+        body: "Priya, a VP of People Ops at a 600-person company formed through three acquisitions, now runs payroll across five entities (five separate legal company registrations, one per country, each with its own tax and compliance rules). She isn't a payroll or compliance expert, was told her multi-entity setup needs a manual, phased rollout, and has heard from peers that the experience \"depends on who you get.\"",
       },
       {
         heading: "Where it breaks down",
@@ -557,7 +557,7 @@ export const caseStudies: CaseStudy[] = [
       },
       {
         heading: "What I'd watch",
-        body: "Time-to-activation for the complex segment measured against the timeline simple customers already get, the % of playbook steps auto-completed, the spread in activation time by manager as a consistency proxy, and complex-customer activation NPS to see whether the simple-vs-complex gap is closing.",
+        body: "Time-to-activation for the complex segment measured against the timeline simple customers already get, the % of playbook steps auto-completed, the spread in activation time by manager as a consistency proxy, and complex-customer activation NPS (Net Promoter Score, a common customer-satisfaction survey) to see whether the simple-vs-complex gap is closing.",
       },
     ],
   },
@@ -569,7 +569,7 @@ export const caseStudies: CaseStudy[] = [
     hook: "Beeper's own search already knows two chats are the same person. Merge just doesn't act on it.",
     coverImage: "/pov/beeper-people-layer-cover.jpg",
     coverDescription:
-      "My POV of how Beeper can turn a signal it already computes into a single, unified contact across every network.",
+      "My POV of how Beeper — an app that combines all your different chat apps (WhatsApp, iMessage, Slack, Telegram, and more) into one inbox — can turn a signal it already computes into a single, unified contact across every network, instead of showing the same person as several different people.",
     coverTags: ["Beeper", "Integrations", "Merge", "People Layer"],
     bentoLabel: "Beeper People Layer",
     problem:
@@ -588,7 +588,7 @@ export const caseStudies: CaseStudy[] = [
         body: [
           "Beeper connects every network you use, but still treats each network as a separate person.",
           "Its own search already labels and stacks the same contact across networks the moment you type a name.",
-          "Merge can join them, but only when its matcher happens to catch the pair, and misses are silent.",
+          "Merge can join them, but only when its matcher — the background system that guesses which two chats belong to the same person — happens to catch the pair, and misses are silent.",
         ],
       },
       {
@@ -645,7 +645,7 @@ export const caseStudies: CaseStudy[] = [
     hook: "Goodfit already sits inside SpringVerify. Discovery isn't the problem, the ask is.",
     coverImage: "/pov/springworks-crosssell-cover.jpg",
     coverDescription:
-      "My POV of how Springworks can get a SpringVerify client to make its first hire in Goodfit, without asking them to build a second hiring tool.",
+      "My POV of how Springworks — whose SpringVerify product runs employee background checks, and whose Goodfit product is a hiring and applicant-tracking tool — can get a SpringVerify client to make its first hire in Goodfit, without asking them to learn or set up a whole second hiring tool.",
     coverTags: ["Springworks", "SpringVerify", "Goodfit", "Integrations"],
     bentoLabel: "Springworks Cross-sell Strategy",
     problem:
@@ -685,7 +685,7 @@ export const caseStudies: CaseStudy[] = [
         body: [
           "Today: a role opens in the ATS, gets screened by hand, hired, then SpringVerify is opened separately and the check starts by hand. Goodfit never appears anywhere on this line.",
           "After the sync: the role shows up in SpringVerify with nobody creating a job, applicants arrive with nobody uploading a list, Goodfit screens with the interview already built, and hiring starts the check with no form to fill.",
-          "One read, one write back, one event: SpringVerify reads the open role and applicants from their ATS through Integrations, Goodfit gets the job and candidates ready to screen, the hire event triggers the background check automatically, and the ranked shortlist writes back into their ATS.",
+          "One read, one write back, one event: SpringVerify reads the open role and applicants from their ATS (Applicant Tracking System — the software they already use to post jobs and manage candidates) through Integrations, Goodfit gets the job and candidates ready to screen, the hire event triggers the background check automatically, and the ranked shortlist writes back into their ATS.",
         ],
       },
       {
@@ -702,7 +702,7 @@ export const caseStudies: CaseStudy[] = [
           "Whether the integrations can read open roles, or only send results back, since that kills the first step if not.",
           "How many accounts have a hiring tool connected at all, since that sets the real ceiling.",
           "Whether HR owns the role or must forward it to someone, since that changes the main button on every screen.",
-          "Whether applicant data can legally move between the two products under DPDP, and whether ready-made interviews per job title exist or are a build.",
+          "Whether applicant data can legally move between the two products under DPDP (India's Digital Personal Data Protection Act, the law governing how personal data can be shared between companies), and whether ready-made interviews per job title exist or are a build.",
         ],
       },
       {
