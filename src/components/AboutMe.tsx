@@ -36,32 +36,37 @@ export default function AboutMe() {
         </div>
       </div>
 
-      <div className="mt-16 grid gap-10 md:grid-cols-2">
-        <div>
-          <h3>{aboutMe.builtLabel}</h3>
-          <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/70">
-            {aboutMe.built.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-          <Link href="/work" className="mt-5 inline-block text-sm font-semibold text-plum-700">
-            See more of my work →
-          </Link>
+      {/* One bounded card for the whole "story" — built, lessons, and the
+          personal note — so it reads as a single unit of the About page
+          instead of three blocks floating loose in the same whitespace. */}
+      <div className="about-story-card mt-16">
+        <div className="grid gap-10 md:grid-cols-2 md:divide-x md:divide-[var(--border)]">
+          <div className="md:pr-10">
+            <h3>{aboutMe.builtLabel}</h3>
+            <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/70">
+              {aboutMe.built.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+            <Link href="/work" className="mt-5 inline-block text-sm font-semibold text-plum-700">
+              See more of my work →
+            </Link>
+          </div>
+
+          <div className="md:pl-10">
+            <h3>{aboutMe.lessonsLabel}</h3>
+            <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/70">
+              {aboutMe.lessons.map((line) => (
+                <li key={line}>{line}</li>
+              ))}
+            </ul>
+          </div>
         </div>
 
-        <div>
-          <h3>{aboutMe.lessonsLabel}</h3>
-          <ul className="mt-4 list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/70">
-            {aboutMe.lessons.map((line) => (
-              <li key={line}>{line}</li>
-            ))}
-          </ul>
-        </div>
+        <p className="mt-10 max-w-2xl border-t border-[var(--border)] pt-10 text-lg leading-relaxed text-ink/70">
+          {aboutMe.personal}
+        </p>
       </div>
-
-      <p className="about-personal mt-16 max-w-2xl text-lg leading-relaxed text-ink/70">
-        {aboutMe.personal}
-      </p>
     </section>
   );
 }

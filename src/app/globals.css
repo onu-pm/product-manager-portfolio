@@ -421,9 +421,50 @@ body {
 }
 
 /* ---- About Me: the bio section at the top of /about -------------------- */
-.about-personal {
-  border-top: 1px solid var(--border);
-  padding-top: 1.75rem;
+.about-story-card {
+  border-radius: 1.1rem;
+  border: 1px solid var(--border);
+  background: var(--paper-raised);
+  padding: clamp(1.75rem, 4vw, 3rem);
+}
+
+/* ---- Contact: two titled panels (form + direct links) ------------------ */
+.contact-panel {
+  border-radius: 1.1rem;
+  border: 1px solid var(--border);
+  background: var(--paper-raised);
+  padding: clamp(1.5rem, 3.5vw, 2.25rem);
+}
+.adventure-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.15rem;
+  border-radius: 0.85rem;
+  border: 1px solid var(--border);
+  color: var(--ink);
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+}
+.adventure-row:hover {
+  background: var(--forest);
+  border-color: transparent;
+  color: var(--citron);
+}
+.adventure-row-label {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.adventure-row-sub {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.85rem;
+  color: var(--ink-secondary);
+}
+.adventure-row:hover .adventure-row-sub {
+  color: color-mix(in srgb, var(--citron) 75%, transparent);
 }
 
 /* A plain responsive bento grid for a page section that isn't the

@@ -6,6 +6,14 @@ import { profile } from "@/lib/content";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+function Arrow() {
+  return (
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
+      <path d="M5 12h14M13 6l6 6-6 6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function Contact() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -45,43 +53,30 @@ export default function Contact() {
 
   return (
     <section id="contact" className="page-shell py-24">
-      <div className="grid gap-12 lg:grid-cols-2 lg:items-start">
-        <div>
-          <h2>
-            <span>If this sounds right,</span> <span className="marker-highlight">let&apos;s talk.</span>
-          </h2>
-          <p className="mt-4 max-w-md text-lg leading-relaxed text-ink/70">
-            A short conversation is usually enough to see if there&apos;s a fit.
-          </p>
+      <div className="mx-auto max-w-2xl text-center">
+        <h2>
+          <span>If this sounds right,</span> <span className="marker-highlight">let&apos;s talk.</span>
+        </h2>
+        <p className="mx-auto mt-4 max-w-md text-lg leading-relaxed text-ink/70">
+          A short conversation is usually enough to see if there&apos;s a fit.
+        </p>
+      </div>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="btn-primary px-7 py-3 text-sm">
-              Connect
-            </a>
-            <a href={`mailto:${profile.email}`} className="btn-secondary px-7 py-3 text-sm">
-              Email
-            </a>
-            <Link href="/work" className="btn-secondary px-7 py-3 text-sm">
-              Portfolio
-            </Link>
-          </div>
-        </div>
-
-        {/* The form on the right — a second, lower-commitment way in for
-            someone who'd rather write a note than open LinkedIn or Mail. */}
-        <div className="lg:justify-self-end lg:max-w-md lg:w-full">
+      {/* Two equal, titled ways in, side by side — a form for someone who'd
+          rather write a note, and direct links for someone who already
+          knows which channel they want. */}
+      <div className="mt-14 grid gap-8 lg:grid-cols-2">
+        <div className="contact-panel">
+          <h3>Let&apos;s start simple</h3>
           {status === "sent" ? (
-            <div className="tint-card rounded-2xl p-8 text-center">
+            <div className="mt-6 rounded-xl border border-plum-100 bg-paper p-6 text-center">
               <p className="text-lg font-semibold text-ink">Thanks, that&apos;s in.</p>
               <p className="mt-2 text-sm text-ink/70">
                 I read every message myself and will get back to you soon.
               </p>
             </div>
           ) : (
-            <form
-              onSubmit={handleSubmit}
-              className="flex flex-col gap-5 rounded-2xl border border-plum-100 bg-paper-raised p-6 md:p-8"
-            >
+            <form onSubmit={handleSubmit} className="mt-6 flex flex-col gap-5">
               <label className="flex flex-col gap-1.5 text-sm font-semibold text-ink/80">
                 Name
                 <input
@@ -120,12 +115,39 @@ export default function Contact() {
               </button>
               {status === "error" && (
                 <p className="text-center text-xs font-semibold text-plum-700">
-                  That didn&apos;t go through. Try again, or email me directly instead.
+                  That didn&apos;t go through. Try again, or pick a path on the right instead.
                 </p>
               )}
               <p className="text-center text-xs text-ink/45">I read every message myself.</p>
             </form>
           )}
+        </div>
+
+        <div className="contact-panel">
+          <h3>Choose your adventure</h3>
+          <div className="mt-6 flex flex-col gap-3">
+            <a href={profile.linkedin} target="_blank" rel="noreferrer" className="adventure-row">
+              <span>
+                <span className="adventure-row-label">Connect</span>
+                <span className="adventure-row-sub">Say hi on LinkedIn</span>
+              </span>
+              <Arrow />
+            </a>
+            <a href={`mailto:${profile.email}`} className="adventure-row">
+              <span>
+                <span className="adventure-row-label">Email</span>
+                <span className="adventure-row-sub">Send a note directly</span>
+              </span>
+              <Arrow />
+            </a>
+            <Link href="/work" className="adventure-row">
+              <span>
+                <span className="adventure-row-label">Portfolio</span>
+                <span className="adventure-row-sub">See the full body of work</span>
+              </span>
+              <Arrow />
+            </Link>
+          </div>
         </div>
       </div>
     </section>
