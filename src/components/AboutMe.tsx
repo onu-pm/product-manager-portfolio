@@ -60,15 +60,15 @@ export default function AboutMe() {
                 <li key={line}>{line}</li>
               ))}
             </ul>
-            <Link href="/alter-ego" className="mt-5 inline-block text-sm font-semibold text-plum-700">
-              Explore my alter ego →
-            </Link>
           </div>
         </div>
 
         <p className="mt-10 max-w-2xl border-t border-[var(--border)] pt-10 text-lg leading-relaxed text-ink/70">
           {aboutMe.personal}
         </p>
+        <Link href="/alter-ego" className="mt-5 inline-block text-sm font-semibold text-plum-700">
+          Explore my alter ego →
+        </Link>
       </div>
     </section>
   );
