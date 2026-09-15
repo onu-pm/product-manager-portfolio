@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import DetailContact from "@/components/DetailContact";
 import InlineClip from "@/components/InlineClip";
 import { labProjects } from "@/lib/content";
 
@@ -91,6 +92,8 @@ export default function LabDetail({ slug }: { slug: string }) {
           </p>
         </div>
       </div>
+
+      <DetailContact />
 
       <nav className="mt-14 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-6">
         {prev ? (

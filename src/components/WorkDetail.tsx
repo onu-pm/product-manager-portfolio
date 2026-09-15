@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Breadcrumbs from "@/components/Breadcrumbs";
+import DetailContact from "@/components/DetailContact";
 import Linkified from "@/components/Linkified";
 import { projects } from "@/lib/content";
 
@@ -185,6 +186,8 @@ export default function WorkDetail({ slug }: { slug: string }) {
           )}
         </>
       )}
+
+      <DetailContact />
 
       <nav className="mt-14 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-6">
         {prev ? (
