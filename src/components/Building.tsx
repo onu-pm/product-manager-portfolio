@@ -10,7 +10,7 @@ export default function Building() {
         <h2 className="mt-3">
           <span>{building.headline.split(",")[0]},</span>{" "}
           <span className="marker-highlight">
-            {building.headline.split(",")[1]}
+            {building.headline.split(",")[1].trim()}
           </span>
         </h2>
         <p className="prose-measure mt-5 text-[15px] leading-relaxed text-ink-secondary">
