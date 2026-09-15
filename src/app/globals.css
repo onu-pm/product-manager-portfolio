@@ -421,18 +421,30 @@ body {
 }
 
 /* ---- About Me: the bio section at the top of /about -------------------- */
-.about-story-card {
+.about-story-card,
+.contact-panel {
   border-radius: 1.1rem;
   border: 1px solid var(--border);
   background: var(--paper-raised);
+  transition:
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.about-story-card:hover,
+.contact-panel:hover {
+  border-color: var(--plum-300);
+  transform: translateY(-3px);
+  box-shadow:
+    0 16px 36px -12px color-mix(in srgb, var(--ink) 28%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--ink) 6%, transparent);
+}
+.about-story-card {
   padding: clamp(1.75rem, 4vw, 3rem);
 }
 
 /* ---- Contact: two titled panels (form + direct links) ------------------ */
 .contact-panel {
-  border-radius: 1.1rem;
-  border: 1px solid var(--border);
-  background: var(--paper-raised);
   padding: clamp(1.5rem, 3.5vw, 2.25rem);
 }
 .adventure-row {
@@ -805,22 +817,35 @@ body {
   background: var(--paper-raised);
   box-shadow: none;
   padding: 1.45rem;
-  transition: border-color 0.4s ease;
+  transition:
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
+/* Every card in the grid glows on hover, not just the clickable ones —
+   a soft lift plus an ambient shadow that uses --ink, so it reads as a
+   shadow in light mode and a gentle halo in dark mode without needing a
+   separate rule per theme. One shared timing/easing with the properties
+   above so nothing on the card animates out of step with the rest. */
 .bento-card:hover {
   border-color: var(--plum-300);
+  transform: translateY(-3px);
+  box-shadow:
+    0 16px 36px -12px color-mix(in srgb, var(--ink) 28%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--ink) 6%, transparent);
 }
 
 /* Content cards (Work/POV/Lab/Brewery): a static, readable face by
    default (name, description, tags, CTA) that glows on hover; the cover-
    flow photo-album slide (below) takes over as the hover state itself,
-   instead of changing the face's own content. */
+   instead of changing the face's own content. The glow itself comes from
+   .bento-card:hover above (every link-card carries that class too) — this
+   only adds the extra border-colour step on top of it. */
 .link-card {
-  transition: border-color 0.4s ease;
+  transition: border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .link-card:hover {
   border-color: var(--plum-400);
-  box-shadow: none;
 }
 
 /* Every card shares one layout contract: a content block pinned to the top
@@ -1469,6 +1494,21 @@ body.menu-open canvas {
   background-color: var(--forest);
   text-align: left;
   box-shadow: none;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* These cards are always a near-black field regardless of site theme (see
+   the hardcoded --forest background above), so the hover glow is white-
+   based rather than themed off --ink — a warm halo plus a lift, same
+   timing as the border/transform above so none of it feels staggered. */
+.work-card:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in srgb, white 32%, transparent);
+  box-shadow:
+    0 20px 42px -14px rgba(0, 0, 0, 0.55),
+    0 0 26px rgba(255, 255, 255, 0.14);
 }
 /* A 16:9 card is only 216px tall once it narrows to ~384px, which isn't
    enough for a title plus three stat chips — measured, the content
