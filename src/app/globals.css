@@ -1578,13 +1578,21 @@ body.menu-open canvas {
   line-height: 1.12;
   max-width: min(94%, 42rem);
 }
+/* A card with a description underneath (POV/Lab, no stat chips competing
+   for room) can afford a third line before truncating, unlike a Work
+   photo card's title, which still has stat chips to fit below it. */
+.work-card-content:has(.work-card-description) .work-card-feature--title {
+  -webkit-line-clamp: 3;
+}
 /* A POV card has no stats to show, so its description takes that visual
    slot instead — same role, same position in the stack, sized down from
-   the cover's italic treatment to fit a card instead of a full hero. */
+   the cover's italic treatment to fit a card instead of a full hero.
+   Three lines, not two, so a longer sentence gets to finish instead of
+   cutting off after a couple of words. */
 .work-card-description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   overflow: hidden;
   margin-top: 0.5rem;
   max-width: min(94%, 38rem);
