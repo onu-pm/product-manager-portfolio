@@ -1988,20 +1988,16 @@ body.menu-open canvas {
   color: var(--ink-secondary);
 }
 
-/* ---- Lab detail page: continuous blog article, not boxed sections ---- */
-.lab-article-section + .lab-article-section {
-  margin-top: 2.25rem;
+/* ---- Lab detail page: an inline screenshot or clip, dropped into the same
+   boxed section a Work/POV case study uses. Spans both grid columns of
+   .work-body-section (heading rail + prose) rather than sitting only in
+   the prose column, so it reads as a break in the section, not an aside. */
+.work-body-section .lab-clip {
+  grid-column: 1 / -1;
+  margin: 0.5rem 0 0;
+  max-width: 46rem;
 }
-.lab-article-cta {
-  margin-top: 2.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--border);
-}
-/* A short screen recording styled and behaving like a gif — no controls,
-   no chrome, just loops in place inside the reading column. */
-.lab-clip {
-  margin: 1.25rem 0 0;
-}
+.lab-clip img,
 .lab-clip video {
   width: 100%;
   border-radius: 0.85rem;

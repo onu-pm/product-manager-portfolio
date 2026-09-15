@@ -4,6 +4,10 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import InlineClip from "@/components/InlineClip";
 import { labProjects } from "@/lib/content";
 
+function SectionHeading({ children }: { children: React.ReactNode }) {
+  return <h3 className="work-section-heading">{children}</h3>;
+}
+
 function Arrow({ dir }: { dir: "left" | "right" }) {
   return (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2">
@@ -51,13 +55,13 @@ export default function LabDetail({ slug }: { slug: string }) {
         </div>
       </header>
 
-      {/* Blog-style body: continuous prose under plain headings, not the
-          boxed section cards a Work/POV case study uses — this reads like
-          a write-up of a build, not a structured case-study breakdown. */}
-      <div className="lab-article prose-measure mt-10">
+      {/* Same boxed-section layout as a Work/POV case study, for visual
+          consistency across all three — only the source material differs
+          (a build write-up here, not a problem/approach/outcome study). */}
+      <div className="work-body-stack mt-10">
         {p.sections.map((s) => (
-          <div key={s.heading} className="lab-article-section">
-            <h3 className="work-section-heading">{s.heading}</h3>
+          <div key={s.heading} className="work-body-section">
+            <SectionHeading>{s.heading}</SectionHeading>
             {Array.isArray(s.body) ? (
               s.body.map((para) => (
                 <p key={para} className="work-body-text">
@@ -71,12 +75,15 @@ export default function LabDetail({ slug }: { slug: string }) {
           </div>
         ))}
 
-        <p className="lab-article-cta work-body-text">
-          Built solo with Claude Code.{" "}
-          <a href={p.liveUrl} target="_blank" rel="noreferrer" className="font-semibold text-plum-700">
-            View the live prototype →
-          </a>
-        </p>
+        <div className="work-body-section">
+          <SectionHeading>Try it</SectionHeading>
+          <p className="work-body-text">
+            Built solo with Claude Code.{" "}
+            <a href={p.liveUrl} target="_blank" rel="noreferrer" className="font-semibold text-plum-700">
+              View the live prototype →
+            </a>
+          </p>
+        </div>
       </div>
 
       <nav className="mt-14 flex items-center justify-between gap-4 border-t border-[var(--border)] pt-6">
