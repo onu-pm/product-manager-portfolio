@@ -30,13 +30,11 @@ export default function Playground() {
       <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Lab" }]} />
       <div className="flex flex-wrap items-end justify-between gap-6 pb-8 pt-5">
         <div className="flex flex-col items-start gap-3">
-          <span className="chapter-tab">Lab</span>
           <h2 className="work-title">
-            <span>Lighter, faster,</span> <span className="marker-highlight">more exploratory.</span>
+            <span>All things built</span> <span className="marker-highlight">using AI</span>
           </h2>
           <p className="prose-measure text-ink-secondary">
-            AI and vibe-coded projects I build for fun, outside of any job. Some ship, some
-            don&apos;t, all of it is real.
+            Prototypes, Agents, Workflows and more - 20% Human, 80% AI.
           </p>
         </div>
 

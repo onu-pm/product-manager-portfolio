@@ -59,8 +59,8 @@ export default function Bento() {
           href="/work"
           areaClass="card-work"
           name="Work"
-          description="The 0-to-1 marketplace behind 45% of partner closures, and the automation that 4X'd ARR."
-          ctaText="5 shipped projects"
+          description="Explore my work, process and more."
+          ctaText="View Work"
           slides={projects.map((p, i) => {
             // The bento slot is a short banner — far shorter than the
             // carousel card — so a rich slide shows the title plus one
@@ -80,9 +80,9 @@ export default function Bento() {
         <PreviewCard
           href="/pov"
           areaClass="card-pov"
-          name="POV"
-          description="Products I picked myself, and wrote my own thesis on."
-          ctaText="4 theses"
+          name="Point-of-View"
+          description="Side explorations across SaaS, HRIS and Platforms."
+          ctaText="Explore POVs"
           slides={caseStudies.map((c, i) => {
             // Same decoupling as the detail page — rich content ships as
             // soon as a case study has real deck content, independent of
@@ -103,9 +103,9 @@ export default function Bento() {
         <PreviewCard
           href="/lab"
           areaClass="card-lab"
-          name="Lab"
-          description="AI and vibe-coded builds, made for fun outside of any job."
-          ctaText="Take a look"
+          name="Laboratory"
+          description="Rapid AI experiments built at the speed of thought."
+          ctaText="Enter Lab"
           slides={labProjects.map((p, i) => ({
             number: `0${i + 1}`,
             label: p.category,
@@ -118,8 +118,8 @@ export default function Bento() {
           href="/alter-ego"
           areaClass="card-alter"
           name={alterEgo.headline}
-          description={alterEgo.description}
-          ctaText="The other side"
+          description="A package.json of me when not at work"
+          ctaText="Enter Closet"
           slides={alterEgo.strands.map((s, i) => ({ number: `0${i + 1}`, label: s }))}
         />
 
@@ -127,8 +127,8 @@ export default function Bento() {
           href="/brewery"
           areaClass="card-brewery"
           name="Brewery"
-          description="An early-stage venture, still under wraps."
-          ctaText="A peek"
+          description="Building something in Stealth"
+          ctaText="Let's Brew"
           slides={[
             { number: "01", label: "Something new" },
             { number: "02", label: "In stealth" },

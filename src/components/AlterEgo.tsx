@@ -7,7 +7,6 @@ export default function AlterEgo() {
       <div className="page-shell">
         <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Alter Ego" }]} />
         <div className="mb-10 mt-6 flex flex-col items-start gap-3">
-          <span className="chapter-tab">Alter Ego</span>
           <h2>
             <span>The part that isn&apos;t</span>{" "}
             <span className="marker-highlight">a job title.</span>

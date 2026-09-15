@@ -833,8 +833,9 @@ export const labProjects: LabProject[] = [
 export const githubUsername = "onu-pm";
 
 export const building = {
-  headline: "Something new, in stealth",
-  body: "I'm spending nights and weekends on an early-stage venture I'm not naming publicly yet. It's still early: no landing page, no waitlist, just building. Reach out if you're curious.",
+  headlineLead: "Dreaming big -",
+  headlineAccent: "one small step at a time.",
+  body: "Incubators and mentors to the front please!",
 };
 
 // ---------------------------------------------------------------------------

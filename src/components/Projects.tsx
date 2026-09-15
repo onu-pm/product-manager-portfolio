@@ -29,13 +29,12 @@ export default function Projects() {
       <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "Work" }]} />
       <div className="flex flex-wrap items-end justify-between gap-6 pb-8 pt-5">
         <div className="flex flex-col items-start gap-3">
-          <span className="chapter-tab">Work</span>
           <h2 className="work-title">
-            <span>Work I&apos;ve actually</span> <span className="marker-highlight">shipped.</span>
+            <span>Selected work - everything,</span>{" "}
+            <span className="marker-highlight">up close.</span>
           </h2>
           <p className="prose-measure text-ink-secondary">
-            Real, shipped product work. Drag, scroll or use the arrows, then open a card for the
-            full story.
+            A sample of products and systems I&apos;ve helped shape so you can see where I fit.
           </p>
         </div>
 

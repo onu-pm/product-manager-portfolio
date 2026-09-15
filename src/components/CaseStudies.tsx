@@ -29,13 +29,13 @@ export default function CaseStudies() {
       <Breadcrumbs trail={[{ label: "Home", href: "/" }, { label: "POV" }]} />
       <div className="flex flex-wrap items-end justify-between gap-6 pb-8 pt-5">
         <div className="flex flex-col items-start gap-3">
-          <span className="chapter-tab">POV</span>
           <h2 className="work-title">
-            <span>How I think,</span> <span className="marker-highlight">unprompted.</span>
+            <span>POV on brands I</span>{" "}
+            <span className="marker-highlight">would love to work for.</span>
           </h2>
           <p className="prose-measure text-ink-secondary">
-            Four products I picked myself, not work I was paid to do, and wrote my own thesis on.
-            Drag, scroll or use the arrows, then open a card for the full reasoning.
+            Case studies on how complexity unfolds, how the system is named, what happens when
+            things go wrong, and whether people trust what they see.
           </p>
         </div>
 
